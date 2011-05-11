@@ -2,6 +2,14 @@ set nocompatible   " disable vi compatability
 filetype plugin on " enable filetype detection for plugins
 syntax on          " syntax highlighting
 
+if $USER == "zwinkau"
+	" IPD: optimize for libFirm hacking
+	set noexpandtab    " use tabs instead of spaces
+elseif $USER == "beza1e1"
+	" Home: optimize for myself
+	set expandtab      " use spaces instead of tabs
+endif
+
 set encoding=utf-8    " best default encoding
 set ttyfast           " assume a fast terminal
 set scrolloff=4       " keep 4 lines around the cursor visible
@@ -23,8 +31,6 @@ set nosmartindent
 
 " tabs and spaces
 set tabstop=3      " a tab equals 3 spaces
-"set expandtab      " use spaces instead of tabs
-set noexpandtab    " use tabs instead of spaces
 set softtabstop=3  " make backspace work right
 set shiftwidth=3   " indent likewise
 
