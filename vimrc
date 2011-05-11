@@ -1,4 +1,8 @@
 set nocompatible   " disable vi compatability
+
+" pathogen loads all plugins in .vim/bundle/
+call pathogen#runtime_append_all_bundles()
+
 filetype plugin on " enable filetype detection for plugins
 syntax on          " syntax highlighting
 
