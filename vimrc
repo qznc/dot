@@ -70,3 +70,6 @@ autocmd BufReadPost *
 
 " search upwards for tags file
 set tags=tags;/
+
+" store swap files under ~/.vim
+set directory=~/.vim/tmp/
