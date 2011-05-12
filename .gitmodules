@@ -10,6 +10,3 @@
 [submodule "vim/bundle/css_color"]
 	path = vim/bundle/css_color
 	url = git://github.com/vim-scripts/css_color.vim.git
-[submodule "vim/bundle/Command-T"]
-	path = vim/bundle/Command-T
-	url = git://github.com/vim-scripts/Command-T.git
