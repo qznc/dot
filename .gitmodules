@@ -13,3 +13,6 @@
 [submodule "vim/bundle/Align"]
 	path = vim/bundle/Align
 	url = git://github.com/vim-scripts/Align.git
+[submodule "vim/bundle/repeat"]
+	path = vim/bundle/repeat
+	url = git://github.com/vim-scripts/repeat.vim.git
