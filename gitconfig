@@ -10,6 +10,7 @@
    conflict = !"$EDITOR" -c '/^[<=|>]\\{7\\}' `git ls-files --unmerged | cut -c 51- | uniq`
    lg = log --decorate --graph --name-status
    lg1 = log --decorate --graph --oneline
+   stats = !git shortlog -s | sort -n -r
 [diff]
    renames = copies
 [merge]
