@@ -15,7 +15,8 @@ else
 fi
 
 ln -sf bashrc ~/.bashrc
-ln -sf vimrc ~/.bashrc
+ln -sf vimrc ~/.vimrc
+ln -sf vim ~/.vim
 
 cp -f gitconfig ~/.gitconfig
 git config --global user.email ${EMAIL}
