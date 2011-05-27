@@ -14,10 +14,10 @@ else
 	EMAIL="beza1e1@web.de"
 fi
 
-ln -sf bashrc ~/.bashrc
-ln -sf vimrc ~/.vimrc
-ln -sf vim ~/.vim
-ln -sf gdbinit ~/.gdbinit
+ln -sf `pwd`/bashrc ~/.bashrc
+ln -sf `pwd`/vimrc ~/.vimrc
+ln -sf `pwd`/vim ~/.vim
+ln -sf `pwd`/gdbinit ~/.gdbinit
 
-cp -f gitconfig ~/.gitconfig
+cp -f `pwd`/gitconfig ~/.gitconfig
 git config --global user.email ${EMAIL}
