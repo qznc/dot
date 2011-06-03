@@ -16,7 +16,7 @@ endif
 
 set encoding=utf-8    " best default encoding
 set ttyfast           " assume a fast terminal
-set scrolloff=4       " keep 4 lines around the cursor visible
+set scrolloff=15      " keep lines around the cursor visible
 set showmode          " show mode on switch
 set showcmd           " show last cmd (fast terminal needed)
 set hidden            " hide buffers instead of unloading
