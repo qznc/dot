@@ -53,7 +53,7 @@ alias history_analysis="sort ~/.bash_history | uniq -c | sort -rn | head -10"
 
 g() {
    if [[ $# == '0' ]]; then
-      git status -u no
+      git st
    else
       git "$@"
    fi
