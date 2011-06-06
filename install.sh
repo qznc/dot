@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+function info() {
+	echo "${*}" >&2
+}
+
 if [ ! -f bashrc ]
 then
 	echo "Something is wrong. Where is bashrc?"
@@ -14,10 +18,12 @@ else
 	EMAIL="beza1e1@web.de"
 fi
 
-ln -sf `pwd`/bashrc ~/.bashrc
-ln -sf `pwd`/vimrc ~/.vimrc
-ln -sf `pwd`/vim ~/.vim
-ln -sf `pwd`/gdbinit ~/.gdbinit
+for file in bashrc vimrc vim gdbinit;
+do
+	info "symlinking ${file}"
+	ln -sf `pwd`/${file} ~/.${file}
+done
 
 cp -f `pwd`/gitconfig ~/.gitconfig
 git config --global user.email ${EMAIL}
+info "installed gitconfig"
