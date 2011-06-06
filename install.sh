@@ -18,7 +18,7 @@ else
 	EMAIL="beza1e1@web.de"
 fi
 
-for file in bashrc vimrc vim gdbinit;
+for file in bashrc vimrc vim gdbinit gitignore;
 do
 	info "symlinking ${file}"
 	ln -sf `pwd`/${file} ~/.${file}
