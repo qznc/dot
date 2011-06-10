@@ -28,6 +28,11 @@ set wildignore=*.pdf,*.o  " ignore certain file names
 "set relativenumber   " vim 7.3! show line number relative to cursor
 "set undofile         " vim 7.3! store undo in file
 
+" colorscheme requirements:
+" - dark background
+" - bright comments
+colorscheme advantage
+
 " automagic indentation
 set autoindent
 set nocindent
