@@ -16,3 +16,6 @@
 [submodule "vim/bundle/repeat"]
 	path = vim/bundle/repeat
 	url = git://github.com/vim-scripts/repeat.vim.git
+[submodule "vim/bundle/clang-complete"]
+	path = vim/bundle/clang-complete
+	url = git://github.com/vim-scripts/clang-complete.git
