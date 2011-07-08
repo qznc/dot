@@ -78,3 +78,5 @@ set tags=tags;/
 
 " store swap files under ~/.vim
 set directory=~/.vim/tmp/
+
+au BufRead,BufNewFile *.x10 set filetype=x10
