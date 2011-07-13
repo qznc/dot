@@ -13,8 +13,6 @@
    stats = shortlog -s -n
 [diff]
    renames = copies
-[merge]
-   conflictstyle = diff3
 [user]
    name = Andreas Zwinkau
 # email differs between personal and professional use,
