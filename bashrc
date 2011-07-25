@@ -91,7 +91,7 @@ case `hostname` in
 		export MAIL=${HOME}/.evolution/mail/local/Inbox
 		export PATH=${PATH}:${HOME}/dev/x10i/x10.doc/bin
 
-		export JAVA_HOME=/usr/lib/jvm/java-6-sun-1.6.0.24
+		export JAVA_HOME=/usr/lib/jvm/java-6-sun
 		GRGEN_PATH=~/local/eclipse-workspace/GrGen
 		CLASSPATH=$CLASSPATH:$GRGEN_PATH/frontend/jars/jargs.jar
 		CLASSPATH=$CLASSPATH:$GRGEN_PATH/frontend/jars/antlr.jar
