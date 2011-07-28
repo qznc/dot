@@ -80,3 +80,6 @@ set tags=tags;/
 set directory=~/.vim/tmp/
 
 au BufRead,BufNewFile *.x10 set filetype=x10
+
+" If you forgot to use sudo, use the double exclamation mark
+cmap w!! w !sudo tee % >/dev/null
