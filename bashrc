@@ -47,7 +47,6 @@ HISTSIZE=15000 # per terminal instance
 HISTFILESIZE=200000 # global
 HISTCONTROL=ignoredups # no duplicates in history
 shopt -s histappend # append to the history file, don't overwrite it
-PROMPT_COMMAND='history -a' # write history on every prompt, instead of shell exit
 alias history_reload="history -n" # load global history into local shell
 alias history_analysis="sort ~/.bash_history | uniq -c | sort -rn | head -10"
 
@@ -65,21 +64,39 @@ set_titlebar() {
 
 ########## SET PROMPT
 
-# LIGHTRED    \[\033[1;31m\]
-# LIGHTGREEN  \[\033[1;32m\]
-# YELLOW      \[\033[1;33m\]
-# LIGHTBLUE   \[\033[1;34m\]
-# LIGHTLILA   \[\033[1;35m\]
-# LIGHTGREY   \[\033[0;37m\]
-# NOCOLOR     \[\033[m\]
-case "$USER" in
-   beza1e1) # private use
-      PS1="\[\033[1;33m\]\$ \[\033[m\]"
-      ;;
-   zwinkau) # professional use
-      PS1="\[\033[1;35m\]\$ \[\033[m\]"
-      ;;
-esac
+function my_prompt {
+	EXITSTATUS="$?"
+	# LIGHTRED    \[\033[1;31m\]
+	# LIGHTGREEN  \[\033[1;32m\]
+	# YELLOW      \[\033[1;33m\]
+	# LIGHTBLUE   \[\033[1;34m\]
+	# LIGHTLILA   \[\033[1;35m\]
+	# LIGHTGREY   \[\033[0;37m\]
+	# OFF         \[\033[m\]
+
+	# print exit code if failure
+	if [ "${EXITSTATUS}" -eq 0 ]
+	then
+		PREFIX=""
+	else
+		PREFIX="\[\033[1;31m\]exit status: ${EXITSTATUS}\[\033[m\]\n"
+	fi
+
+	# color of dollar sign according to username
+	case "$USER" in
+		beza1e1) # private use
+			DOLLAR_COLOR="\[\033[1;33m\]"
+			PS1="\[\033[1;33m\]\$ \[\033[m\]"
+			;;
+		zwinkau) # professional use
+			DOLLAR_COLOR="\[\033[1;35m\]"
+			;;
+	esac
+
+	history -a # write history on every prompt, instead of shell exit
+	PS1="${PREFIX}${DOLLAR_COLOR}\$ \[\033[m\]"
+}
+PROMPT_COMMAND=my_prompt
 
 ########## MACHINE SPECIFIC
 
