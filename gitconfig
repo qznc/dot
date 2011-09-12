@@ -1,16 +1,24 @@
 [alias]
    ci = commit
+   ca = commit -a
+   fix = commit -a --amend
+   fixup = commit -a -m "fixup"
    co = checkout
    up = pull --rebase -q
+   ftch = fetch --all -q
    psh = push -q
-   st = status
+   st = status -s -b
    adu = add -u
+   br = branch
    bvv = branch -vv
+   bv = branch -vv
    wd = diff --color-words
    conflict = !"$EDITOR" -c '/^[<=|>]\\{7\\}' `git ls-files --unmerged | cut -c 51- | uniq`
    lg = log --decorate --graph --name-status
    lg1 = log --decorate --graph --oneline
+   l = log --decorate --graph --oneline
    stats = shortlog -s -n
+   clear = checkout -p .
 [diff]
    renames = copies
 [user]
@@ -36,7 +44,7 @@
 [color "diff"]
    whitespace = red reverse
 [core]
-   whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+   whitespace=fix,trailing-space,cr-at-eol
    excludesfile = ~/.gitignore
 [push]
    default = tracking
