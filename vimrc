@@ -25,8 +25,6 @@ set visualbell        " no beep
 "set cursorline        " highlight line with cursor
 set ruler             " display position in file
 set wildignore=*.pdf,*.o  " ignore certain file names
-"set relativenumber   " vim 7.3! show line number relative to cursor
-"set undofile         " vim 7.3! store undo in file
 
 " colorscheme requirements:
 " - dark background
@@ -64,7 +62,11 @@ set listchars=tab:▸\ ,eol:↵
 
 " highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
-:match ExtraWhitespace /\s\+\%#\@<!$/
+match ExtraWhitespace /\s\+\%#\@<!$/
+
+" line numbers
+set relativenumber   " show line number relative to cursor (vim 7.3)
+highlight LineNr ctermfg=darkcyan
 
 " load some plugins
 "runtime macros/matchit.vim  " advanced % command, which works in LaTeX, HTML, etc.
