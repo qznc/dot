@@ -58,6 +58,7 @@ set undodir=~/.vim/undos
 "set wrap            " wrap lines
 "set textwidth=79    " insert mode auto line breaks
 set colorcolumn=80   " highlight column
+hi ColorColumn ctermbg=darkgray
 
 " display invisible chars
 set list
