@@ -25,6 +25,9 @@ set visualbell        " no beep
 "set cursorline        " highlight line with cursor
 set ruler             " display position in file
 set wildignore=*.pdf,*.o  " ignore certain file names
+set wildignore+=*.aux,*.out,*.toc,*.blg,*.snm,*.vrb,*.nav " LaTeX stuff
+set wildignore+=*.pyc " Python byte code
+set wildignore+=*.sw? " Vim swap files
 
 " colorscheme requirements:
 " - dark background
