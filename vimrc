@@ -61,7 +61,7 @@ set colorcolumn=80   " highlight column
 
 " display invisible chars
 set list
-set listchars=tab:▸\ ,eol:↵
+set listchars=tab:▸\ ,eol:↵,extends:→,precedes:←,nbsp:×
 
 " highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
