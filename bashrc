@@ -102,7 +102,7 @@ PROMPT_COMMAND=my_prompt
 ########## MACHINE SPECIFIC
 
 case `hostname` in
-	i44pc50*)
+	i44pc*)
 		source /usr/public/tools/Modules/init/bash
 
 		export PRINTER=hpneu
