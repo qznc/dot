@@ -116,7 +116,6 @@ case `hostname` in
 		CLASSPATH=$CLASSPATH:$GRGEN_PATH/engine-net-2/out/bin/grgen.jar
 		export CLASSPATH
 		
-		module add jam
 		alias jam="jam -j2"
 		module add icc
 		module add ycomp
