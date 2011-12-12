@@ -69,7 +69,7 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+\%#\@<!$/
 
 " line numbers
-set relativenumber   " show line number relative to cursor (vim 7.3)
+"set relativenumber   " show line number relative to cursor (vim 7.3)
 highlight LineNr ctermfg=darkcyan
 
 " load some plugins
