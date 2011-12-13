@@ -19,7 +19,7 @@ else
 fi
 
 # install dot-rc files
-for file in bashrc vimrc vim gdbinit gitignore tmux.conf
+for file in bashrc vimrc vim gdbinit gitignore tmux.conf muttrc
 do
 	info "symlinking ${file}"
 	ln -sf `pwd`/${file} ~/.${file}

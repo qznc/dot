@@ -1,0 +1,26 @@
+### RECEIVING ###
+# Automatically log in to this mailbox at startup
+set spoolfile="imaps://kb228@imap.uni-karlsruhe.de/INBOX"
+# Define the = shortcut, and the entry point for the folder browser (c?)
+set folder="imaps://kb228@imap.uni-karlsruhe.de/INBOX"
+# Reduce polling frequency to a sane level
+set mail_check=60
+set record="=Sent"
+set postponed="=Drafts"
+set trash="=Trash"
+# Don't wait to enter mailbox manually
+unset imap_passive
+
+### SENDING ###
+set smtp_url="smtp://smtp.uni-karlsruhe.de:587"
+set realname="Andreas Zwinkau"
+set from="zwinkau@kit.edu"
+set use_from=yes
+my_hdr Reply-To: zwinkau@kit.edu
+set signature="~/.signature"
+
+### MANAGING ###
+set delete=ask-yes                        # Ask before doing a delete.
+
+macro index,pager A "<tag-prefix><save-message>=Archives.2011<enter>"
+
