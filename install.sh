@@ -15,7 +15,7 @@ if [[ `hostname` == i44* ]]
 then
 	EMAIL="zwinkau@kit.edu"
 else
-	EMAIL="beza1e1@web.de"
+	EMAIL="qznc@go.to"
 fi
 
 # install dot-rc files
