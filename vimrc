@@ -50,15 +50,17 @@ set smartcase    " ... only if search term is lower case only
 set incsearch    " incremental (instant) search
 set hlsearch     " highlight search results
 
-" persistent undo (available since vim 7.3 / Ubuntu 11.4)
-set undofile
-set undodir=~/.vim/undos
+if version >= 730
+  " persistent undo (available since vim 7.3 / Ubuntu 11.4)
+  set undofile
+  set undodir=~/.vim/undos
 
-" wrapping
-"set wrap            " wrap lines
-"set textwidth=79    " insert mode auto line breaks
-set colorcolumn=80   " highlight column
-hi ColorColumn ctermbg=darkgray
+  " wrapping
+  "set wrap            " wrap lines
+  "set textwidth=79    " insert mode auto line breaks
+  set colorcolumn=80   " highlight column
+  hi ColorColumn ctermbg=darkgray
+endif
 
 " display invisible chars
 set list
