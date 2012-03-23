@@ -19,3 +19,4 @@ function todo -d "txt notebook"
 end
 
 set -xg EDITOR vim
+set -xg PATH $PATH $HOME/bin $HOME/dev/x10i/x10.dist/bin
