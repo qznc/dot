@@ -1,0 +1,5 @@
+# vixn is a graphical vi clone with support for proportional fonts
+# http://vixn.org
+
+set('font', 'DejaVu Sans 10')
+set('tabstop', 3)
