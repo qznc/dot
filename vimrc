@@ -6,13 +6,7 @@ call pathogen#runtime_append_all_bundles()
 filetype plugin on " enable filetype detection for plugins
 syntax on          " syntax highlighting
 
-if $USER == "zwinkau"
-	" IPD: optimize for libFirm hacking
-	set noexpandtab    " use tabs instead of spaces
-elseif $USER == "beza1e1"
-	" Home: optimize for myself
-	set expandtab      " use spaces instead of tabs
-endif
+set noexpandtab    " use tabs instead of spaces
 
 set encoding=utf-8    " best default encoding
 set ttyfast           " assume a fast terminal
