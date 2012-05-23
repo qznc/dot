@@ -9,16 +9,15 @@
    psh = push -q
    st = status -s -b
    adu = add -u
-   br = branch
-   bvv = branch -vv
    bv = branch -vv
    wd = diff --color-words
    conflict = !"$EDITOR" -c '/^[<=|>]\\{7\\}' `git ls-files --unmerged | cut -c 51- | uniq`
    lg = log --decorate --graph --name-status
-   lg1 = log --decorate --graph --oneline
    l = log --decorate --graph --oneline
    stats = shortlog -s -n
    clear = checkout -p .
+   staged = diff --cached
+   conti = rebase --continue
 [diff]
    renames = copies
 [user]
