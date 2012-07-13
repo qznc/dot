@@ -68,3 +68,11 @@ handle SIGILL nostop noprint pass
 handle SIGQUIT nostop noprint pass
 end
 
+define x10debug
+set print static-members off
+break x10aux::throwNPE
+break x10aux::throwBPE
+break x10aux::throwArrayIndexOutOfBoundsException
+break x10aux::throwOOME
+handle SIGPWR SIGXCPU nostop noprint
+end
