@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e -u
+
+BRANCH=${1-master}
+NAME=$(basename $(pwd))
+VERSION=`git describe --always --tags ${BRANCH}`
+OUTPUT="${NAME}-${VERSION}.tar.bz2"
+
+echo "Pack ${BRANCH} into ${OUTPUT}"
+git archive --prefix ${NAME}/ --format=tar ${BRANCH} | bzip2 >${OUTPUT}
