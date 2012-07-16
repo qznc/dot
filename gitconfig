@@ -16,6 +16,7 @@
    clear = checkout -p .
    staged = diff --cached
    conti = rebase --continue
+   mrg = merge --no-ff --edit --stat
 [diff]
    renames = copies
 [user]
