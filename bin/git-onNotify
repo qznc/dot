@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+#
+_USAGE= """
+Usage: git-onsave cmd
+
+Run |cmd| each time a modification on tracked files is detected.
+|cmd| is optional and defaults to 'make'.
+"""
+
+import subprocess
+import sys
+import pyinotify
+import os.path
+
+def getGitFiles():
+	data = subprocess.check_output("git ls-files".split())
+	for line in data.splitlines():
+		yield os.path.abspath(line)
+
+class OnWriteHandler(pyinotify.ProcessEvent):
+	def my_init(self, cmd):
+		self.cmd = cmd
+		self.files = set(getGitFiles())
+	def process_IN_MODIFY(self, event):
+		if not event.pathname in self.files: return
+		subprocess.call(self.cmd.split(' '))
+
+def auto_compile(path):
+	wm = pyinotify.WatchManager()
+	handler = OnWriteHandler(cmd=cmd)
+	notifier = pyinotify.Notifier(wm, default_proc_fun=handler)
+	wm.add_watch('.', pyinotify.ALL_EVENTS, rec=True, auto_add=True)
+	sys.stderr.write('==> Start monitoring "%s" (type ctrl-c to exit)\n' % path)
+	notifier.loop()
+
+if __name__ == '__main__':
+	# Optional argument
+	cmd = 'make'
+	if len(sys.argv) == 2:
+		cmd = sys.argv[1]
+	# Blocks monitoring
+	auto_compile(cmd)
