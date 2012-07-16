@@ -38,6 +38,7 @@ fi
 export EDITOR=vim
 
 export PATH=${HOME}/bin:${PATH}
+export PATH=${HOME}/dev/dot/bin:${PATH}
 export PATH=${PATH}:${HOME}/dev/x10i/x10.dist/bin
 export PATH=${HOME}/dev/cparser/build:${PATH}
 
