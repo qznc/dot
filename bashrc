@@ -14,6 +14,7 @@ alias firm_svn_log="svn log svn+ssh://zwinkau@ssh.info.uni-karlsruhe.de/ben/firm
 alias ..="cd .."
 alias todo="vim ~/Dropbox/TODO.txt"
 alias v="vim"
+alias apt="aptitude"
 #alias goto_pbqp_code="cd $HOME/local/firm/libfirm/ir/be/ia32/ia32_pbqp"
 #alias quake="ioquake3-firm +game osp +exec my.cfg +connect i44sun3 && cd ~/dev/arenastats && ./firm.sh"
 
@@ -86,7 +87,7 @@ function my_prompt {
 
 	# color of dollar sign according to username
 	case "$USER" in
-		beza1e1) # private use
+		beza1e1|qznc) # private use
 			DOLLAR_COLOR="\[\033[1;33m\]"
 			PS1="\[\033[1;33m\]\$ \[\033[m\]"
 			;;
