@@ -15,6 +15,7 @@ alias ..="cd .."
 alias todo="vim ~/Dropbox/TODO.txt"
 alias v="vim"
 alias apt="aptitude"
+alias ipd="ssh -t zwinkau@ssh.info.uni-karlsruhe.de ssh i44pc50"
 #alias goto_pbqp_code="cd $HOME/local/firm/libfirm/ir/be/ia32/ia32_pbqp"
 #alias quake="ioquake3-firm +game osp +exec my.cfg +connect i44sun3 && cd ~/dev/arenastats && ./firm.sh"
 
