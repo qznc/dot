@@ -18,5 +18,10 @@ function todo -d "txt notebook"
 	vim ~/Dropbox/TODO.txt
 end
 
+function LANGC -d "set LANG=C for a single command"
+	vim ~/Dropbox/TODO.txt
+	begin; set -lx LANG C; $argv; end
+end
+
 set -xg EDITOR vim
 set -xg PATH $PATH $HOME/bin $HOME/dev/x10i/x10.dist/bin
