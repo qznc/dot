@@ -27,4 +27,4 @@ function LANGC -d "set LANG=C for a single command"
 end
 
 set -xg EDITOR vim
-set -xg PATH $PATH $HOME/bin $HOME/dev/x10i/x10.dist/bin
+set -xg PATH $PATH $HOME/bin $HOME/dev/x10i/x10.dist/bin ${HOME}/dev/dot/bin
