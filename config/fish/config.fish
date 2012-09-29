@@ -14,12 +14,15 @@ function go -d "alias for gnome-open"
 	gnome-open $argv
 end
 
+function vin -d "alias for vixn"
+	vixn $argv
+end
+
 function todo -d "txt notebook"
 	vim ~/Dropbox/TODO.txt
 end
 
 function LANGC -d "set LANG=C for a single command"
-	vim ~/Dropbox/TODO.txt
 	begin; set -lx LANG C; $argv; end
 end
 
