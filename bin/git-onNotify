@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 _USAGE= """
-Usage: git-onsave cmd
+Usage: git-onNotify cmd
 
 Run |cmd| each time a modification on tracked files is detected.
 |cmd| is optional and defaults to 'make'.
