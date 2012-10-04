@@ -18,13 +18,17 @@ function vin -d "alias for vixn"
 	vixn $argv
 end
 
+function apt -d "alias for aptitude"
+	aptitude $argv
+end
+
 function todo -d "txt notebook"
 	vim ~/Dropbox/TODO.txt
 end
 
 function LANGC -d "set LANG=C for a single command"
-	begin; set -lx LANG C; $argv; end
+	begin; set -lx LANG C; eval $argv; end
 end
 
 set -xg EDITOR vim
-set -xg PATH $PATH $HOME/bin $HOME/dev/x10i/x10.dist/bin ${HOME}/dev/dot/bin
+set -xg PATH $PATH $HOME/bin $HOME/dev/x10i/x10.dist/bin $HOME/dev/dot/bin
