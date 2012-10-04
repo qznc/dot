@@ -14,6 +14,7 @@ alias firm_svn_log="svn log svn+ssh://zwinkau@ssh.info.uni-karlsruhe.de/ben/firm
 alias ..="cd .."
 alias todo="vim ~/Dropbox/TODO.txt"
 alias v="vim"
+alias vin="vixn"
 alias apt="aptitude"
 alias ipd="ssh -t zwinkau@ssh.info.uni-karlsruhe.de ssh i44pc50"
 #alias goto_pbqp_code="cd $HOME/local/firm/libfirm/ir/be/ia32/ia32_pbqp"
