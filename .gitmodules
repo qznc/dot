@@ -22,3 +22,6 @@
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+[submodule "vim/bundle/rooter"]
+	path = vim/bundle/rooter
+	url = git://github.com/airblade/vim-rooter.git
