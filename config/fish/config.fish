@@ -50,5 +50,10 @@ function LANGC -d "set LANG=C for a single command"
 	begin; set -lx LANG C; eval $argv; end
 end
 
+function cdl -d "cd and ls"
+	cd $argv
+	ls -t --color=always -x | head -n3 -q
+end
+
 set -xg EDITOR vim
 set -xg PATH $PATH $HOME/bin $HOME/dev/x10i/x10.dist/bin $HOME/dev/dot/bin
