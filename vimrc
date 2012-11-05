@@ -26,7 +26,7 @@ set wildignore+=*.sw? " Vim swap files
 " colorscheme requirements:
 " - dark background
 " - bright comments
-colorscheme advantage
+colorscheme parsimony
 
 " automagic indentation
 set autoindent
