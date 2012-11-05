@@ -39,7 +39,7 @@ function apt -d "alias for aptitude"
 end
 
 function todo -d "txt notebook"
-	vim ~/Dropbox/TODO.txt
+	vim ~/Dropbox/todo.txt
 end
 
 function analyse_history -d "analyze fish shell history for often used commands"

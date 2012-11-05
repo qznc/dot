@@ -18,7 +18,7 @@ else
 	EMAIL="qznc@go.to"
 fi
 
-# install dot-rc files
+# install dot-rc files and directories
 for file in bashrc bash_profile vimrc vim gdbinit gitignore tmux.conf muttrc
 do
 	info "symlinking ${file}"
