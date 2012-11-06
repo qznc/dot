@@ -24,8 +24,7 @@ set wildignore+=*.pyc " Python byte code
 set wildignore+=*.sw? " Vim swap files
 
 " colorscheme requirements:
-" - dark background
-" - bright comments
+set background=light
 colorscheme parsimony
 
 " automagic indentation
