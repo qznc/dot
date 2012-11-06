@@ -31,7 +31,7 @@ git config --global user.email ${EMAIL}
 info "installed gitconfig"
 
 # install .config files
-for dir in fish vixn.org
+for dir in fish vixn.org terminator
 do
 	mkdir -p ~/.config/$dir
 	for file in config/$dir/*

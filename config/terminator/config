@@ -1,0 +1,24 @@
+[global_config]
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+[keybindings]
+[profiles]
+  [[default]]
+    visible_bell = True
+    custom_command = /usr/bin/fish
+    urgent_bell = True
+    foreground_color = "#000000"
+    use_custom_command = True
+    scroll_on_output = False
+    show_titlebar = False
+    font = Inconsolata Medium 12
+    background_color = "#ffffdd"
+    scrollback_infinite = True
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
