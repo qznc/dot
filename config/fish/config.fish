@@ -2,8 +2,19 @@ if status --is-login
 	echo "Login Shell!"
 end
 
+function git_prompt -d "short info about git repos if available"
+	if git status >/dev/null ^/dev/null
+		set -l branch (git name-rev HEAD --name-only --always)
+		echo "$branch "
+	end
+end
+
 function fish_prompt -d "Write out the prompt"
-	printf '%s%s%s➤%s ' (set_color $fish_color_cwd) (prompt_pwd) (set_color cyan) (set_color normal)
+	set_color $fish_color_cwd
+	echo -n (git_prompt)
+	set_color cyan
+	echo -n '➤ '
+	set_color normal
 end
 
 function g -d "alias for git"
