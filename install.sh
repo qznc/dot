@@ -31,12 +31,12 @@ git config --global user.email ${EMAIL}
 info "installed gitconfig"
 
 # install .config files
-for dir in fish vixn.org terminator
+for dir in config/*
 do
-	mkdir -p ~/.config/$dir
-	for file in config/$dir/*
+	mkdir -p ~/.$dir
+	for file in $dir/*
 	do
-		ln -sf `pwd`/$file ~/.config/$dir/
+		ln -sf `pwd`/$file ~/.$dir/
 		info "symlinking $file"
 	done
 done
