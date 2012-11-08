@@ -4,7 +4,7 @@ end
 
 function git_prompt -d "short info about git repos if available"
 	if git status >/dev/null ^/dev/null
-		set -l branch (git name-rev HEAD --name-only --always)
+		set -l branch (git name-rev HEAD --name-only --always ^/dev/null)
 		echo "$branch "
 	end
 end
