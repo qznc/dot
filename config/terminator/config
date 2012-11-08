@@ -3,6 +3,7 @@
 [keybindings]
 [profiles]
   [[default]]
+    scrollbar_position = hidden
     visible_bell = True
     custom_command = /usr/bin/fish
     urgent_bell = True
