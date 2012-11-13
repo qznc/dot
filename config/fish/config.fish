@@ -53,6 +53,10 @@ function todo -d "txt notebook"
 	vim ~/Dropbox/todo.txt
 end
 
+function pvw -d "personal vim wiki"
+	vim ~/Dropbox/pvw/main
+end
+
 function analyse_history -d "analyze fish shell history for often used commands"
 	grep -v "^#" $HOME/.config/fish/fish_history | sort | uniq -c | sort -n | tail
 end
