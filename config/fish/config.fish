@@ -50,7 +50,9 @@ function todo -d "txt notebook"
 end
 
 function pvw -d "personal vim wiki"
-	vim ~/Dropbox/pvw/main
+	pushd ~/Dropbox/pvw
+	vim main
+	popd
 end
 
 function analyse_history -d "analyze fish shell history for often used commands"
