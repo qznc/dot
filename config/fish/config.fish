@@ -45,10 +45,6 @@ function vin -d "alias for vixn"
 	vixn $argv
 end
 
-function apt -d "alias for aptitude"
-	aptitude $argv
-end
-
 function todo -d "txt notebook"
 	vim ~/Dropbox/todo.txt
 end

@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+case $1 in
+	gencaches|showpkg|stats|showsrc|dump|dumpavail|unmet|show|search|depends|rdepends|pkgnames|dotty|xvcg|policy|madison)
+		apt-cache $*
+		;;
+	update|upgrade|dselect-upgrade|dist-upgrade|install|remove|purge|source|build-dep|check|download|clean|autoclean|autoremove|changelog)
+		apt-get $*
+		;;
+	auto|manual|hold|unhold|showauto|showmanual|showhold)
+		apt-mark $*
+		;;
+	add|del|export|exportall|list|finger|adv|net-update)
+		apt-key $*
+		;;
+	key-update) # apt-key update conflicts with apt-get update
+		shift
+		apt-key update $*
+		;;
+	*)
+		echo "auto dispatcher for apt-get, apt-cache, etc"
+esac
