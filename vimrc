@@ -43,6 +43,11 @@ set smartcase    " ... only if search term is lower case only
 set incsearch    " incremental (instant) search
 set hlsearch     " highlight search results
 
+" backup files
+set backup                      " enable ~foo files
+set backupdir-=.                " not in local directory
+set backupdir^=~/.vim/tmp,/tmp  " try other directories
+
 if version >= 730
   " persistent undo (available since vim 7.3 / Ubuntu 11.4)
   set undofile
