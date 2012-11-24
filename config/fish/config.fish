@@ -10,6 +10,11 @@ function git_prompt -d "short info about git repos if available"
 end
 
 function fish_prompt -d "Write out the prompt"
+	set_color red
+	if nb remind
+		echo " "
+		nb skip-remind
+	end
 	set_color $fish_color_cwd
 	echo -n (git_prompt)
 	set_color cyan
@@ -50,17 +55,11 @@ function todo -d "txt notebook"
 end
 
 function pvw -d "personal vim wiki"
-	pushd ~/Dropbox/pvw
-	vim main
-	popd
+	nb
 end
 
 function journal -d "journal inside pvw"
-	pushd ~/Dropbox/pvw
-	set -l FILE (date +%Y-%m-%d)
-	echo (date --rfc-3339=seconds) >>$FILE
-	vim $FILE
-	popd
+	nb journal
 end
 
 function analyse_history -d "analyze fish shell history for often used commands"
