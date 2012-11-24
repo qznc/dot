@@ -1,1 +1,3 @@
-*.swp
+vim/tmp
+vim/.netrwhist
+vim/vim
