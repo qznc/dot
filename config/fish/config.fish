@@ -55,6 +55,14 @@ function pvw -d "personal vim wiki"
 	popd
 end
 
+function journal -d "journal inside pvw"
+	pushd ~/Dropbox/pvw
+	set -l FILE (date +%Y-%m-%d)
+	echo (date --rfc-3339=seconds) >>$FILE
+	vim $FILE
+	popd
+end
+
 function analyse_history -d "analyze fish shell history for often used commands"
 	grep -v "^#" $HOME/.config/fish/fish_history | sort | uniq -c | sort -n | tail
 end
