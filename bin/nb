@@ -1,0 +1,37 @@
+#!/bin/sh
+# Personal notebook script
+set -e
+cd ~/Dropbox/pvw
+
+case $1 in
+	recently) # least recently modified
+		ls -t -1
+		;;
+	remind) # echo reminder if last journal is too long ago
+		YEAR=$(date +%Y)
+		FILE=$(ls -t -1 $YEAR* | head -1)
+		MTIME=$(stat -c %Y $FILE)
+		NOW=$(date +%s)
+		DIFF=$(( ($NOW - $MTIME) / 60 ))
+		# if more than 30 minutes then remind
+		if [ $DIFF -gt 30 ]
+		then
+			echo "journal?"
+		else
+			exit 1
+		fi
+		;;
+	skip-remind) # make reminder disappear for a little
+		YEAR=$(date +%Y)
+		FILE=$(ls -t -1 $YEAR* | head -1)
+		touch $FILE
+		;;
+	journal) # edit journal entry for today
+		FILE=$(date +%Y-%m-%d)
+		echo $(date --rfc-3339=seconds) >>$FILE
+		vim $FILE
+		;;
+	*) # start at main page
+		vim main
+		;;
+esac
