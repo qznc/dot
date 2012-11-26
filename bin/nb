@@ -28,7 +28,9 @@ case $1 in
 		;;
 	journal) # edit journal entry for today
 		FILE=$(date +%Y-%m-%d)
+		echo >>$FILE
 		echo $(date --rfc-3339=seconds) >>$FILE
+		echo >>$FILE
 		vim $FILE
 		;;
 	*) # start at main page
