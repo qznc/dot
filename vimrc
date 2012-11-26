@@ -48,6 +48,12 @@ set backup                      " enable ~foo files
 set backupdir-=.                " not in local directory
 set backupdir^=~/.vim/tmp,/tmp  " try other directories
 
+" store swap files under ~/.vim
+set directory=~/.vim/tmp/
+
+" set shell explicitly, as e.g. fish brakes vim
+set shell=/bin/sh
+
 if version >= 730
   " persistent undo (available since vim 7.3 / Ubuntu 11.4)
   set undofile
@@ -86,9 +92,6 @@ autocmd BufReadPost *
 
 " search upwards for tags file
 set tags=tags;/
-
-" store swap files under ~/.vim
-set directory=~/.vim/tmp/
 
 au BufRead,BufNewFile *.x10 set filetype=x10
 
