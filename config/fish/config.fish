@@ -10,6 +10,7 @@ function git_prompt -d "short info about git repos if available"
 end
 
 function fish_prompt -d "Write out the prompt"
+	or echo $status" "
 	set_color red
 	if nb remind
 		echo " "
