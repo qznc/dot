@@ -16,8 +16,8 @@ function fish_prompt -d "Write out the prompt"
 		echo " "
 		nb skip-remind
 	end
-	set_color $fish_color_cwd
-	echo -n (git_prompt)
+	#set_color $fish_color_cwd
+	#echo -n (git_prompt)
 	set_color cyan
 	echo -n '➤ '
 	set_color normal
