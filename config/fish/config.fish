@@ -35,16 +35,36 @@ function gst -d "alias for g st"
 	g st $argv
 end
 
+function st -d "alias for g st"
+	g st $argv
+end
+
 function gap -d "alias for g add -p"
 	g add -p $argv
+end
+
+function gb -d "alias for g bv"
+	g bv $argv
+end
+
+function gd -d "alias for git-diff"
+	git diff --word-diff=color $argv
 end
 
 function gg -d "alias for gitg"
 	gitg $argv
 end
 
-function go -d "alias for gnome-open"
-	gnome-open $argv
+function l -d "alias for ls with some tweaks"
+	ls --color=auto -A -B --group-directories-first -h -v $argv
+end
+
+function m -d "alias for make"
+	make LANG=C --warn-undefined-variables $argv
+end
+
+function go -d "alias for xdg-open"
+	xdg-open $argv
 end
 
 function vin -d "alias for vixn"
@@ -55,16 +75,12 @@ function todo -d "txt notebook"
 	vim ~/Dropbox/todo.txt
 end
 
-function pvw -d "personal vim wiki"
-	nb
-end
-
 function journal -d "journal inside pvw"
 	nb journal
 end
 
 function analyse_history -d "analyze fish shell history for often used commands"
-	grep -v "^#" $HOME/.config/fish/fish_history | sort | uniq -c | sort -n | tail
+	grep -v "^#" $HOME/.config/fish/fish_history | sort | uniq -c | sort -n | tail -n 32
 end
 
 function LANGC -d "set LANG=C for a single command"
