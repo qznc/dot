@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+
+PREFIX=/data1/zwinkau/compile_mosh
+
+mosh --server="LD_LIBRARY_PATH=$PREFIX/lib $PREFIX/bin/mosh-server" zwinkau@ipd
