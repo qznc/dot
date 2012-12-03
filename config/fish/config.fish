@@ -31,10 +31,6 @@ function gup -d "alias for g up"
 	g up $argv
 end
 
-function gst -d "alias for g st"
-	g st $argv
-end
-
 function st -d "alias for g st"
 	g st $argv
 end
@@ -56,11 +52,23 @@ function gg -d "alias for gitg"
 end
 
 function l -d "alias for ls with some tweaks"
-	ls --color=auto -A -B --group-directories-first -h -v $argv
+	ls --color=auto -B --group-directories-first -h -v $argv
 end
 
 function m -d "alias for make"
 	make LANG=C --warn-undefined-variables $argv
+end
+
+function c -d "alias for cd"
+	cd $argv
+end
+
+function v -d "alias for vim"
+	v $argv
+end
+
+function p -d "alias for pwd"
+	pwd $argv
 end
 
 function go -d "alias for xdg-open"
@@ -87,7 +95,7 @@ function LANGC -d "set LANG=C for a single command"
 	begin; set -lx LANG C; eval $argv; end
 end
 
-function cdl -d "cd and ls"
+function cl -d "cd and ls"
 	cd $argv; and ls -t --color=always -x | head -n3 -q
 end
 
