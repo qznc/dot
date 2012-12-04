@@ -39,8 +39,16 @@ function gap -d "alias for g add -p"
 	g add -p $argv
 end
 
+function gl -d "alias for g l"
+	g l $argv
+end
+
 function gb -d "alias for g bv"
 	g bv $argv
+end
+
+function gp -d "alias for g psh"
+	g psh $argv
 end
 
 function gd -d "alias for git-diff"
