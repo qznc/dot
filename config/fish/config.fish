@@ -72,7 +72,7 @@ function c -d "alias for cd"
 end
 
 function v -d "alias for vim"
-	v $argv
+	vim $argv
 end
 
 function p -d "alias for pwd"
