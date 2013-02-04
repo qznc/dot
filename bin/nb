@@ -1,6 +1,12 @@
 #!/bin/sh
 # Personal notebook script
 set -e
+
+if [ ! -d ~/Dropbox/pvw ]
+then
+	exit 1
+fi
+
 cd ~/Dropbox/pvw
 
 case $1 in
