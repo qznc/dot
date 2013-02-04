@@ -108,4 +108,4 @@ function cl -d "cd and ls"
 end
 
 set -xg EDITOR vim
-set -xg PATH $PATH $HOME/bin $HOME/dev/x10i/x10.dist/bin $HOME/dev/dot/bin
+set -xg PATH $PATH $HOME/bin $HOME/dev/x10i/x10.dist/bin $HOME/dev/dot/bin /afs/info.uni-karlsruhe.de/public/java/ycomp
