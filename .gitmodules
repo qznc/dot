@@ -25,3 +25,6 @@
 [submodule "vim/bundle/rooter"]
 	path = vim/bundle/rooter
 	url = git://github.com/airblade/vim-rooter.git
+[submodule "vim/bundle/easymotion"]
+	path = vim/bundle/easymotion
+	url = git://github.com/Lokaltog/vim-easymotion.git
