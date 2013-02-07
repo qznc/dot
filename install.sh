@@ -40,3 +40,9 @@ do
 		info "symlinking $file"
 	done
 done
+
+# configure Gnome
+gconftool-2 --set /apps/metacity/general/action_double_click_titlebar toggle_maximize_vertically --type string
+gconftool-2 --set /apps/metacity/general/button_layout "close,minimize,maximize:" --type string
+gconftool-2 --set /apps/gnome-terminal/profiles/Default/custom_command "/usr/bin/fish" --type string
+gconftool-2 --set /apps/gnome-terminal/profiles/Default/use_custom_command "1" --type bool
