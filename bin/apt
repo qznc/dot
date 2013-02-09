@@ -11,7 +11,10 @@ case $1 in
 	update|upgrade|dselect-upgrade|dist-upgrade|install|remove|purge|source|build-dep|check|download|clean|autoclean|autoremove|changelog)
 		sudo apt-get $*
 		;;
-	auto|manual|hold|unhold|showauto|showmanual|showhold)
+	showauto|showmanual|showhold)
+		apt-mark $*
+		;;
+	auto|manual|hold|unhold)
 		sudo apt-mark $*
 		;;
 	add|del|export|exportall|list|finger|adv|net-update)
