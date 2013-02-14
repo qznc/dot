@@ -1,5 +1,4 @@
 ack-grep
-acroread
 alsa-utils
 ant
 autossh
@@ -17,7 +16,6 @@ cdecl
 clang
 cmake
 command-not-found
-computer-janitor-gtk
 context
 curl
 debootstrap
@@ -76,8 +74,6 @@ language-pack-de
 language-pack-en
 language-pack-gnome-de
 language-pack-gnome-en
-language-support-writing-de
-language-support-writing-en
 laptop-mode-tools
 latexmk
 lsb
@@ -99,8 +95,6 @@ network-manager-openvpn
 offlineimap
 openjdk-7-jdk
 openjdk-7-jre
-openoffice.org-impress
-openoffice.org-writer
 openssh-client
 openssh-server
 pandoc
@@ -156,7 +150,6 @@ virtualbox-guest-additions-iso
 virtualbox-guest-dkms
 virtualbox-guest-x11
 vite
-vixn
 vlc
 wget
 xclip
