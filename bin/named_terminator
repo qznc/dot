@@ -1,7 +1,7 @@
 #!/bin/sh
 
 TITLE=`zenity --entry --title="Terminator Window Name" --text="Enter Name:"`
-FLAGS= -m
+FLAGS=-m -l hsplit
 
 if [ $? ]
 	then terminator ${FLAGS} -T "${TITLE}"
