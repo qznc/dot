@@ -151,6 +151,7 @@ virtualbox-guest-dkms
 virtualbox-guest-x11
 vite
 vlc
+weechat-curses
 wget
 xclip
 xdg-utils
