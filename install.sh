@@ -41,6 +41,9 @@ do
 	done
 done
 
+# create directories
+mkdir -p ~/.cache/vim/{backup,swp}
+
 # configure Gnome
 gconftool-2 --set /apps/metacity/general/action_double_click_titlebar toggle_maximize_vertically --type string
 gconftool-2 --set /apps/metacity/general/button_layout "close,minimize,maximize:" --type string

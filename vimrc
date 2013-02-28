@@ -46,10 +46,10 @@ set hlsearch     " highlight search results
 " backup files
 set backup                      " enable ~foo files
 set backupdir-=.                " not in local directory
-set backupdir^=~/.vim/tmp,/tmp  " try other directories
+set backupdir^=~/.cache/vim/backup,/tmp  " try other directories
 
 " store swap files under ~/.vim
-set directory=~/.vim/tmp/
+set directory=~/.cache/vim/swp
 
 " set shell explicitly, as e.g. fish brakes vim
 set shell=/bin/sh

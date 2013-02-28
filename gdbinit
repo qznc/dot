@@ -75,4 +75,6 @@ break x10aux::throwBPE
 break x10aux::throwArrayIndexOutOfBoundsException
 break x10aux::throwOOME
 handle SIGPWR SIGXCPU nostop noprint
+handle SIG39 nostop noprint
+handle SIG40 nostop noprint
 end
