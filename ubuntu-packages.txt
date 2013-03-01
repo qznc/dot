@@ -81,7 +81,6 @@ lsb-base
 lsb-release
 lshw
 lsof
-make
 mencoder
 mercurial
 metacity
@@ -97,6 +96,7 @@ openjdk-7-jdk
 openjdk-7-jre
 openssh-client
 openssh-server
+pan
 pandoc
 par
 pidgin
@@ -110,7 +110,6 @@ python3
 python3-feedparser
 rar
 scribus
-sed
 simple-scan
 sloccount
 sqlite3
@@ -119,8 +118,6 @@ subversion
 terminator
 thunderbird
 thunderbird-gnome-support
-thunderbird-locale-de
-thunderbird-locale-en
 tmux
 transmission-gtk
 ttf-adf-universalis
