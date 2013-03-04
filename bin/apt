@@ -24,6 +24,9 @@ case $1 in
 		shift
 		apt-key update $*
 		;;
+	add-repository)
+		apt-add-repository $*
+		;;
 	*)
 		echo "auto dispatcher for apt-get, apt-cache, etc"
 esac
