@@ -1,8 +1,8 @@
 ### RECEIVING ###
 # Automatically log in to this mailbox at startup
-set spoolfile="imaps://kb228@imap.uni-karlsruhe.de/INBOX"
+set spoolfile="imaps://zwinkau@imap.ira.uni-karlsruhe.de/INBOX"
 # Define the = shortcut, and the entry point for the folder browser (c?)
-set folder="imaps://kb228@imap.uni-karlsruhe.de/INBOX"
+set folder="imaps://zwinkau@imap.ira.uni-karlsruhe.de/INBOX"
 # Reduce polling frequency to a sane level
 set mail_check=60
 set record="=Sent"
