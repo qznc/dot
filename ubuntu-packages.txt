@@ -1,6 +1,7 @@
 ack-grep
 alsa-utils
 ant
+astyle
 autossh
 avahi-utils
 avidemux
