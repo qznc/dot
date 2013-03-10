@@ -57,7 +57,7 @@ set shell=/bin/sh
 if version >= 730
   " persistent undo (available since vim 7.3 / Ubuntu 11.4)
   set undofile
-  set undodir=~/.vim/undos
+  set undodir=~/.cache/vim/undos
 
   " wrapping
   "set wrap            " wrap lines
