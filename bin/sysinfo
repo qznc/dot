@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+def remove_spaces(string):
+	s = string.replace("  ", " ")
+	while s != string:
+		string = s
+		s = string.replace("  ", " ")
+	return s
+
 # CPU Info
 PHYSICAL_IDs=set()
 CORE_IDs=set()
@@ -17,11 +24,11 @@ for line in open("/proc/cpuinfo"):
 		PHYSICAL_IDs.add(int(v.strip()))
 	if k == "model name":
 		m = v.strip()
-		m = m.replace("Core(TM) ", "")
+		m = m.replace("Core(TM)", "")
 		m = m.replace("(R)", "")
-		m = m.replace("CPU ", "")
-		m = m.replace("@ ", "")
-		CPU_MODEL = m
+		m = m.replace("CPU", "")
+		m = m.replace("@", "")
+		CPU_MODEL = remove_spaces(m)
 
 # Memory Info
 MEM_GB=0
@@ -59,14 +66,6 @@ for line in open("/proc/partitions"):
 ALL_HDD = ", ".join("%s %dGB" % (n,s) for n,s in HDDs)
 
 # Devices
-def clean(string):
-	string = string.replace(" Corporation", "")
-	string = string.replace(" Audio Controller", "")
-	string = string.replace(" High Definition", "")
-	string = string.replace(" Chipset Family", "")
-	string = string.replace(" Network Connection", "")
-	return string.strip()
-
 PCI_IDS = open("/usr/share/misc/pci.ids").readlines()
 def named_pci_devices(vendor_id, device_id):
 	i = 0
@@ -84,7 +83,7 @@ def named_pci_devices(vendor_id, device_id):
 		if line.startswith("\t"+DeviceID):
 			device = line[6:].strip()
 			break
-	return clean(vendor), clean(device)
+	return vendor, device
 
 PCI_CLS_NAMES = {
 	4000:    "Audio",
