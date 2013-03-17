@@ -112,3 +112,10 @@ end
 function cl -d "cd and ls"
 	cd $argv; and ls -t --color=always -x | head -n3 -q
 end
+
+function fish_greeting
+	echo -n "Hello World! "
+	set_color cyan
+	date
+	set_color normal
+end
