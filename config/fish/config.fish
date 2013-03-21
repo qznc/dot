@@ -119,3 +119,7 @@ function fish_greeting
 	date
 	set_color normal
 end
+
+function ycomp -d "graph GUI for yFiles"
+	/afs/info.uni-karlsruhe.de/public/java/ycomp/ycomp --dolayout --autoreload $argv
+end
