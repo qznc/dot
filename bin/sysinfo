@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from subprocess import check_output
+
 def remove_spaces(string):
 	s = string.replace("  ", " ")
 	while s != string:
@@ -111,10 +113,32 @@ for line in open("/etc/os-release"):
 	if k.strip() == "VERSION_ID":
 		OS_VERSION = v.strip()[1:-1]
 
+def snip(string, before, after):
+	i = string.index(before)
+	i += len(before)
+	j = string.index(after, i)
+	return string[i:j].strip()
+
+def nvidia_resolution():
+	"""Get resolution of nvidia driven screen"""
+	raw = check_output("nvidia-settings -q CurrentMetaMode -t".split())
+	return snip(raw, "@", " ")
+
+SCREEN_RESOLUTION = nvidia_resolution()
+
+def nvidia_driver_version():
+	"""Get driver version of nvidia"""
+	for line in open("/proc/driver/nvidia/version"):
+		if not line.startswith("NVRM version:"): continue
+		return "nvidia-"+snip(line, "Kernel Module  ", " ")
+
+GRAPHICS_DRIVER = nvidia_driver_version()
+
 print "CPU: %s sockets=%d cores=%d threads=%d" % (CPU_MODEL, len(PHYSICAL_IDs), len(CORE_IDs), MAX_SIBLINGS)
 print "Mem: %.3f GB" % (MEM_GB)
 print "OS: %s %s (Linux %s)" % (OS_NAME, OS_VERSION, LINUX_VERSION)
 print "Uptime: %d days" % (UPTIME_DAYS)
 print "Disks: %s" % (ALL_HDD)
+print "Screen: %spx  %s" % (SCREEN_RESOLUTION, GRAPHICS_DRIVER)
 for dev in PCI_DEVICES:
 	print "Dev %s: %s %s" % dev
