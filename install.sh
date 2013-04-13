@@ -49,3 +49,12 @@ gconftool-2 --set /apps/metacity/general/action_double_click_titlebar toggle_max
 gconftool-2 --set /apps/metacity/general/button_layout "close,minimize,maximize:" --type string
 gconftool-2 --set /apps/gnome-terminal/profiles/Default/custom_command "/usr/bin/fish" --type string
 gconftool-2 --set /apps/gnome-terminal/profiles/Default/use_custom_command "1" --type bool
+
+# configure Gnome3 via gsettings (successor of gconf)
+while read line; do
+	gsettings set $line
+done <"simple_gsettings.save"
+# quoted arguments are not simple
+gsettings set org.gnome.gedit.preferences.editor editor-font "PT Sans 12"
+gsettings set org.gnome.gedit.plugins active-plugins "['docinfo', 'filebrowser', 'spell', 'quickopen', 'wordcompletion', 'modelines', 'time', 'smartspaces']"
+
