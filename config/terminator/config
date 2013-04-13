@@ -3,10 +3,11 @@
 [keybindings]
 [profiles]
   [[default]]
-    scrollbar_position = hidden
+    use_system_font = False
     visible_bell = True
     custom_command = /usr/bin/fish
     urgent_bell = True
+    scrollbar_position = hidden
     foreground_color = "#000000"
     use_custom_command = True
     scroll_on_output = False
