@@ -3,6 +3,7 @@ set -xg PATH $PATH $HOME/bin
 set -xg PATH $PATH $HOME/dev/x10i/x10.dist/bin
 set -xg PATH $PATH $HOME/dev/dot/bin
 set -xg DEBEMAIL "Andreas Zwinkau <qznc@web.de>"
+set -xg LANG "en_US.utf8"
 
 if status --is-login
 	echo "Login Shell!"
