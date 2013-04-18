@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+import sys
+
+def splitfirst(data, separator=" "):
+	i = data.index(separator)
+	return (data[:i], data[i+len(separator):])
+
+def slurp_raw_data(path):
+	data = dict()
+	for line in open(path):
+		try:
+			key,value = splitfirst(line, ":")
+		except ValueError:
+			continue
+		subkeys = key.split(".")
+		cdata = data
+		for sk in subkeys[1:-1]:
+			if not sk in cdata:
+				cdata[sk] = dict()
+			cdata = cdata[sk]
+		cdata[subkeys[-1]] = value.strip()
+	return data
+
+def compare_raw_data(raws):
+	byprog = dict()
+	for i,dataset in enumerate(raws):
+		for testsuite in dataset.values(): # probably only "cpu2000"
+			for prog,measure in testsuite["results"].items():
+				if not prog in byprog:
+					byprog[prog] = dict()
+				byindex = byprog[prog]
+				time = None
+				for run in measure["base"].values():
+					KEY = "reported_time"
+					if not time:
+						time = run[KEY]
+					else:
+						time = min(time,run[KEY])
+				byindex[i] = float(time)
+	return byprog
+
+def average(lst):
+	sum = lst[0]
+	for x in lst[1:]:
+		sum += x
+	return sum / len(lst)
+
+def standard_deviation(lst):
+	avg = average(lst)
+	diffs = 0.0
+	for x in lst:
+		diffs += (x-avg)**2
+	return (diffs / len(lst))**0.5
+
+def print_line(name, values):
+	print("%-14s" % name, end="")
+	for x in values:
+		print("  %4.4f" % x, end="")
+	print()
+
+def print_overview_line(name, func, times):
+	print_line(name, map(func, times))
+
+def table_print(compared):
+	times = list()
+	for prog,line in compared.items():
+		values = list(line.values())
+		print_line(prog, values)
+		times.append(values)
+	times = list(zip(*times))
+	print_overview_line("average", average, times)
+	print_overview_line("std dev", standard_deviation, times)
+
+
+all = map(slurp_raw_data, sys.argv[1:])
+table_print(compare_raw_data(all))
