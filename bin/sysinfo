@@ -2,6 +2,12 @@
 
 from subprocess import check_output, CalledProcessError
 
+def simple_output(cmd):
+	try:
+		return check_output(cmd.split(), stderr=open("/dev/null", 'w'))
+	except CalledProcessError:
+		return ""
+
 def remove_spaces(string):
 	s = string.replace("  ", " ")
 	while s != string:
@@ -48,7 +54,7 @@ LINUX_VERSION=""
 for line in open("/proc/version"):
 	version = line.split()[2]
 	version = version.split("-")[0]
-	arch = check_output("uname -m".split()).strip()
+	arch = simple_output("uname -m").strip()
 	LINUX_VERSION = "%s %s" % (version, arch)
 
 # Uptime
@@ -144,7 +150,7 @@ def nvidia_driver_version():
 
 def nvidia_resolution():
 	"""Get resolution of nvidia driven screen"""
-	raw = check_output("nvidia-settings -q CurrentMetaMode -t".split())
+	raw = simple_output("nvidia-settings -q CurrentMetaMode -t")
 	return snip(raw, "@", " ")
 
 def screen():
@@ -152,9 +158,9 @@ def screen():
 		res = nvidia_resolution()
 		driver = nvidia_driver_version()
 		return "%spx  %s" % (res, driver)
-	except OSError:
+	except IOError:
 		pass
-	except CalledProcessError:
+	except OSError:
 		pass
 	return "unknown"
 
