@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from subprocess import check_output
+from subprocess import check_output, CalledProcessError
 
 def remove_spaces(string):
 	s = string.replace("  ", " ")
@@ -123,9 +123,15 @@ for line in open("/etc/os-release"):
 		OS_VERSION = v.replace('"', '').strip()
 
 def snip(string, before, after):
-	i = string.index(before)
-	i += len(before)
-	j = string.index(after, i)
+	try:
+		i = string.index(before)
+		i += len(before)
+	except ValueError:
+		i = 0
+	try:
+		j = string.index(after, i)
+	except ValueError:
+		j = len(string)
 	return string[i:j].strip()
 
 def nvidia_driver_version():
@@ -145,6 +151,8 @@ def screen():
 		driver = nvidia_driver_version()
 		return "%spx  %s" % (res, driver)
 	except OSError:
+		pass
+	except CalledProcessError:
 		pass
 	return "unknown"
 
