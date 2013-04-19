@@ -47,7 +47,9 @@ for line in open("/proc/meminfo"):
 LINUX_VERSION=""
 for line in open("/proc/version"):
 	version = line.split()[2]
-	LINUX_VERSION = version.split("-")[0]
+	version = version.split("-")[0]
+	arch = check_output("uname -m".split()).strip()
+	LINUX_VERSION = "%s %s" % (version, arch)
 
 # Uptime
 UPTIME_DAYS=0
