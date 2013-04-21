@@ -7,7 +7,7 @@ MINIMUM_SECONDS = 30
 
 def parse_duration(string):
 	seconds = 0.0
-	string = string.strip()
+	string = string.strip().replace(",", ".")
 	if not string:
 		return 0
 	elif string.endswith("h"):
