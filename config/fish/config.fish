@@ -16,9 +16,21 @@ function git_prompt -d "short info about git repos if available"
 	end
 end
 
+function notify_long_running -d "clone UndistractMe"
+	if [ "$CMD_DURATION" = "" ]
+		# A short running command. Assume active window is my window.
+		set -g MY_WINDOW_ID (xprop -root _NET_ACTIVE_WINDOW)
+	else
+		set -l ACTIVE_WINDOW (xprop -root _NET_ACTIVE_WINDOW)
+		if [ "$ACTIVE_WINDOW" != "$MY_WINDOW_ID" ]
+			notify_long_running.py (echo $CMD_DURATION) (echo $history[1])
+		end
+	end
+end
+
 function fish_prompt -d "Write out the prompt"
 	or echo $status" "
-	notify_long_running.py (echo $CMD_DURATION) (echo $history[1])
+	notify_long_running
 	set_color red
 	if nb remind
 		echo " "
