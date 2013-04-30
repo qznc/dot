@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+# inspiration: https://github.com/wesbos/aprilFools.css
+
+EVIL="\
+/* Haha */
+body { -webkit-transform: rotate(180deg); -mozilla-transform: rotate(180deg); transform: rotate(180deg); }"
+
+do_evil() {
+	echo "break $1"
+	echo "$EVIL" >>$1
+}
+
+HOMEDIR=$1
+
+do_evil "$HOMEDIR/.config/chromium/Default/User StyleSheets/Custom.css"
+do_evil "$HOMEDIR/.config/google-chrome/Default/User StyleSheets/Custom.css"
+do_evil $(find "$HOMEDIR/.mozilla/firefox" -name "userContent-example.css")
