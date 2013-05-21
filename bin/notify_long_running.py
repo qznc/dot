@@ -33,6 +33,7 @@ def maybe_notify(duration, cmd):
 	summary = "Finished after "+duration
 	notify2.init("undistract my fish")
 	n = notify2.Notification(summary, cmd, "face-surprise")
+	n.set_hint_int32("transient", 1)
 	n.show()
 
 if __name__ == "__main__":
