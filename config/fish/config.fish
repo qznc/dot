@@ -3,7 +3,14 @@ set -xg PATH $PATH $HOME/bin
 set -xg PATH $PATH $HOME/dev/x10i/x10.dist/bin
 set -xg PATH $PATH $HOME/dev/dot/bin
 set -xg DEBEMAIL "Andreas Zwinkau <qznc@web.de>"
+
 set -xg LANG "en_US.utf8"
+set -xg LANGUAGE "$LANG"
+set -xg LC_ALL "$LANG"
+set -xg LC_MONETARY "de_DE.utf8"
+set -xg LC_MEASUREMENT "de_DE.utf8"
+set -xg LC_NUMERIC "de_DE.utf8"
+set -xg LC_TIME "de_AT.utf8" # austria has better date formatting
 
 if status --is-login
 	echo "Login Shell!"
