@@ -37,7 +37,7 @@ function notify_long_running -d "clone UndistractMe"
 end
 
 function fish_prompt -d "Write out the prompt"
-	or echo $status" "
+	echo $status" "
 	notify_long_running
 	set_color red
 	if nb remind
@@ -112,7 +112,7 @@ function go -d "alias for xdg-open"
 end
 
 function vin -d "alias for vixn"
-	vixn $argv
+	vixn $argv &
 end
 
 function todo -d "txt notebook"
