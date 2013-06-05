@@ -37,7 +37,8 @@ function notify_long_running -d "clone UndistractMe"
 end
 
 function fish_prompt -d "Write out the prompt"
-	echo $status" "
+  set -l RET $status
+  [ "$RET" = "0" ]; or echo $RET" "
 	notify_long_running
 	set_color red
 	if nb remind
