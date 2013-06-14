@@ -128,6 +128,10 @@ function journal -d "journal inside pvw"
 	nb journal
 end
 
+function ta -d "alias for textadept"
+	textadept -f $argv &
+end
+
 function analyse_history -d "analyze fish shell history for often used commands"
 	grep -v "^#" $HOME/.config/fish/fish_history | sort | uniq -c | sort -n | tail -n 32
 end
