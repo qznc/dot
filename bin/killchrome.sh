@@ -1,3 +1,8 @@
 #!/bin/sh
 set -e
-ps ax | grep chrome | grep opt | cut -d " " -f 1 | xargs kill -9
+PSLIST=$(ps ax | grep chrome | grep opt)
+echo "psgrep gave:"
+echo "$PSLIST"
+PIDS=$(echo $PSLIST | cut -d " " -s -f 1)
+echo "Killing $PIDS"
+echo $PIDS | xargs kill -9
