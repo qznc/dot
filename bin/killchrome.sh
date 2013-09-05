@@ -1,8 +1,16 @@
 #!/bin/sh
 set -e
-PSLIST=$(ps ax | grep chrome | grep opt)
-echo "psgrep gave:"
-echo "$PSLIST"
-PIDS=$(echo $PSLIST | cut -d " " -s -f 1)
-echo "Killing $PIDS"
-echo $PIDS | xargs kill -9
+
+function getpid() {
+	PSLIST=$(ps ax | grep chrome | grep opt)
+	PID=$(echo $PSLIST | cut -d " " -s -f 1)
+	echo "$PID"
+}
+
+PID=$(getpid)
+while [ $PID ]
+do
+	echo "Killing $PID"
+	PID=$(getpid)
+	kill -9 $PID
+done
