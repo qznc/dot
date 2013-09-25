@@ -78,3 +78,8 @@ handle SIGPWR SIGXCPU nostop noprint
 handle SIG39 nostop noprint
 handle SIG40 nostop noprint
 end
+
+define octoposdebug
+handle SIG44 nostop noprint
+handle SIG46 nostop noprint
+end
