@@ -68,7 +68,7 @@ endif
 
 " display invisible chars
 set list
-set listchars=tab:▸\ ,eol:↵,extends:→,precedes:←,nbsp:×
+set listchars=tab:▸\ ,extends:→,precedes:←,nbsp:×
 
 " highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
