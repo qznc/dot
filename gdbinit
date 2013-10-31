@@ -82,4 +82,5 @@ end
 define octoposdebug
 handle SIG44 nostop noprint
 handle SIG46 nostop noprint
+handle SIG35 nostop noprint
 end
