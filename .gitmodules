@@ -31,3 +31,6 @@
 [submodule "vim/bundle/locl-configuration"]
 	path = vim/bundle/locl-configuration
 	url = git://github.com/vim-scripts/Local-configuration.git
+[submodule "vim/bundle/localvimrc"]
+	path = vim/bundle/localvimrc
+	url = https://github.com/vim-scripts/localvimrc.git
