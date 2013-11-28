@@ -48,9 +48,6 @@ set backup                      " enable ~foo files
 set backupdir-=.                " not in local directory
 set backupdir^=~/.cache/vim/backup,/tmp  " try other directories
 
-" use localvimrc plugin for project specific config
-let g:localvimrc_ask=0
-
 " store swap files under ~/.vim
 set directory=~/.cache/vim/swp
 
