@@ -22,6 +22,7 @@ set wildignore=*.pdf,*.o  " ignore certain file names
 set wildignore+=*.aux,*.out,*.toc,*.blg,*.snm,*.vrb,*.nav " LaTeX stuff
 set wildignore+=*.pyc " Python byte code
 set wildignore+=*.sw? " Vim swap files
+set wildignore+=*.tuc,*.bbl " ConTeXt
 
 " colorscheme requirements:
 set background=light
