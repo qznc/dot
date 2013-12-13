@@ -55,7 +55,7 @@ set directory=~/.cache/vim/swp
 " set shell explicitly, as e.g. fish brakes vim
 set shell=/bin/sh
 
-if version >= 730
+if version >= 703
   " persistent undo (available since vim 7.3 / Ubuntu 11.4)
   set undofile
   set undodir=~/.cache/vim/undos
