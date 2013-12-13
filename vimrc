@@ -63,8 +63,10 @@ if version >= 703
   " wrapping
   "set wrap            " wrap lines
   "set textwidth=79    " insert mode auto line breaks
-  set colorcolumn=80   " highlight column
-  hi ColorColumn ctermbg=darkgray
+
+  " highlight if line too long
+  hi ColorColumn ctermbg=LightYellow
+  call matchadd('ColorColumn', '\%>80v.\+', 100) " asfsdf asdfoiwe  erogn eroig oeri mfg aofi gfdo g dfo g
 endif
 
 " display invisible chars
