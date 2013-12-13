@@ -139,7 +139,7 @@ function analyse_history -d "analyze fish shell history for often used commands"
 end
 
 function LANGC -d "set LANG=C for a single command"
-	begin; set -lx LANG C; eval $argv; end
+	env LANG=C $argv
 end
 
 function cl -d "cd and ls"
