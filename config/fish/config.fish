@@ -4,6 +4,7 @@ set -xg PATH $PATH $HOME/dev/x10i/x10.dist/bin
 set -xg PATH $PATH $HOME/dev/dot/bin
 set -xg PATH $PATH $HOME/dev/k/bin
 set -xg PATH $PATH $HOME/dev/git-annex
+set -xg PATH $PATH /data1/zwinkau/sparc-linux-4.4.2-toolchains/multilib/bin
 set -xg DEBEMAIL "Andreas Zwinkau <qznc@web.de>"
 
 set -xg LANG "en_US.utf8"

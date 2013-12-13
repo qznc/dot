@@ -55,11 +55,13 @@ set directory=~/.cache/vim/swp
 " set shell explicitly, as e.g. fish brakes vim
 set shell=/bin/sh
 
-if version >= 703
-  " persistent undo (available since vim 7.3 / Ubuntu 11.4)
-  set undofile
-  set undodir=~/.cache/vim/undos
+if has('persistent_undo')
+    set undodir=~/.cache/vim/undos " Save all undo files in a single location
+    set undolevels=5000 " Save a lot of back-history...
+    set undofile " Actually switch on persistent undo
+endif
 
+if version >= 703
   " wrapping
   "set wrap            " wrap lines
   "set textwidth=79    " insert mode auto line breaks
