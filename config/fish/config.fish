@@ -135,7 +135,7 @@ function ta -d "alias for textadept"
 end
 
 function analyse_history -d "analyze fish shell history for often used commands"
-	grep -v "^#" $HOME/.config/fish/fish_history | sort | uniq -c | sort -n | tail -n 32
+	history | sort | uniq -c | sort -n | tail -n 32
 end
 
 function LANGC -d "set LANG=C for a single command"
