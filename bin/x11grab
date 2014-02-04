@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+OUTPUT=$1
+
+WINDESC=$(xwininfo)
+ID=$(echo "$WINDESC" | grep "Window id:" | cut -c 31-)
+WIDTH=$(echo "$WINDESC" | grep "Width:" | cut -c 10-)
+HEIGHT=$(echo "$WINDESC" | grep "Height:" | cut -c 11-)
+X=$(echo "$WINDESC" | grep "Absolute upper-left X:" | cut -c 27-)
+Y=$(echo "$WINDESC" | grep "Absolute upper-left Y:" | cut -c 27-)
+
+echo "Capture: ${ID}"
+echo ffmpeg -f x11grab -s ${WIDTH}x${HEIGHT} -r 30 -i :0.0+${X},${Y} -vcodec libx264 -vpre lossless_ultrafast -threads 2 "${OUTPUT}"
+ffmpeg -f x11grab -s ${WIDTH}x${HEIGHT} -r 30 -i :0.0+${X},${Y} -vcodec libx264 -vpre lossless_ultrafast -threads 2 "${OUTPUT}"
