@@ -80,8 +80,12 @@ handle SIG40 nostop noprint
 end
 
 define octoposdebug
+handle SIG49 nostop noprint
 handle SIG44 nostop noprint
 handle SIG46 nostop noprint
 handle SIG35 nostop noprint
 #set follow-fork-mode child
+set follow-fork-mode parent
 end
+
+set confirm off
