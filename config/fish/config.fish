@@ -156,3 +156,7 @@ end
 function ycomp -d "graph GUI for yFiles"
 	/afs/info.uni-karlsruhe.de/public/java/ycomp/ycomp --dolayout --autoreload $argv
 end
+
+function ibc -d "command line calculator via bc"
+	echo "$argv" | bc -l
+end
