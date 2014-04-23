@@ -147,7 +147,7 @@ function cl -d "cd and ls"
 end
 
 function fish_greeting
-	echo -n "Hello World! "
+	fortune -s | cowthink -f tux
 	set_color cyan
 	date
 	set_color normal
