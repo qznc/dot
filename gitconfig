@@ -32,3 +32,8 @@
    excludesfile = ~/.gitignore
 [push]
    default = tracking
+[sendemail]
+  smtpencryption = tls
+  smtpserverport = 587
+  smtpserver = smtp.informatik.kit.edu
+  smtpuser = zwinkau
