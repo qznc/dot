@@ -34,6 +34,11 @@ case $1 in
 		;;
 	journal) # edit journal entry for today
 		FILE=$(date +%Y-%m-%d)
+		if [ ! -f "$FILE" ]
+		then
+			echo >>$FILE "Danke für: "
+			echo >>$FILE "Gestern Zahnseide benutzt: "
+		fi
 		echo >>$FILE
 		echo $(date +%H:%M\ %:z) >>$FILE
 		echo >>$FILE
