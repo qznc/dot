@@ -7,6 +7,9 @@ set -xg PATH $PATH $HOME/dev/git-annex
 set -xg PATH $PATH /data1/zwinkau/sparc-linux-4.4.2-toolchains/multilib/bin
 set -xg DEBEMAIL "Andreas Zwinkau <qznc@web.de>"
 
+set -xg ANDROID_HOME /data1/zwinkau/adt-bundle-linux-x86_64-20140702/sdk
+set -xg PATH $PATH $ANDROID_HOME/tools $ANDROID_HOME/platform-tools
+
 set -xg LANG "en_US.utf8"
 set -xg LANGUAGE "$LANG"
 set -xg LC_ALL "$LANG"
