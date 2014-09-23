@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+"""
+Randomly choose a file and a line in it from the repo files.
+
+Inspired by http://www.templeos.org/Wb/Accts/TS/Wb2/WalkThru.html
+Basic idea:
+
+1. Let this script give you some point in the repo.
+2. Explain the line in 5 minutes
+
+Could be great for impromptu presentations to
+* get team members familiar with project code
+* lightning talks in a conference
+* test knowledge breadth of a programmer
+
+Possible use:
+$ vi $(git randomline)
+"""
+
+from subprocess import check_output
+from random import choice, randint
+
+_CMD_FILELIST='git ls-files'
+
+def get_file():
+  raw = check_output(_CMD_FILELIST, shell=True, universal_newlines=True)
+  return choice(raw.split("\n"))
+
+def get_linenum(path):
+  num_lines = sum(1 for line in open(path))
+  return randint(0, num_lines)
+
+path = get_file()
+line = get_linenum(path)
+print("%s +%d" % (path,line))
