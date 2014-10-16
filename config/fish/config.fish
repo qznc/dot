@@ -21,6 +21,8 @@ set -xg LC_MEASUREMENT "de_DE.utf8"
 set -xg LC_NUMERIC "de_DE.utf8"
 set -xg LC_TIME "de_AT.utf8" # austria has better date formatting
 
+set -xg CDPATH $CDPATH /data1/zwinkau/
+
 if status --is-login
 	echo "Login Shell!"
 end
