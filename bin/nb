@@ -19,8 +19,8 @@ case $1 in
 		MTIME=$(stat -c %Y $FILE)
 		NOW=$(date +%s)
 		DIFF=$(( ($NOW - $MTIME) / 60 ))
-		# if more than 30 minutes then remind
-		if [ $DIFF -gt 30 ]
+		# if more than 90 minutes then remind
+		if [ $DIFF -gt 90 ]
 		then
 			echo "journal?"
 		else
