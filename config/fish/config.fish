@@ -155,7 +155,7 @@ function cl -d "cd and ls"
 end
 
 function fish_greeting
-	fortune -s | cowthink -f tux
+	fortune -s "$HOME/.config/fortune/my_cookies" | cowthink -f tux
 	set_color cyan
 	date
 	set_color normal

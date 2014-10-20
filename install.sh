@@ -30,6 +30,11 @@ cp -f `pwd`/gitconfig ~/.gitconfig
 git config --global user.email ${EMAIL}
 info "installed gitconfig"
 
+# fortune cookies
+pushd config/fortune
+strfile my_cookies my_cookies.dat >/dev/null
+popd
+
 # install .config files
 for dir in config/*
 do
