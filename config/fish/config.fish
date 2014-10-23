@@ -4,11 +4,7 @@ set -xg PATH $PATH $HOME/dev/x10i/x10.dist/bin
 set -xg PATH $HOME/dev/dot/bin $PATH
 set -xg PATH $PATH $HOME/dev/k/bin
 set -xg PATH $PATH $HOME/dev/git-annex
-set -xg PATH $PATH /data1/zwinkau/sparc-linux-4.4.2-toolchains/multilib/bin
 set -xg DEBEMAIL "Andreas Zwinkau <qznc@web.de>"
-
-set -xg ANDROID_HOME /data1/zwinkau/adt-bundle-linux-x86_64-20140702/sdk
-set -xg PATH $PATH $ANDROID_HOME/tools $ANDROID_HOME/platform-tools
 
 set -xg IRTSSBASE $HOME/dev/irtss
 set -xg PATH $PATH $IRTSSBASE/tools/bin
@@ -21,7 +17,14 @@ set -xg LC_MEASUREMENT "de_DE.utf8"
 set -xg LC_NUMERIC "de_DE.utf8"
 set -xg LC_TIME "de_AT.utf8" # austria has better date formatting
 
-set -xg CDPATH $CDPATH /data1/zwinkau/
+if test -d /data1/zwinkau
+	set -xg PATH $PATH /data1/zwinkau/sparc-linux-4.4.2-toolchains/multilib/bin
+
+	set -xg CDPATH $CDPATH /data1/zwinkau/
+
+	set -xg ANDROID_HOME /data1/zwinkau/adt-bundle-linux-x86_64-20140702/sdk
+	set -xg PATH $PATH $ANDROID_HOME/tools $ANDROID_HOME/platform-tools
+end
 
 if status --is-login
 	echo "Login Shell!"
