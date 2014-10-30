@@ -171,3 +171,7 @@ end
 function ibc -d "command line calculator via bc"
 	echo "$argv" | bc -l
 end
+
+function mailfile -d "compose mail with thunderbird attaching the given file"
+	thunderbird -compose "attachment=(readlink -f $argv)" &
+end
