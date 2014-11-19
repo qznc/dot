@@ -6,7 +6,7 @@ call pathogen#runtime_append_all_bundles()
 filetype plugin on " enable filetype detection for plugins
 syntax on          " syntax highlighting
 
-set expandtab    " use spaces instead of tabs
+set noexpandtab    " use tabs instead of spaces
 
 set encoding=utf-8    " best default encoding
 set ttyfast           " assume a fast terminal
@@ -34,7 +34,7 @@ set nocindent
 set nosmartindent
 
 " tabs and spaces
-set tabstop=2      " a tab equals 3 spaces
+set tabstop=2      " a tab equals n spaces
 set softtabstop=2  " make backspace work right
 set shiftwidth=2   " indent likewise
 
