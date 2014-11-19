@@ -34,10 +34,17 @@ case $1 in
 		;;
 	journal) # edit journal entry for today
 		FILE=$(date +%Y-%m-%d)
+		PREV=$(date --date="yesterday" +%Y-%m-%d)
 		if [ ! -f "$FILE" ]
 		then
+			echo >>$FILE "Wichtigste Aufgabe heute: "
 			echo >>$FILE "Danke für: "
-			echo >>$FILE "Gestern Zahnseide benutzt: "
+			echo >>$FILE "Gestern Zahnseide benutzt? "
+			if [ -f "$PREV" ]
+			then
+				JOB=$(cat "$PREV" | head -n 1 | cut -d ':' -f 2- | sed -e 's/^ *//' -e 's/ *$//')
+				echo >>$FILE "Gestern \"$JOB\" erledigt? "
+			fi
 		fi
 		echo >>$FILE
 		echo $(date +%H:%M\ %:z) >>$FILE
