@@ -86,7 +86,22 @@ def check_double_words(path, string):
 		if in_comment(before):
 			continue
 		l,c = position(before)
-		print("D %s:%d:%d: %s" % (path, l, c, m.group(0)))
+		print("D %s:%d:%d: %s  [duplicate]" % (path, l, c, m.group(0)))
+		global _FOUND_MISTAKE
+		_FOUND_MISTAKE = True
+
+_RE_LATEX_MISTAKES = re.compile("[^~]\\\\cite{")
+assert None != _RE_LATEX_MISTAKES.search("foo \cite{blub} bar")
+
+def check_latex(path, string):
+	"""Check for various common LaTeX mistakes"""
+	matches = _RE_LATEX_MISTAKES.finditer(string)
+	for m in matches:
+		before = string[:m.start(0)]
+		if in_comment(before):
+			continue
+		l,c = position(before)
+		print("L %s:%d:%d: %s  [use ~ before]" % (path, l, c, m.group(0)))
 		global _FOUND_MISTAKE
 		_FOUND_MISTAKE = True
 
@@ -98,6 +113,7 @@ def check_file(path, args):
 	check_passive(path, contents)
 	check_weasel_words(path, contents)
 	check_double_words(path, contents)
+	check_latex(path, contents)
 
 def position(string):
 	"""Returns (line,column) position of end of string """
