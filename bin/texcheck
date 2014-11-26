@@ -56,7 +56,7 @@ def check_passive(path, string):
 		global _FOUND_MISTAKE
 		_FOUND_MISTAKE = True
 
-_WEASEL_WORDS = "many|various|very|fairly|several|extremely|exceedingly|quite|remarkably|few|surprisingly|mostly|largely|huge|tiny|((are|is) a number)|excellent|interestingly|significantly|substantially|clearly|vast|relatively|completely|apparent|great|leading|remarkable|notable|honorable|award-winning|visionary|outstanding|prestigious|world-class|turns out|widely|often|most|some|recently|lately|currently|traditionally|soon|presently|occasionally|somehow"
+_WEASEL_WORDS = "many|various|very|fairly|several|extremely|exceedingly|quite|remarkably|few|surprisingly|mostly|largely|huge|tiny|((are|is) a number)|excellent|interestingly|significantly|substantially|clearly|vast|relatively|completely|apparent|great|leading|remarkable|notable|honorable|award-winning|visionary|outstanding|prestigious|world-class|turns out|widely|often|most|some|recently|lately|currently|traditionally|soon|presently|occasionally|somehow|not(ice|e) that|major|minor"
 _RE_WEASEL = re.compile("(%s)" % _WEASEL_WORDS)
 
 def check_weasel_words(path, string):
