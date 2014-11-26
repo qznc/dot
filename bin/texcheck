@@ -1,0 +1,125 @@
+#!/usr/bin/env python3
+import sys
+import argparse
+import os
+import re
+
+parser = argparse.ArgumentParser(description='Check LaTeX files for technical writing mistakes.')
+parser.add_argument('files', metavar='PATH', type=str, nargs='*',
+		help='path to check (default=.)', default=['.'])
+
+_FOUND_MISTAKE=False
+
+def main(args):
+	for path in args.files:
+		check(path, args)
+	if _FOUND_MISTAKE:
+		sys.exit(1)
+
+_SKIP_NAMES = [".git", ".svn"]
+
+def most_files(root):
+	"""Yields paths similar to os.walk, but skips stuff like .git"""
+	for file in os.listdir(root):
+		if file in _SKIP_NAMES:
+			continue
+		p = os.path.join(root,file)
+		if os.path.isdir(p):
+			yield from most_files(p)
+		else:
+			yield p
+
+def check(path, args):
+	if path.endswith(".tex"):
+		check_file(path, args)
+	else:
+		for p in most_files(path):
+			if not p.endswith(".tex"):
+				continue
+			if p.startswith("./"):
+				p = p[2:]
+			check_file(p, args)
+
+_IRREGULARS = "awoken|been|born|beat|become|begun|bent|beset|bet|bid|bidden|bound|bitten|bled|blown|broken|bred|brought|broadcast|built|burnt|burst|bought|cast|caught|chosen|clung|come|cost|crept|cut|dealt|dug|dived|done|drawn|dreamt|driven|drunk|eaten|fallen|fed|felt|fought|found|fit|fled|flung|flown|forbidden|forgotten|foregone|forgiven|forsaken|frozen|gotten|given|gone|ground|grown|hung|heard|hidden|hit|held|hurt|kept|knelt|knit|known|laid|led|leapt|learnt|left|lent|let|lain|lighted|lost|made|meant|met|misspelt|mistaken|mown|overcome|overdone|overtaken|overthrown|paid|pled|proven|put|quit|read|rid|ridden|rung|risen|run|sawn|said|seen|sought|sold|sent|set|sewn|shaken|shaven|shorn|shed|shone|shod|shot|shown|shrunk|shut|sung|sunk|sat|slept|slain|slid|slung|slit|smitten|sown|spoken|sped|spent|spilt|spun|spit|split|spread|sprung|stood|stolen|stuck|stung|stunk|stridden|struck|strung|striven|sworn|swept|swollen|swum|swung|taken|taught|torn|told|thought|thrived|thrown|thrust|trodden|understood|upheld|upset|woken|worn|woven|wed|wept|wound|won|withheld|withstood|wrung|written"
+_PASSIVE_PREFIX = "am|are|were|being|is|been|was|be"
+_RE_PASSIVE = re.compile("((%s)\s+(\w+ed|%s))" % (_PASSIVE_PREFIX, _IRREGULARS))
+
+def check_passive(path, string):
+	"""Check string for use of passive voice"""
+	matches = _RE_PASSIVE.finditer(string)
+	for m in matches:
+		before = string[:m.start(0)]
+		if in_comment(before):
+			continue
+		l,c = position(before)
+		print("P %s:%d:%d: %s" % (path, l, c, m.group(0)))
+		global _FOUND_MISTAKE
+		_FOUND_MISTAKE = True
+
+_WEASEL_WORDS = "many|various|very|fairly|several|extremely|exceedingly|quite|remarkably|few|surprisingly|mostly|largely|huge|tiny|((are|is) a number)|excellent|interestingly|significantly|substantially|clearly|vast|relatively|completely"
+_RE_WEASEL = re.compile("(%s)" % _WEASEL_WORDS)
+
+def check_weasel_words(path, string):
+	"""Check string for use of weasel words"""
+	matches = _RE_WEASEL.finditer(string)
+	for m in matches:
+		before = string[:m.start(0)]
+		if in_comment(before):
+			continue
+		l,c = position(before)
+		print("W %s:%d:%d: %s" % (path, l, c, m.group(0)))
+		global _FOUND_MISTAKE
+		_FOUND_MISTAKE = True
+
+_RE_WORD = re.compile("(\w\w+)")
+
+def check_double_words(path, string):
+	"""Check string for use of double double words"""
+	prev = ""
+	matches = _RE_WORD.finditer(string)
+	for m in matches:
+		w = m.group(0)
+		if w != prev:
+			prev = w
+			continue
+		before = string[:m.start(0)]
+		if in_comment(before):
+			continue
+		l,c = position(before)
+		print("D %s:%d:%d: %s" % (path, l, c, m.group(0)))
+		global _FOUND_MISTAKE
+		_FOUND_MISTAKE = True
+
+def check_file(path, args):
+	"""Check file for various writing mistakes"""
+	assert path.endswith(".tex")
+	with open(path) as fh:
+		contents = fh.read()
+	check_passive(path, contents)
+	check_weasel_words(path, contents)
+	check_double_words(path, contents)
+
+def position(string):
+	"""Returns (line,column) position of end of string """
+	line = string.count("\n") + 1
+	column = len(string) - string.rfind("\n")
+	return line, column
+
+assert position("foo\nbar") == (2,4)
+
+def in_comment(string):
+	"""Returns whether end of string is within a TeX comment"""
+	i = string.rfind("\n")
+	while True:
+		i = string.find("%", i+1)
+		if i == -1:
+			return False
+		if string[i-1] != '\\':
+			return True
+
+assert in_comment("foo\nbla%baz")
+assert not in_comment("foo%bla\nbaz")
+
+if __name__ == "__main__":
+	args = parser.parse_args()
+	main(args)
