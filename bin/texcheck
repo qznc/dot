@@ -90,20 +90,28 @@ def check_double_words(path, string):
 		global _FOUND_MISTAKE
 		_FOUND_MISTAKE = True
 
-_RE_LATEX_MISTAKES = re.compile("[^~]\\\\cite{")
-assert None != _RE_LATEX_MISTAKES.search("foo \cite{blub} bar")
+_LATEX_MISTAKES = {
+	"[^~]\\\\cite{": "use ~ before",
+	"([^\w]et al[^\w])": "use et~al",
+	"([^\w]et~al\.\s)": "use et~al.\ ",
+	"([^\w]etc\.\s)": "use etc.\ ",
+	"([^\w]i\.e\.\s)": "use i.e.\ ",
+	"([^\w]e\.g\.\s)": "use e.g.\ ",
+	"([^\w]cf\.\s)": "use cf.\ ",
+}
 
 def check_latex(path, string):
 	"""Check for various common LaTeX mistakes"""
-	matches = _RE_LATEX_MISTAKES.finditer(string)
-	for m in matches:
-		before = string[:m.start(0)]
-		if in_comment(before):
-			continue
-		l,c = position(before)
-		print("%s:%d:%d: %s  [use ~ before]" % (path, l, c, m.group(0)))
-		global _FOUND_MISTAKE
-		_FOUND_MISTAKE = True
+	for pattern,msg in _LATEX_MISTAKES.items():
+		matches = re.compile(pattern).finditer(string)
+		for m in matches:
+			before = string[:m.start(0)]
+			if in_comment(before):
+				continue
+			l,c = position(before)
+			print("%s:%d:%d: %s  [%s]" % (path, l, c, m.group(0),msg))
+			global _FOUND_MISTAKE
+			_FOUND_MISTAKE = True
 
 _BUMPTIOUS = {
 	"persons": "people",
