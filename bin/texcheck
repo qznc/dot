@@ -52,7 +52,7 @@ def check_passive(path, string):
 		if in_comment(before):
 			continue
 		l,c = position(before)
-		print("P %s:%d:%d: %s" % (path, l, c, m.group(0)))
+		print("%s:%d:%d: %s  [passive]" % (path, l, c, m.group(0)))
 		global _FOUND_MISTAKE
 		_FOUND_MISTAKE = True
 
@@ -67,7 +67,7 @@ def check_weasel_words(path, string):
 		if in_comment(before):
 			continue
 		l,c = position(before)
-		print("W %s:%d:%d: %s" % (path, l, c, m.group(0)))
+		print("%s:%d:%d: %s" % (path, l, c, m.group(0)))
 		global _FOUND_MISTAKE
 		_FOUND_MISTAKE = True
 
@@ -86,7 +86,7 @@ def check_double_words(path, string):
 		if in_comment(before):
 			continue
 		l,c = position(before)
-		print("D %s:%d:%d: %s  [duplicate]" % (path, l, c, m.group(0)))
+		print("%s:%d:%d: %s %s" % (path, l, c, m.group(0), m.group(0)))
 		global _FOUND_MISTAKE
 		_FOUND_MISTAKE = True
 
@@ -101,7 +101,7 @@ def check_latex(path, string):
 		if in_comment(before):
 			continue
 		l,c = position(before)
-		print("L %s:%d:%d: %s  [use ~ before]" % (path, l, c, m.group(0)))
+		print("%s:%d:%d: %s  [use ~ before]" % (path, l, c, m.group(0)))
 		global _FOUND_MISTAKE
 		_FOUND_MISTAKE = True
 
@@ -167,7 +167,7 @@ def check_bumptious(path, string):
 			continue
 		l,c = position(before)
 		r = _BUMPTIOUS[m.group(0)]
-		print("B %s:%d:%d: %s  [%s]" % (path, l, c, m.group(0), r))
+		print("%s:%d:%d: %s  => %s" % (path, l, c, m.group(0), r))
 		global _FOUND_MISTAKE
 		_FOUND_MISTAKE = True
 
