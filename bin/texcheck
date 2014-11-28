@@ -164,18 +164,18 @@ _BUMPTIOUS = {
 	"may be true that": "may",
 	"is often the case that": "often",
 }
-_RE_BUMPTIOUS = re.compile("(%s)" % ("|".join(_BUMPTIOUS.keys())))
+_RE_BUMPTIOUS = re.compile("[^\w](%s)" % ("|".join(_BUMPTIOUS.keys())))
 
 def check_bumptious(path, string):
 	"""Check for bumptious phrases"""
 	matches = _RE_BUMPTIOUS.finditer(string)
 	for m in matches:
-		before = string[:m.start(0)]
+		before = string[:m.start(1)]
 		if in_comment(before):
 			continue
 		l,c = position(before)
-		r = _BUMPTIOUS[m.group(0)]
-		print("%s:%d:%d: %s  => %s" % (path, l, c, m.group(0), r))
+		r = _BUMPTIOUS[m.group(1)]
+		print("%s:%d:%d: %s  => %s" % (path, l, c, m.group(1), r))
 		global _FOUND_MISTAKE
 		_FOUND_MISTAKE = True
 
