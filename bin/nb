@@ -40,6 +40,7 @@ case $1 in
 			echo >>$FILE "Wichtigste Aufgabe heute: "
 			echo >>$FILE "Danke für: "
 			echo >>$FILE "Gestern Zahnseide benutzt? "
+			echo >>$FILE "Gestern mobility training? "
 			if [ -f "$PREV" ]
 			then
 				JOB=$(cat "$PREV" | head -n 1 | cut -d ':' -f 2- | sed -e 's/^ *//' -e 's/ *$//')
