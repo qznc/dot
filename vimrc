@@ -6,7 +6,8 @@ call pathogen#runtime_append_all_bundles()
 filetype plugin on " enable filetype detection for plugins
 syntax on          " syntax highlighting
 
-set noexpandtab    " use tabs instead of spaces
+set noexpandtab    " use tabs instead of spaces by default
+" to overrule for certain filetypes, use after/ftplugin/*.vim
 
 set encoding=utf-8    " best default encoding
 set ttyfast           " assume a fast terminal
