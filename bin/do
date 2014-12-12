@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+import sys
+import os
+import re
+import subprocess
+
+_LINECOLNR = re.compile("(.+):(\d+):(\d+):?")
+_LINENR = re.compile("(.+):([\d]+):?")
+_PROTOCOL = re.compile("(https?|ftp|file|gopher|mailto|news|nntp|telnet|wais):.+")
+_ARITHMETIC = re.compile("[ \d+*-/%()~<>&|^=!]+")
+
+def exec_and_exit(cmd):
+	os.system(cmd)
+	exit(0)
+
+def try_regexes(arg):
+	m = _PROTOCOL.fullmatch(arg)
+	if m:
+		# leave URLs to xdg-open
+		exec_and_exit("xdg-open "+arg)
+	if m and os.path.isfile(m.group(1)):
+		exec_and_exit("vim %s +%s" % (m.group(1), m.group(2)))
+	m = _LINECOLNR.fullmatch(arg)
+	if m and os.path.isfile(m.group(1)):
+		exec_and_exit("vim \"%s\" \"+call cursor(%s,%s)\"" % (m.group(1), m.group(2), m.group(3)))
+	m = _LINENR.fullmatch(arg)
+	if m and os.path.isfile(m.group(1)):
+		exec_and_exit("vim %s +%s" % (m.group(1), m.group(2)))
+
+def try_man_page(arg):
+	status, out = subprocess.getstatusoutput("man -w "+arg)
+	if status == 0: # there is a man page of this name
+		exec_and_exit("man "+arg)
+
+def try_subdirs(arg):
+	dir_limit = 1000
+	count = 0
+	for root, dirs, files in os.walk("."):
+		if arg in files:
+			assert (root.startswith("./"))
+			path = os.path.join(root[2:], arg)
+			print("Instead use:", path, file=sys.stderr)
+			do_single(os.path.join(root, arg))
+		count += 1
+		if count > dir_limit:
+			break
+
+def try_ctags(arg):
+	pwd = os.path.abspath(".")
+	while True:
+		if pwd == "/":
+			break
+		ctags_path = os.path.join(pwd,"tags")
+		if not os.path.isfile(ctags_path):
+			pwd = os.path.dirname(pwd)
+			continue
+		cmd = 'grep "^%s\\s" '%arg +ctags_path
+		s,out = subprocess.getstatusoutput(cmd)
+		if s != 0:
+			break
+		exec_and_exit('vim -c "ta %s"' % arg)
+
+def try_arithmetic(arg):
+	if not _ARITHMETIC.fullmatch(arg):
+		return
+	try:
+		print(eval(arg))
+	except SyntaxError:
+		return
+	exit(0)
+
+def do_single(arg):
+	if os.path.exists(arg):
+		# leave file and dir handling to xdg-open
+		exec_and_exit("xdg-open "+arg)
+	try_arithmetic(arg)
+	try_regexes(arg)
+	try_man_page(arg)
+	if "." in arg:
+		import socket
+		try:
+			n,al,ad = socket.gethostbyname_ex(arg)
+			os.system("sensible-browser "+arg)
+		except socket.gaierror:
+			pass
+	try_ctags(arg)
+	try_subdirs(arg)
+	# last try, delegate to xdg-open
+	print("Giving up for '%s'. Maybe xdg-open knows better." % (arg), file=sys.stderr)
+	os.system("xdg-open "+arg)
+
+def do(args):
+	if not args:
+		print("Telepathy module missing.")
+		exit(1)
+	for arg in args:
+		do_single(arg)
+
+if __name__ == "__main__":
+	do(sys.argv[1:])
