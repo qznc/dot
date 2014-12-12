@@ -2,12 +2,14 @@
 # Personal notebook script
 set -e
 
-if [ ! -d ~/Dropbox/pvw ]
+DDIR="$HOME/Dropbox/Apps/Plain.txt"
+
+if [ ! -d "$DDIR" ]
 then
 	exit 1
 fi
 
-cd ~/Dropbox/pvw
+cd "$DDIR"
 
 case $1 in
 	recently) # least recently modified
