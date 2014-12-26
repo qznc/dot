@@ -93,8 +93,7 @@ def do(args):
 	if not args:
 		print("Telepathy module missing.")
 		exit(1)
-	for arg in args:
-		do_single(arg)
+	do_single(" ".join(args))
 
 if __name__ == "__main__":
 	do(sys.argv[1:])
