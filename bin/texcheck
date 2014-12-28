@@ -29,12 +29,21 @@ def most_files(root):
 		else:
 			yield p
 
+_EXTENSIONS = "tex md mdwn txt rst".split()
+def accept_ext(path):
+    """check for acceptable file paths"""
+    for ext in _EXTENSIONS:
+        if path.endswith("."+ext):
+            return True
+    return False
+
+
 def check(path, args):
-	if path.endswith(".tex"):
+	if accept_ext(path):
 		check_file(path, args)
 	else:
 		for p in most_files(path):
-			if not p.endswith(".tex"):
+			if not accept_ext(p):
 				continue
 			if p.startswith("./"):
 				p = p[2:]
@@ -181,7 +190,7 @@ def check_bumptious(path, string):
 
 def check_file(path, args):
 	"""Check for various writing mistakes"""
-	assert path.endswith(".tex")
+	assert accept_ext(path)
 	with open(path) as fh:
 		contents = fh.read()
 	check_passive(path, contents)
