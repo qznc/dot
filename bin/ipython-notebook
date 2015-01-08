@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+NOTEBOOKS_PATH="${HOME}/Dropbox/ipython-notebooks"
+
+if [ ! -d "${NOTEBOOKS_PATH}" ]
+then
+	mkdir "${NOTEBOOKS_PATH}"
+fi
+cd "${NOTEBOOKS_PATH}"
+ipython3 notebook
