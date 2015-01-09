@@ -8,4 +8,4 @@ then
 	mkdir "${NOTEBOOKS_PATH}"
 fi
 cd "${NOTEBOOKS_PATH}"
-ipython3 notebook
+ipython3 notebook --script --matplotlib=inline
