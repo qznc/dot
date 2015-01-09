@@ -12,7 +12,8 @@ set trash="=Trash"
 unset imap_passive
 
 ### SENDING ###
-set smtp_url="smtp://smtp.uni-karlsruhe.de:587"
+set smtp_url="smtp://zwinkau@smtp.informatik.kit.edu:587"
+set ssl_starttls = yes
 set realname="Andreas Zwinkau"
 set from="zwinkau@kit.edu"
 set use_from=yes
