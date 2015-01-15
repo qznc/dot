@@ -121,20 +121,12 @@ function p -d "alias for pwd"
 	pwd $argv
 end
 
-function go -d "alias for xdg-open"
-	xdg-open $argv
-end
-
 function vin -d "alias for vixn"
 	vixn $argv &
 end
 
 function ta -d "alias for textadept"
 	textadept $argv &
-end
-
-function todo -d "txt notebook"
-	vim ~/Dropbox/todo.txt
 end
 
 function journal -d "journal inside pvw"
