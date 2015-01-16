@@ -28,6 +28,9 @@ case $1 in
 		shift
 		sudo apt-add-repository $*
 		;;
+	installed)
+		dpkg --get-selections
+		;;
 	*)
 		echo "auto dispatcher for apt-get, apt-cache, etc"
 esac
