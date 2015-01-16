@@ -8,6 +8,7 @@ set -xg DEBEMAIL "Andreas Zwinkau <qznc@web.de>"
 
 set -xg IRTSSBASE $HOME/dev/irtss
 set -xg PATH $PATH $IRTSSBASE/tools/bin
+set -xg JAVA_HOME /usr/lib/jvm/default-java
 
 set -xg LANG "en_US.utf8"
 set -xg LANGUAGE "$LANG"
