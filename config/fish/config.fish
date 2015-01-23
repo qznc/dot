@@ -153,7 +153,8 @@ end
 function fish_greeting
 	fortune -s "$HOME/.config/fortune/my_cookies" | cowthink -f tux
 	set_color cyan
-	date
+	date "+ %Y-%m-%d %H:%M%z   a %A in %B"
+	echo " "(hostname) is (uptime -p)
 	set_color normal
 end
 
