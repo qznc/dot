@@ -51,7 +51,7 @@ def check(path, args):
 
 _IRREGULARS = "awoken|been|born|beat|become|begun|bent|beset|bet|bid|bidden|bound|bitten|bled|blown|broken|bred|brought|broadcast|built|burnt|burst|bought|cast|caught|chosen|clung|come|cost|crept|cut|dealt|dug|dived|done|drawn|dreamt|driven|drunk|eaten|fallen|fed|felt|fought|found|fit|fled|flung|flown|forbidden|forgotten|foregone|forgiven|forsaken|frozen|gotten|given|gone|ground|grown|hung|heard|hidden|hit|held|hurt|kept|knelt|knit|known|laid|led|leapt|learnt|left|lent|let|lain|lighted|lost|made|meant|met|misspelt|mistaken|mown|overcome|overdone|overtaken|overthrown|paid|pled|proven|put|quit|read|rid|ridden|rung|risen|run|sawn|said|seen|sought|sold|sent|set|sewn|shaken|shaven|shorn|shed|shone|shod|shot|shown|shrunk|shut|sung|sunk|sat|slept|slain|slid|slung|slit|smitten|sown|spoken|sped|spent|spilt|spun|spit|split|spread|sprung|stood|stolen|stuck|stung|stunk|stridden|struck|strung|striven|sworn|swept|swollen|swum|swung|taken|taught|torn|told|thought|thrived|thrown|thrust|trodden|understood|upheld|upset|woken|worn|woven|wed|wept|wound|won|withheld|withstood|wrung|written"
 _PASSIVE_PREFIX = "am|are|were|being|is|been|was|be"
-_RE_PASSIVE = re.compile("((%s)\s+(\w+ed|%s))" % (_PASSIVE_PREFIX, _IRREGULARS))
+_RE_PASSIVE = re.compile(r"\b((%s)\s+(\w+ed|%s))\b" % (_PASSIVE_PREFIX, _IRREGULARS))
 
 def check_passive(path, string):
 	"""Check string for use of passive voice"""
@@ -66,7 +66,7 @@ def check_passive(path, string):
 		_FOUND_MISTAKE = True
 
 _WEASEL_WORDS = "many|various|very|fairly|several|extremely|exceedingly|quite|remarkably|few|surprisingly|mostly|largely|huge|tiny|((are|is) a number)|excellent|interestingly|significantly|substantially|clearly|vast|relatively|completely|apparent|great|leading|remarkable|notable|honorable|award-winning|visionary|outstanding|prestigious|world-class|turns out|widely|often|most|some|recently|lately|currently|traditionally|soon|presently|occasionally|somehow|not(ice|e) that|major|minor|exciting|surprising|important|interesting|considerably"
-_RE_WEASEL = re.compile("(%s)" % _WEASEL_WORDS)
+_RE_WEASEL = re.compile(r"\b(%s)\b" % _WEASEL_WORDS)
 
 def check_weasel_words(path, string):
 	"""Check string for use of weasel words"""
@@ -80,7 +80,7 @@ def check_weasel_words(path, string):
 		global _FOUND_MISTAKE
 		_FOUND_MISTAKE = True
 
-_RE_WORD = re.compile("(\w\w+)")
+_RE_WORD = re.compile(r"(\w\w+)")
 
 def check_double_words(path, string):
 	"""Check string for use of double double words"""
@@ -173,7 +173,7 @@ _BUMPTIOUS = {
 	"may be true that": "may",
 	"is often the case that": "often",
 }
-_RE_BUMPTIOUS = re.compile("[^\w](%s)" % ("|".join(_BUMPTIOUS.keys())))
+_RE_BUMPTIOUS = re.compile(r"[^\w](%s)" % ("|".join(_BUMPTIOUS.keys())))
 
 def check_bumptious(path, string):
 	"""Check for bumptious phrases"""
