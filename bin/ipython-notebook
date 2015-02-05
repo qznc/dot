@@ -2,10 +2,19 @@
 set -e
 
 NOTEBOOKS_PATH="${HOME}/Dropbox/ipython-notebooks"
+IPYTHON_PATH="${HOME}/dev/myipy"
 
 if [ ! -d "${NOTEBOOKS_PATH}" ]
 then
 	mkdir "${NOTEBOOKS_PATH}"
 fi
 cd "${NOTEBOOKS_PATH}"
-ipython3 notebook --script --matplotlib=inline
+
+IPYTHON=ipython3
+if [ -d "${IPYTHON_PATH}" ]
+then
+	IPYTHON="${IPYTHON_PATH}/.env/bin/ipython"
+	echo "my own ipython"
+fi
+
+${IPYTHON} notebook --script --matplotlib=inline
