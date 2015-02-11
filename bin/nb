@@ -17,7 +17,7 @@ case $1 in
 		;;
 	remind) # echo reminder if last journal is too long ago
 		YEAR=$(date +%Y)
-		FILE=$(ls -t -1 $YEAR* | head -1)
+		FILE=$(ls -t -1 $YEAR/$YEAR* | head -1)
 		MTIME=$(stat -c %Y $FILE)
 		NOW=$(date +%s)
 		DIFF=$(( ($NOW - $MTIME) / 60 ))
@@ -31,12 +31,13 @@ case $1 in
 		;;
 	skip-remind) # make reminder disappear for a little
 		YEAR=$(date +%Y)
-		FILE=$(ls -t -1 $YEAR* | head -1)
+		FILE=$(ls -t -1 $YEAR/$YEAR* | head -1)
 		touch $FILE
 		;;
 	journal) # edit journal entry for today
-		FILE=$(date +%Y-%m-%d)
-		PREV=$(date --date="yesterday" +%Y-%m-%d)
+		FILE=$(date +%Y/%Y-%m-%d)
+		mkdir -p $(dirname "$FILE")
+		PREV=$(date --date="yesterday" +%Y/%Y-%m-%d)
 		if [ ! -f "$FILE" ]
 		then
 			echo >>$FILE "Wichtigste Aufgabe heute: "
