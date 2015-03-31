@@ -21,8 +21,6 @@ set -xg LC_TIME "de_AT.utf8" # austria has better date formatting
 if test -d /data1/zwinkau
 	set -xg PATH $PATH /data1/zwinkau/sparc-linux-4.4.2-toolchains/multilib/bin
 
-	set -xg CDPATH $CDPATH /data1/zwinkau/
-
 	set -xg ANDROID_HOME /data1/zwinkau/adt-bundle-linux-x86_64-20140702/sdk
 	set -xg PATH $PATH $ANDROID_HOME/tools $ANDROID_HOME/platform-tools
 end
