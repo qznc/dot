@@ -4,6 +4,7 @@ set -xg PATH $PATH $HOME/dev/x10i/x10.dist/bin
 set -xg PATH $HOME/dev/dot/bin $PATH
 set -xg PATH $PATH $HOME/dev/k/bin
 set -xg PATH $PATH $HOME/dev/git-annex
+set -xg PATH $PATH $HOME/dev/invadeSIM
 set -xg DEBEMAIL "Andreas Zwinkau <qznc@web.de>"
 
 set -xg IRTSSBASE $HOME/dev/irtss
