@@ -129,7 +129,11 @@ case `hostname` in
 		module rm jdk-1.5.0-sun
 		alias ycomp="ycomp --dolayout"
 		;;
-   localhost*)
-      alias eclipse="~/bin/eclipse/eclipse"
+	itiv*)
+		export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
+		export PATH=${PATH}:/opt/sparc-elf-3.4.4/bin:${HOME}/dev/grmon_tools/common/bin
+		;;
+	localhost*)
+		alias eclipse="~/bin/eclipse/eclipse"
 esac
 
