@@ -1,5 +1,6 @@
 set -xg EDITOR vim
 set -xg PATH $PATH $HOME/bin
+set -xg PATH $PATH $HOME/bin/ldc/bin
 set -xg PATH $PATH $HOME/dev/x10i/x10.dist/bin
 set -xg PATH $HOME/dev/dot/bin $PATH
 set -xg PATH $PATH $HOME/dev/k/bin
