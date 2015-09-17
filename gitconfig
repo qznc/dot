@@ -17,6 +17,7 @@
    staged = diff --cached
    conti = rebase --continue
    mrg = merge --no-ff --edit --stat
+   praise = blame
 [diff]
    renames = copies
 [user]
