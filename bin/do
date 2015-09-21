@@ -45,6 +45,16 @@ def try_subdirs(arg):
 		if count > dir_limit:
 			break
 
+def try_multimedia(arg):
+	# audio
+	for ext in (".mp3", ".ogg"):
+		if arg.endswith(ext):
+			exec_and_exit('mplayer "%s"' % arg)
+	# video
+	for ext in (".mp4", ".ogv", ".avi"):
+		if arg.endswith(ext):
+			exec_and_exit('mplayer "%s"' % arg)
+
 def try_ctags(arg):
 	pwd = os.path.abspath(".")
 	while True:
@@ -70,6 +80,7 @@ def try_arithmetic(arg):
 	exit(0)
 
 def do_single(arg):
+	try_multimedia(arg)
 	if os.path.exists(arg):
 		# leave file and dir handling to xdg-open
 		exec_and_exit("xdg-open "+arg)
