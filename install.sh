@@ -19,7 +19,7 @@ else
 fi
 
 # install dot-rc files and directories
-for file in bashrc bash_profile vimrc vim gdbinit gitignore tmux.conf muttrc devscripts textadept latexmkrc
+for file in bashrc bash_profile vimrc vim gdbinit gitignore tmux.conf muttrc devscripts textadept latexmkrc netsurf
 do
 	info "symlinking ${file}"
 	ln -sf `pwd`/${file} ~/.${file}
