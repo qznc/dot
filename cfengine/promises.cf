@@ -1,0 +1,68 @@
+body common control
+{
+  bundlesequence => { "test", "desktop" };
+  inputs => { "cfengine_stdlib.cf" };
+}
+
+bundle agent test
+{
+  reports:
+    cfengine_3::
+      "Hello world!";
+}
+
+bundle agent desktop
+{
+  vars:
+    "always_desired_packages" slist => {
+      "ack-grep",
+      "ant",
+      "astyle",
+      "build-essential",
+      "cdecl",
+      "cmake",
+      "dos2unix",
+      "exuberant-ctags",
+      "fish",
+      "gdb",
+      "gimp",
+      "git",
+      "gitg",
+      "gitk",
+      "gitk",
+      "git-svn",
+      "git-svn",
+      "gnupg",
+      "gnupg",
+      "gstreamer0.10-plugins-bad",
+      "gstreamer0.10-plugins-bad-multiverse",
+      "gstreamer0.10-plugins-good",
+      "gstreamer0.10-plugins-ugly",
+      "ikiwiki",
+      "indicator-multiload",
+      "inkscape",
+      "inotify-tools",
+      "latexmk",
+      "lsb-release",
+      "openjdk-7-jdk",
+      "openjdk-7-jre",
+      "openssh-client",
+      "openssh-server",
+      "pandoc",
+      "par",
+      "popularity-contest",
+      "python3",
+      "realpath",
+      "subversion",
+      "thunderbird",
+      "tmux",
+      "ttf-inconsolata",
+      "vim",
+      "wget",
+      };
+  packages:
+    ubuntu::
+       "$(always_desired_packages)"
+                  package_policy => "add",
+                  package_method => apt;
+}
