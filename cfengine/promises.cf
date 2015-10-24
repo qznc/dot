@@ -1,6 +1,6 @@
 body common control
 {
-  bundlesequence => { "test", "desktop" };
+  bundlesequence => { "selfexec", "packages" };
   inputs => { "cfengine_stdlib.cf" };
 }
 
@@ -11,58 +11,107 @@ bundle agent test
       "Hello world!";
 }
 
-bundle agent desktop
+bundle agent selfexec {
+  files:
+    "/etc/cron.daily/cfengine3"
+      copy_from => no_backup_cp("$(sys.workdir)/inputs/cronscript.sh"),
+      perms => mog("755", "root", "root");
+}
+
+bundle agent packages
 {
   vars:
-    "always_desired_packages" slist => {
+    "buildslave_packages" slist => {
+      "realpath",
+    };
+    "andi_packages" slist => {
       "ack-grep",
-      "ant",
       "astyle",
-      "build-essential",
-      "cdecl",
-      "cmake",
+      "bsdmainutils",
       "dos2unix",
+      "eclipse",
       "exuberant-ctags",
       "fish",
-      "gdb",
-      "gimp",
-      "git",
+      "fonts-inconsolata",
+      "fonts-liberation",
+      "fonts-sil-gentium",
+      "fonts-sil-gentium-basic",
+      "gedit",
       "gitg",
       "gitk",
-      "gitk",
-      "git-svn",
-      "git-svn",
+      "gnome-terminal",
       "gnupg",
-      "gnupg",
-      "gstreamer0.10-plugins-bad",
-      "gstreamer0.10-plugins-bad-multiverse",
-      "gstreamer0.10-plugins-good",
-      "gstreamer0.10-plugins-ugly",
       "ikiwiki",
       "indicator-multiload",
       "inkscape",
       "inotify-tools",
-      "latexmk",
+      "language-pack-de",
+      "language-pack-en",
       "lsb-release",
-      "openjdk-7-jdk",
-      "openjdk-7-jre",
-      "openssh-client",
-      "openssh-server",
+      "lshw",
+      "lsof",
+      "mercurial",
+      "mplayer",
+      "multiarch-support",
+      "mutt",
       "pandoc",
       "par",
       "popularity-contest",
-      "python3",
-      "realpath",
-      "subversion",
+      "pylint",
+      "python3-feedparser",
+      "rar",
       "thunderbird",
       "tmux",
-      "ttf-inconsolata",
       "vim",
+      "vlc",
+      "weechat-curses",
       "wget",
-      };
+      "xclip",
+      "xdg-utils",
+    };
+    "ipd_packages" slist => {
+      "ant",
+      "build-essential",
+      "cdecl",
+      "cmake",
+      "gdb",
+      "gimp",
+      "git-svn",
+      "krb5-user",
+      "latexmk",
+      "openjdk-7-jdk",
+      "openjdk-7-jre",
+      "openssh-client",
+      "subversion",
+      "vite",
+    };
+    "private_packages" slist => {
+      "avidemux",
+      "calligrastage",
+      "context",
+      "font-manager",
+      "gargoyle-free",
+      "gimp",
+      "gstreamer0.10-plugins-bad",
+      "gstreamer0.10-plugins-bad-multiverse",
+      "gstreamer0.10-plugins-good",
+      "gstreamer0.10-plugins-ugly",
+      "offlineimap",
+    };
+    "always_desired_packages" slist => {
+      "git",
+      "python3",
+    };
+    "personal_laptop_packages" slist => {
+      @(always_desired_packages),
+      @(ipd_packages),
+      @(private_packages),
+      @(andi_packages),
+    };
   packages:
     ubuntu::
-       "$(always_desired_packages)"
+       "$(personal_laptop_packages)"
                   package_policy => "add",
-                  package_method => apt;
+                  package_method => apt,
+                  action => if_elapsed(1440);
 }
