@@ -55,9 +55,9 @@ function postexec_test --on-event fish_postexec
 end
 
 function fish_prompt -d "Write out the prompt"
-  set -l RET $status
-  [ "$RET" = "0" ]; or echo $RET" "
+	set -l RET $status
 	set_color red
+	[ "$RET" = "0" ]; or echo "return code $RET at "(date "+%Y-%m-%d %H:%M:%S")
 	if nb remind
 		echo " "
 		nb skip-remind
