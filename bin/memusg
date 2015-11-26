@@ -52,7 +52,8 @@ do
     let peak="sample > peak ? sample : peak"
     sleep 0.1
 done
-echo "memusg: peak=$peak" >&2
+human_peak=$(numfmt --from-unit=1024 --to=iec-i $peak)
+echo "memusg: peak=$human_peak" >&2
 ) &
 monpid=$!
 
