@@ -13,8 +13,9 @@ cd "${NOTEBOOKS_PATH}"
 IPYTHON=ipython3
 if [ -d "${IPYTHON_PATH}" ]
 then
-	IPYTHON="${IPYTHON_PATH}/.env/bin/ipython"
+	IPYTHON="${IPYTHON_PATH}/.env/bin/jupyter"
 	echo "my own ipython"
 fi
 
+source ${IPYTHON_PATH}/.env/bin/activate
 ${IPYTHON} notebook --script --matplotlib=inline
