@@ -21,6 +21,8 @@ set -xg LC_MEASUREMENT "de_DE.utf8"
 set -xg LC_NUMERIC "de_DE.utf8"
 set -xg LC_TIME "de_AT.utf8" # austria has better date formatting
 
+set -xg HOSTNAME (hostname)
+
 if test -d /data1/zwinkau
     set -xg PATH $PATH /data1/zwinkau/sparc-linux-4.4.2-toolchains/multilib/bin
 
@@ -38,6 +40,12 @@ function git_prompt -d "short info about git repos if available"
         set -l branch (git name-rev HEAD --name-only --always ^/dev/null)
         echo "$branch "
     end
+end
+
+function log_persistent_history --on-event fish_preexec
+    set -l pershist $HOME/.history_persistent_$HOSTNAME
+    set -l time (date --iso-8601=seconds)
+    echo "$time $argv" >>$pershist
 end
 
 function preexec_test --on-event fish_preexec
