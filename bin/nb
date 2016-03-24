@@ -41,7 +41,7 @@ case $1 in
 		if [ ! -f "$FILE" ]
 		then
 			echo >>$FILE "Wichtigste Aufgabe heute: "
-			echo >>$FILE "Danke für: "
+			echo >>$FILE "Ich war glücklich als: "
 			#echo >>$FILE "Gestern Zahnseide benutzt? "
 			#echo >>$FILE "Gestern an Diss gearbeitet? "
 			if [ -f "$PREV" ]
