@@ -1,12 +1,12 @@
 set -xg EDITOR vim
 set -xg PATH $PATH $HOME/bin
-set -xg PATH $PATH $HOME/bin/ldc/bin
+set -xg PATH $PATH $HOME/bin/ldc/bin ^/dev/null
 set -xg PATH $PATH $HOME/dev/x10i/x10.dist/bin
 set -xg PATH $HOME/dev/dot/bin $PATH
 set -xg PATH $PATH $HOME/dev/k/bin
 set -xg PATH $PATH $HOME/dev/git-annex
 set -xg PATH $PATH $HOME/dev/invadeSIM
-set -xg PATH $HOME/.cabal/bin /opt/ghc/7.8.4/bin /opt/cabal/1.22/bin /opt/alex/3.1.4/bin /opt/happy/1.19.5/bin $PATH
+set -xg PATH $HOME/.cabal/bin /opt/ghc/7.8.4/bin /opt/cabal/1.22/bin /opt/alex/3.1.4/bin /opt/happy/1.19.5/bin $PATH ^/dev/null
 set -xg DEBEMAIL "Andreas Zwinkau <qznc@web.de>"
 
 set -xg IRTSSBASE $HOME/dev/irtss
