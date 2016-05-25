@@ -18,6 +18,7 @@
    conti = rebase --continue
    mrg = merge --no-ff --edit --stat
    praise = blame
+   repoversion = describe --always --tags
 [diff]
    renames = copies
 [user]
