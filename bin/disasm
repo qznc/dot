@@ -1,2 +1,0 @@
-#!/bin/sh
-objdump --no-show-raw-insn -D $* | less -S
