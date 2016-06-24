@@ -14,7 +14,6 @@ ca-certificates
 ca-certificates-java
 calligrastage
 cdecl
-clang
 cmake
 command-not-found
 context
@@ -26,14 +25,20 @@ easytag
 eclipse
 evince
 exuberant-ctags
-ffmpeg
 findutils
 fish
 font-manager
+fonts-dejavu-core
+fonts-droid
+fonts-gfs-baskerville
+fonts-gfs-bodoni-classic
+fonts-inconsolata
 fonts-liberation
+fonts-opensymbol
 fonts-sil-charis
 fonts-sil-gentium
 fonts-sil-gentium-basic
+fonts-ubuntu-title
 f-spot
 gargoyle-free
 gconf-editor
@@ -61,7 +66,6 @@ gstreamer0.10-plugins-ugly
 gtk-recordmydesktop
 ikiwiki
 indicator-appmenu
-indicator-cpufreq
 indicator-datetime
 indicator-multiload
 indicator-power
@@ -75,10 +79,8 @@ language-pack-de
 language-pack-en
 language-pack-gnome-de
 language-pack-gnome-en
-laptop-mode-tools
 latexmk
 lsb
-lsb-base
 lsb-release
 lshw
 lsof
@@ -92,6 +94,7 @@ multiarch-support
 mutt
 netcat
 network-manager-openvpn
+ninja-build
 offlineimap
 openjdk-7-jdk
 openjdk-7-jre
@@ -106,6 +109,7 @@ pkg-config
 poppler-utils
 popularity-contest
 powertop
+puppet
 pylint
 python3
 python3-feedparser
@@ -117,25 +121,15 @@ sqlite3
 strace
 subversion
 terminator
+texlive-full
 thunderbird
 thunderbird-gnome-support
 tmux
 transmission-gtk
 ttf-adf-universalis
-ttf-dejavu-core
-ttf-droid
-ttf-freefont
-ttf-gfs-baskerville
-ttf-gfs-bodoni-classic
-ttf-inconsolata
-ttf-liberation
 ttf-linux-libertine
 ttf-mscorefonts-installer
-ttf-opensymbol
-ttf-sil-charis
-ttf-sil-gentium
 ttf-ubuntu-font-family
-ttf-ubuntu-title
 unetbootin
 unison
 units
@@ -151,6 +145,12 @@ vite
 vlc
 weechat-curses
 wget
+wmctrl
 xclip
 xdg-utils
 zenity
+R emacs23
+R emacs24
+R xemacs21
+R remmina
+R radare

@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+import sys
+import subprocess
+
+assert __name__ == "__main__"
+
+TO_INSTALL = set()
+TO_REMOVE = set()
+ALL_GREEN = True
+
+def register(line):
+	if line.startswith("R "):
+		TO_REMOVE.add(line[2:])
+	else:
+		TO_INSTALL.add(line)
+
+# Read configuration
+for path in sys.argv[1:]:
+	with open(path) as fh:
+		for line in fh:
+			register(line.strip())
+
+def error(msg):
+	global ALL_GREEN
+	ALL_GREEN = False
+	print("Error:", msg)
+
+both = TO_INSTALL.intersection(TO_REMOVE)
+if both:
+	error("remove AND install? "+" ".join(both))
+	exit(1)
+
+def precheck(pkgs, short_cmd, op):
+	op = op + " "
+	pkgs = " ".join(pkgs)
+	cmd = "apt-get %s -s -y %s" % (short_cmd, pkgs)
+	try:
+		output = subprocess.check_output(cmd.split())
+	except subprocess.CalledProcessError:
+		error(cmd)
+		return
+	for line in output.decode("utf8").split("\n"):
+		if line.startswith(op):
+			pkg = line.split()[1]
+			yield pkg
+
+# Check removals
+removals = set(precheck(TO_REMOVE, "remove", "Remv"))
+for pkg in removals:
+	if pkg in TO_INSTALL:
+		error("Would remove '%s', which shall be installed" % pkg)
+
+# Check installs
+installs = set(precheck(TO_INSTALL, "install", "Inst"))
+for pkg in installs:
+	if pkg in TO_REMOVE:
+		error("Would install '%s', which shall be removed" % pkg)
+
+if ALL_GREEN:
+	if (removals):
+		print("apt-get remove", " ".join(removals))
+	if (installs):
+		print("apt-get install", " ".join(installs))
+else:
+	exit(1)
