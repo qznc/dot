@@ -113,6 +113,7 @@ puppet
 pylint
 python3
 python3-feedparser
+qpdfview
 rar
 scribus
 simple-scan
