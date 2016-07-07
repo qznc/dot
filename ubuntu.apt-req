@@ -18,11 +18,11 @@ cmake
 command-not-found
 context
 curl
-debootstrap
+R debootstrap
 deja-dup
 dos2unix
 easytag
-eclipse
+R eclipse
 evince
 exuberant-ctags
 findutils
@@ -84,10 +84,10 @@ lsb
 lsb-release
 lshw
 lsof
-mencoder
+R mencoder
 mercurial
-metacity
-miro
+R metacity
+R miro
 mosh
 mplayer
 multiarch-support
@@ -100,11 +100,11 @@ openjdk-7-jdk
 openjdk-7-jre
 openssh-client
 openssh-server
-pan
+R pan
 pandoc
 par
 pidgin
-pinpoint
+R pinpoint
 pkg-config
 poppler-utils
 popularity-contest
@@ -129,10 +129,10 @@ tmux
 transmission-gtk
 ttf-adf-universalis
 ttf-linux-libertine
-ttf-mscorefonts-installer
+R ttf-mscorefonts-installer
 ttf-ubuntu-font-family
 unetbootin
-unison
+R unison
 units
 unrar
 unzip
@@ -155,3 +155,6 @@ R emacs24
 R xemacs21
 R remmina
 R radare
+R libtomcat7-java
+R libtomcat6-java
+R groff
