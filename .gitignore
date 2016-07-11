@@ -5,3 +5,4 @@ vim/view
 textadept/session
 textadept/theme
 *.dat
+qpdfview.conf
