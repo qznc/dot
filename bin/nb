@@ -11,6 +11,21 @@ fi
 
 cd "$DDIR"
 
+TALKABOUT="
+Erzähl mir etwas was dich kürzlich glücklich gemacht hat!
+Erzähl mir etwas worauf du stolz bist!
+Erzähl mir von einem guten Menschen!
+Erzähl mir von einer tollen Stadt!
+Erzähl mir von einem schönen Urlaub!
+Erzähl mir eine Sache die auf deiner Löffelliste steht!
+Was hast du in der letzten Woche gelernt?
+Was motiviert dich?
+Machst du genug Fehler?
+Was würdest du gerne ändern kannst es aber nicht?
+Was erhoffst du dir im nächsten halben Jahr?
+Was wird sich auch in 10 Jahren nicht geändert haben?
+Was erhoffst du dir in 5 Jahren?"
+
 case $1 in
 	recently) # least recently modified
 		ls -t -1
@@ -41,9 +56,10 @@ case $1 in
 		if [ ! -f "$FILE" ]
 		then
 			echo >>$FILE "Wichtigste Aufgabe heute: "
-			echo >>$FILE "Ich war glücklich als: "
+			#echo >>$FILE "Ich war glücklich als: "
 			#echo >>$FILE "Gestern Zahnseide benutzt? "
 			#echo >>$FILE "Gestern an Diss gearbeitet? "
+			echo $TALKABOUT | shuf -n1 >>$FILE
 			if [ -f "$PREV" ]
 			then
 				JOB=$(cat "$PREV" | head -n 1 | cut -d ':' -f 2- | sed -e 's/^ *//' -e 's/ *$//')
