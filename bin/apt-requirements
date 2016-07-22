@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 import sys
 import subprocess
+import argparse
+
+P = argparse.ArgumentParser(description="declarative apt")
+P.add_argument("path", type=str, help="Path to requirements file")
+P.add_argument("--act", default=False, action='store_true',
+		help="Actually do install and remove packages")
 
 assert __name__ == "__main__"
 
@@ -15,10 +21,10 @@ def register(line):
 		TO_INSTALL.add(line)
 
 # Read configuration
-for path in sys.argv[1:]:
-	with open(path) as fh:
-		for line in fh:
-			register(line.strip())
+ARGS = P.parse_args()
+with open(ARGS.path) as fh:
+	for line in fh:
+		register(line.strip())
 
 def error(msg):
 	global ALL_GREEN
@@ -60,8 +66,14 @@ removals = removals.intersection(TO_REMOVE)
 installs = installs.intersection(TO_INSTALL)
 if ALL_GREEN:
 	if (removals):
-		print("apt-get remove", " ".join(removals))
+		cmd = "apt-get remove " + " ".join(removals)
+		print(cmd)
+		if ARGS.act:
+			os.system(cmd)
 	if (installs):
-		print("apt-get install", " ".join(installs))
+		cmd = "apt-get install " + " ".join(installs)
+		print(cmd)
+		if ARGS.act:
+			os.system(cmd)
 else:
 	exit(1)
