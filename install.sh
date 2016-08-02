@@ -68,6 +68,3 @@ done <"simple_gsettings.save"
 # quoted arguments are not simple
 gsettings set org.gnome.gedit.preferences.editor editor-font "PT Sans 12"
 gsettings set org.gnome.gedit.plugins active-plugins "['docinfo', 'filebrowser', 'spell', 'quickopen', 'wordcompletion', 'modelines', 'time', 'smartspaces']"
-# disable overlay scroll bars
-gsettings set com.canonical.desktop.interface scrollbar-mode normal
-
