@@ -173,7 +173,9 @@ function fish_greeting
     set_color cyan
     date "+ %Y-%m-%d %H:%M%z   a %A in %B"
     echo " "(hostname) is (uptime -p)
-    /usr/lib/update-notifier/apt-check --human-readable
+    test -e /tmp/updates-available
+    and cat /tmp/updates-available
+    /usr/lib/update-notifier/apt-check --human-readable >/tmp/updates-available &
     set_color normal
 end
 
