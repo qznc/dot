@@ -153,3 +153,9 @@ R remmina
 R libtomcat7-java
 R libtomcat6-java
 R groff
+R spring
+R docker.io
+#R python-pygame # necessary due to impressive
+R hugs
+impressive
+shutter
