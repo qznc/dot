@@ -25,6 +25,11 @@ def register(line):
 ARGS = P.parse_args()
 with open(ARGS.path) as fh:
 	for line in fh:
+		i = line.find("#")
+		if i >= 0:
+			line = line[:i]
+		if not line:
+			continue
 		register(line.strip())
 
 def error(msg):
