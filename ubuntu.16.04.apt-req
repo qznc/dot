@@ -1,0 +1,155 @@
+ack-grep
+alsa-utils
+ant
+astyle
+autossh
+avahi-utils
+avidemux
+bash
+bash-completion
+bsdmainutils
+build-essential
+bzip2
+ca-certificates
+ca-certificates-java
+calligrastage
+cdecl
+cmake
+command-not-found
+context
+curl
+R debootstrap
+deja-dup
+dos2unix
+easytag
+R eclipse
+evince
+exuberant-ctags
+findutils
+fish
+font-manager
+fonts-dejavu-core
+fonts-droid
+fonts-gfs-baskerville
+fonts-gfs-bodoni-classic
+fonts-inconsolata
+fonts-liberation
+fonts-opensymbol
+fonts-sil-charis
+fonts-sil-gentium
+fonts-sil-gentium-basic
+fonts-ubuntu-title
+gargoyle-free
+gconf-editor
+gdb
+gedit
+gimp
+git
+gitg
+gitk
+git-svn
+gnome-keyring
+gnome-panel
+gnome-power-manager
+gnome-terminal
+gnucash
+gnupg
+gnupg-agent
+gnuplot-nox
+gparted
+graphviz
+gstreamer0.10-plugins-bad
+gstreamer0.10-plugins-bad-multiverse
+gstreamer0.10-plugins-good
+gtk-recordmydesktop
+ikiwiki
+indicator-appmenu
+indicator-datetime
+indicator-multiload
+indicator-power
+indicator-printers
+indicator-session
+indicator-sound
+inkscape
+inotify-tools
+krb5-user
+language-pack-de
+language-pack-en
+language-pack-gnome-de
+language-pack-gnome-en
+latexmk
+lsb
+lsb-release
+lshw
+lsof
+R mencoder
+mercurial
+R metacity
+R miro
+mosh
+mplayer
+multiarch-support
+mutt
+netcat
+network-manager-openvpn
+ninja-build
+offlineimap
+openssh-client
+openssh-server
+R pan
+pandoc
+par
+R pidgin
+R pinpoint
+pkg-config
+poppler-utils
+popularity-contest
+powertop
+puppet
+pylint
+python3
+python3-feedparser
+qpdfview
+rar
+scribus
+simple-scan
+sloccount
+sqlite3
+strace
+subversion
+terminator
+texlive-full
+thunderbird
+thunderbird-gnome-support
+tmux
+transmission-gtk
+ttf-adf-universalis
+ttf-linux-libertine
+R ttf-mscorefonts-installer
+ttf-ubuntu-font-family
+unetbootin
+R unison
+units
+unrar
+unzip
+usbutils
+vim
+virtualbox
+virtualbox-guest-additions-iso
+virtualbox-guest-dkms
+virtualbox-guest-x11
+vite
+vlc
+weechat-curses
+wget
+wmctrl
+xclip
+xdg-utils
+zenity
+R emacs23
+R emacs24
+R xemacs21
+R remmina
+R libtomcat7-java
+R libtomcat6-java
+R groff
