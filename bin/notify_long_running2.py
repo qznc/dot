@@ -18,6 +18,9 @@ def maybe_notify(duration, cmd, success):
 	n.show()
 
 def parse_iso8601(datestr):
+	if len(datestr) > 22 and datestr[22] == ':':
+		# remove colon in timezone for strptime
+		datestr = datestr[:22] + datestr[23:]
 	return datetime.datetime.strptime(datestr, "%Y-%m-%dT%H:%M:%S%z" )
 
 if __name__ == "__main__":
