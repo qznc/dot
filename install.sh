@@ -59,7 +59,7 @@ mkdir -p ~/.cache/vim/{backup,swp,undos}
 gconftool-2 --set /apps/metacity/general/action_double_click_titlebar toggle_maximize_vertically --type string
 gconftool-2 --set /apps/metacity/general/button_layout "close,minimize,maximize:" --type string
 gconftool-2 --set /apps/gnome-terminal/profiles/Default/custom_command "/usr/bin/fish" --type string
-gconftool-2 --set /apps/gnome-terminal/profiles/Default/use_custom_command "1" --type bool
+gconftool-2 --set /apps/gnome-terminal/profiles/Default/use_custom_command "0" --type bool
 
 # configure Gnome3 via gsettings (successor of gconf)
 while read line; do

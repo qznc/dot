@@ -3,7 +3,9 @@
 # another test for interactively
 if [[ $- != *i* ]]; then
 	return
-fi		
+fi
+
+[ -f /usr/bin/fish ] && exec /usr/bin/fish
 
 alias ls='ls -F --color=auto'
 alias grep='grep --color=auto'
