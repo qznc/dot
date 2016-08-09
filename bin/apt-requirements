@@ -41,7 +41,9 @@ deb_lines_current = set()
 if os.path.exists(_SOURCE_PATH):
 	with open(_SOURCE_PATH) as fh:
 		for line in fh:
-			deb_lines_current.add(line)
+			if not line.startswith("deb"):
+				continue
+			deb_lines_current.add(line[4:].strip())
 if DEB_LINES.difference(deb_lines_current):
 	if ARGS.act:
 		with open(_SOURCE_PATH, "w") as fh:
