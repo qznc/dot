@@ -159,3 +159,5 @@ R docker.io
 R hugs
 impressive
 shutter
+DEB https://apt.dockerproject.org/repo ubuntu-precise main
+docker-engine
