@@ -50,7 +50,7 @@ gitg
 gitk
 git-svn
 gnome-keyring
-gnome-panel
+R gnome-panel
 gnome-power-manager
 gnome-terminal
 gnucash
