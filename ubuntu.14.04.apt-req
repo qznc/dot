@@ -157,3 +157,4 @@ R radare
 R libtomcat7-java
 R libtomcat6-java
 R groff
+DEB https://apt.dockerproject.org/repo ubuntu-precise main

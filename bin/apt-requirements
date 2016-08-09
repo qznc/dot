@@ -13,11 +13,14 @@ assert __name__ == "__main__"
 
 TO_INSTALL = set()
 TO_REMOVE = set()
+DEB_LINES = set()
 ALL_GREEN = True
 
 def register(line):
 	if line.startswith("R "):
 		TO_REMOVE.add(line[2:])
+	elif line.startswith("DEB "):
+		DEB_LINES.add(line[4:])
 	else:
 		TO_INSTALL.add(line)
 
@@ -31,6 +34,26 @@ with open(ARGS.path) as fh:
 		if not line:
 			continue
 		register(line.strip())
+
+# Should update sources?
+_SOURCE_PATH="/etc/apt/sources.list.d/requirements.list"
+deb_lines_current = set()
+if os.path.exists(_SOURCE_PATH):
+	with open(_SOURCE_PATH) as fh:
+		for line in fh:
+			deb_lines_current.add(line)
+if DEB_LINES.difference(deb_lines_current):
+	if ARGS.act:
+		with open(_SOURCE_PATH, "w") as fh:
+			for l in sorted(DEB_LINES):
+				fh.write("deb ")
+				fh.write(l)
+				fh.write("\n")
+	else:
+		print("For /etc/apt/sources.list.d/requirements.list")
+		for l in sorted(DEB_LINES):
+			print(l)
+		print()
 
 def error(msg):
 	global ALL_GREEN
