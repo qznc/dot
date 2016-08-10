@@ -157,7 +157,7 @@ R docker.io
 #R python-pygame # necessary due to impressive
 R hugs
 impressive
-shutter
+R shutter
 DEB https://apt.dockerproject.org/repo ubuntu-precise main
 docker-engine
 R cfengine3
