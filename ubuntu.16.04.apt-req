@@ -19,7 +19,7 @@ command-not-found
 context
 curl
 R debootstrap
-deja-dup
+R deja-dup
 dos2unix
 easytag
 R eclipse
@@ -49,7 +49,7 @@ gitg
 gitk
 git-svn
 gnome-keyring
-gnome-panel
+R gnome-panel
 gnome-power-manager
 gnome-terminal
 gnucash
@@ -85,7 +85,6 @@ lsof
 R mencoder
 mercurial
 R metacity
-R miro
 mosh
 mplayer
 multiarch-support
@@ -134,10 +133,10 @@ unrar
 unzip
 usbutils
 vim
-virtualbox
-virtualbox-guest-additions-iso
-virtualbox-guest-dkms
-virtualbox-guest-x11
+R virtualbox
+R virtualbox-guest-additions-iso
+R virtualbox-guest-dkms
+R virtualbox-guest-x11
 vite
 vlc
 weechat-curses
@@ -145,7 +144,7 @@ wget
 wmctrl
 xclip
 xdg-utils
-zenity
+R zenity
 R emacs23
 R emacs24
 R xemacs21
@@ -161,3 +160,8 @@ impressive
 shutter
 DEB https://apt.dockerproject.org/repo ubuntu-precise main
 docker-engine
+R cfengine3
+R hplip
+R aisleriot
+R oneconf
+#R katepart
