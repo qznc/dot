@@ -39,3 +39,7 @@
   smtpserverport = 587
   smtpserver = smtp.informatik.kit.edu
   smtpuser = zwinkau
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
