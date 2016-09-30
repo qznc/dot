@@ -19,7 +19,6 @@ command-not-found
 context
 curl
 R debootstrap
-R deja-dup
 dos2unix
 easytag
 R eclipse
@@ -98,7 +97,6 @@ openssh-server
 R pan
 pandoc
 par
-R pidgin
 R pinpoint
 pkg-config
 poppler-utils
@@ -144,7 +142,6 @@ wget
 wmctrl
 xclip
 xdg-utils
-R zenity
 R emacs23
 R emacs24
 R xemacs21
@@ -161,8 +158,11 @@ R shutter
 DEB https://apt.dockerproject.org/repo ubuntu-precise main
 docker-engine
 R cfengine3
-R hplip
 R aisleriot
 R oneconf
 #R katepart
 htop
+R telepathy-indicator
+R telepathy-mission-control-5
+preload
+ubuntu-mate-desktop
