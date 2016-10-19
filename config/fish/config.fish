@@ -28,6 +28,7 @@ set -xg HOSTNAME (hostname)
 
 if test -d /data1/zwinkau/sparc-linux-4.4.2-toolchains/multilib/bin
     set -xg PATH $PATH /data1/zwinkau/sparc-linux-4.4.2-toolchains/multilib/bin
+    set -xg PATH $PATH /data1/zwinkau/sparc-elf-4.4.2/bin
 end
 
 if test -d /data1/zwinkau/Android
