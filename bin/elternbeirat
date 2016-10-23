@@ -1,2 +1,2 @@
 #!/bin/sh
-fossil ui ~/Dropbox/Elternbeirat.fossil
+fossil ui ~/Dropbox/Elternbeirat/Elternbeirat.fossil
