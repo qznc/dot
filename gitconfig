@@ -1,11 +1,10 @@
 [alias]
-   ci = commit
+   ci = commit -a
    co = checkout
    up = pull --rebase -q
    ftch = fetch --all -q
    psh = push -q
    st = status -s -b
-   adu = add -u
    bv = branch -vv
    wd = diff --color-words
    conflict = !"$EDITOR" -c '/^[<=|>]\\{7\\}' `git ls-files --unmerged | cut -c 51- | uniq`
@@ -19,6 +18,10 @@
    mrg = merge --no-ff --edit --stat
    praise = blame
    repoversion = describe --always --tags
+   track = add --intent-to-add
+   cip = commit --patch
+   cap = commit --patch --amend
+   caa = commit --amend -a
 [diff]
    renames = copies
 [user]
