@@ -166,3 +166,4 @@ R telepathy-indicator
 R telepathy-mission-control-5
 preload
 ubuntu-mate-desktop
+DEB https://packages.gitlab.com/runner/gitlab-ci-multi-runner/ubuntu/ xenial main
