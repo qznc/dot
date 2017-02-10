@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -e
+
+NOTEBOOKS_PATH="${HOME}/Dropbox/ipython-notebooks"
+IPYTHON_PATH="${HOME}/dev/myipy"
+
+if [ ! -d "${NOTEBOOKS_PATH}" ]
+then
+	mkdir "${NOTEBOOKS_PATH}"
+fi
+
+cd "${IPYTHON_PATH}"
+bash -c "source .env/bin/activate && jupyter notebook --notebook-dir=${NOTEBOOKS_PATH}"
