@@ -11,7 +11,7 @@ set -xg DEBEMAIL "Andreas Zwinkau <qznc@web.de>"
 set -xg IRTSSBASE $HOME/git/irtss
 set -xg PATH $PATH $IRTSSBASE/tools/bin
 set -xg JAVA_HOME /usr/lib/jvm/default-java
-set -xg GUROBI_HOME /data1/zwinkau/gurobi651/linux64
+set -xg GUROBI_HOME /data1/zwinkau/gurobi702/linux64
 set -xg GRB_LICENSE_FILE {$GUROBI_HOME}/gurobi.lic
 set -xg LD_LIBRARY_PATH {$GUROBI_HOME}/lib {$LD_LIBRARY_PATH}
 set -xg PATH $GUROBI_HOME/bin $PATH
