@@ -2,7 +2,7 @@
 # Personal notebook script
 set -e
 
-DDIR="$HOME/Dropbox/Apps/Plain.txt"
+DDIR="$HOME/Sync/pvw"
 
 if [ ! -d "$DDIR" ]
 then
