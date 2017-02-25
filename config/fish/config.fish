@@ -97,20 +97,12 @@ function st -d "alias for g st"
     g st $argv
 end
 
-function gap -d "alias for g add -p"
-    g add -p $argv
-end
-
 function gl -d "alias for g l"
     g l $argv
 end
 
 function gb -d "alias for g bv"
     g bv $argv
-end
-
-function gp -d "alias for g psh"
-    g psh $argv
 end
 
 function gd -d "alias for git-diff"
@@ -141,20 +133,8 @@ function p -d "alias for pwd"
     pwd $argv
 end
 
-function vin -d "alias for vixn"
-    vixn $argv &
-end
-
-function ta -d "alias for textadept"
-    textadept $argv &
-end
-
 function journal -d "journal inside pvw"
     nb journal
-end
-
-function ta -d "alias for textadept"
-    textadept -f $argv &
 end
 
 function analyse_history -d "analyze fish shell history for often used commands"
@@ -163,11 +143,6 @@ end
 
 function LANGC -d "set LANG=C for a single command"
     env LANG=C $argv
-end
-
-function cl -d "cd and ls"
-    cd $argv
-    and ls -t --color=always -x | head -n3 -q
 end
 
 function fish_greeting
