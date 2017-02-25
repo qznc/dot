@@ -113,6 +113,10 @@ function gg -d "alias for gitg"
     gitg $argv
 end
 
+function k -d "alias for kakoune"
+    kak $argv
+end
+
 function l -d "alias for ls with some tweaks"
     ls --color=auto -B --group-directories-first -h -v $argv
 end
