@@ -10,5 +10,4 @@ then
 fi
 cd "${NOTEBOOKS_PATH}"
 
-cd "${IPYTHON_PATH}"
-make run
+bash -c "source ${IPYTHON_PATH}/.env/bin/activate && ipython notebook --script --matplotlib=inline"
