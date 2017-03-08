@@ -22,6 +22,7 @@
    cip = commit --patch
    cap = commit --patch --amend
    caa = commit --amend -a
+   ini = "!git init && git commit --allow-empty -m initial"
 [diff]
    renames = copies
 [user]
