@@ -83,9 +83,6 @@ def try_arithmetic(arg):
 def do_single(arg):
 	try_multimedia(arg)
 	if os.path.exists(arg):
-		if arg.endswith(".pdf"):
-			exec_and_exit("qpdfview --unique --instance do%d %s"\
-				% (random.randint(100000, 999999),  arg))
 		# leave file and dir handling to xdg-open
 		exec_and_exit("xdg-open "+arg)
 	try_arithmetic(arg)

@@ -30,12 +30,6 @@ cp -f `pwd`/gitconfig ~/.gitconfig
 git config --global user.email ${EMAIL}
 info "installed gitconfig"
 
-# install qpdfview config
-# do not use symlink, because it stores geometry there
-mkdir -p ~/.config/qpdfview/
-info "cp qpdfview.conf"
-cp -u qpdfview.conf ~/.config/qpdfview/
-
 # fortune cookies
 pushd config/fortune
 strfile my_cookies my_cookies.dat >/dev/null
