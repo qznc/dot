@@ -41,8 +41,9 @@ export EDITOR=vim
 
 export PATH=${HOME}/bin:${PATH}
 export PATH=${HOME}/dev/dot/bin:${PATH}
-export PATH=${PATH}:${HOME}/dev/x10i/x10.dist/bin
-export PATH=${HOME}/dev/cparser/build:${PATH}
+export PATH=${HOME}/git/dot/bin:${PATH}
+export PATH=${PATH}:${HOME}/git/x10i/x10.dist/bin
+export PATH=${HOME}/git/cparser/build:${PATH}
 
 export LANG="en_US.utf8"
 
@@ -113,7 +114,7 @@ case `hostname` in
 
 		export PRINTER=hpneu
 		export MAIL=${HOME}/.evolution/mail/local/Inbox
-		export PATH=${PATH}:${HOME}/dev/x10i/x10.doc/bin
+		export PATH=${PATH}:${HOME}/git/x10i/x10.doc/bin
 
 		export JAVA_HOME=/usr/lib/jvm/default-java
 		GRGEN_PATH=~/local/eclipse-workspace/GrGen

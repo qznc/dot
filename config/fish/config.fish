@@ -4,6 +4,7 @@ set -xg PATH $PATH $HOME/bin/ldc/bin ^/dev/null
 set -xg PATH $PATH $HOME/git/x10i/x10.dist/bin
 set -xg PATH $PATH /afs/info.uni-karlsruhe.de/public/java/ycomp/
 set -xg PATH $HOME/dev/dot/bin $PATH
+set -xg PATH $HOME/git/dot/bin $PATH
 set -xg PATH $PATH $HOME/git/invadeSIM
 set -xg PATH $HOME/.cabal/bin /opt/ghc/7.8.4/bin /opt/cabal/1.22/bin /opt/alex/3.1.4/bin /opt/happy/1.19.5/bin $PATH ^/dev/null
 set -xg DEBEMAIL "Andreas Zwinkau <qznc@web.de>"
