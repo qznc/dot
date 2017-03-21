@@ -57,18 +57,20 @@ function log_persistent_history --on-event fish_preexec
     echo "$time $argv" >>$pershist
 end
 
-function preexec_test --on-event fish_preexec
-    set -g preexec_time (date --iso-8601=seconds)
-    set -g MY_WINDOW_ID (xprop -root _NET_ACTIVE_WINDOW ^/dev/null)
-end
+if set -q DISPLAY
+  function preexec_test --on-event fish_preexec
+      set -g preexec_time (date --iso-8601=seconds)
+      set -g MY_WINDOW_ID (xprop -root _NET_ACTIVE_WINDOW ^/dev/null)
+  end
 
-function postexec_test --on-event fish_postexec
-    set -l RET "$status"
-    set -l postexec_time (date --iso-8601=seconds)
-    set -l ACTIVE_WINDOW (xprop -root _NET_ACTIVE_WINDOW ^/dev/null)
-    if [ "$ACTIVE_WINDOW" != "$MY_WINDOW_ID" ]
-        notify_long_running2.py "$preexec_time" "$postexec_time" "$argv" "$RET"
-    end
+  function postexec_test --on-event fish_postexec
+      set -l RET "$status"
+      set -l postexec_time (date --iso-8601=seconds)
+      set -l ACTIVE_WINDOW (xprop -root _NET_ACTIVE_WINDOW ^/dev/null)
+      if [ "$ACTIVE_WINDOW" != "$MY_WINDOW_ID" ]
+          notify_long_running2.py "$preexec_time" "$postexec_time" "$argv" "$RET"
+      end
+  end
 end
 
 function fish_prompt -d "Write out the prompt"
