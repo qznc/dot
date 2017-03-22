@@ -6,9 +6,6 @@ call pathogen#runtime_append_all_bundles()
 filetype plugin on " enable filetype detection for plugins
 syntax on          " syntax highlighting
 
-set noexpandtab    " use tabs instead of spaces by default
-" to overrule for certain filetypes, use after/ftplugin/*.vim
-
 set encoding=utf-8    " best default encoding
 set ttyfast           " assume a fast terminal
 set lazyredraw        " no redraw within macros etc
@@ -36,9 +33,11 @@ set nocindent
 set nosmartindent
 
 " tabs and spaces
+set expandtab      " use spaces instead of tabs by default
 set tabstop=2      " a tab equals n spaces
 set softtabstop=2  " make backspace work right
 set shiftwidth=2   " indent likewise
+" to overrule for certain filetypes, use after/ftplugin/*.vim
 
 " searching
 set ignorecase   " ignore upper/lower case
@@ -84,10 +83,6 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 " line numbers
 "set relativenumber   " show line number relative to cursor (vim 7.3)
 highlight LineNr ctermfg=darkcyan
-
-" load some plugins
-"runtime macros/matchit.vim  " advanced % command, which works in LaTeX, HTML, etc.
-" use `vim-addons install matchit` instead
 
 " When editing a file, always jump to the last known cursor position.
 " Also restores folds
