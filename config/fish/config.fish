@@ -57,7 +57,7 @@ function log_persistent_history --on-event fish_preexec
     echo "$time $argv" >>$pershist
 end
 
-if set -q DISPLAY
+if begin set -q DISPLAY ;and test -e /usr/bin/xprop; end
   function preexec_test --on-event fish_preexec
       set -g preexec_time (date --iso-8601=seconds)
       set -g MY_WINDOW_ID (xprop -root _NET_ACTIVE_WINDOW ^/dev/null)
