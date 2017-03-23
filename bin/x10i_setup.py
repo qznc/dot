@@ -8,6 +8,7 @@ import sys
 import argparse
 import subprocess
 import shutil
+import fileinput
 from datetime import datetime
 
 X10I_PATH = os.path.expanduser("~/git/x10i")
@@ -22,6 +23,8 @@ P.add_argument('--debug', action='store_true',
     help='Show debug output')
 P.add_argument('--skip-irtss', action='store_true',
     help='Do not build irtss')
+P.add_argument('--visualize', action='store_true',
+    help='Make agent system send out visualization data')
 P.add_argument('--tilecount', type=int, metavar='T', default=4,
     help='Number of tiles')
 
@@ -61,11 +64,24 @@ VARIANT = {
             }
         }
 
+def config_irtss():
+    if ARGS.visualize:
+        with fileinput.input('src/lib/debug-cfg.h', inplace=True) as f:
+            for line in f:
+                print(line.replace('SUB_AGENT_TELEMETRY_ON  0',
+                        'SUB_AGENT_TELEMETRY_ON  1'), end='')
+    else: # undo previous visualize, potentially
+        with fileinput.input('src/lib/debug-cfg.h', inplace=True) as f:
+            for line in f:
+                print(line.replace('SUB_AGENT_TELEMETRY_ON  1',
+                        'SUB_AGENT_TELEMETRY_ON  0'), end='')
+
 def build_irtss():
     arch = TARGET_TO_ARCH[ARGS.target]
     variant = VARIANT[arch][ARGS.tilecount]
     LOG.debug("chdir "+IRTSS_PATH)
     os.chdir(IRTSS_PATH)
+    config_irtss()
     # Building iRTSS
     if ARGS.skip_irtss:
         LOG.info("skip irtss build")
