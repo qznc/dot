@@ -1,7 +1,7 @@
 set nocompatible   " disable vi compatability
 
 " pathogen loads all plugins in .vim/bundle/
-call pathogen#infect()
+execute pathogen#infect()
 
 filetype plugin indent on " enable filetype detection for plugins and indentation
 syntax on          " syntax highlighting
