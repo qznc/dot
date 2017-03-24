@@ -153,14 +153,21 @@ function LANGC -d "set LANG=C for a single command"
     env LANG=C $argv
 end
 
+function show_available_updates
+    test -r /tmp/updates-available
+    and cat /tmp/updates-available
+    set -l UNDO_MASK (umask -p)
+    umask 0000
+    /usr/lib/update-notifier/apt-check --human-readable >/tmp/updates-available &
+    eval $UNDO_MASK
+end
+
 function fish_greeting
     fortune -s "$HOME/.config/fortune/my_cookies" | cowthink -f tux
     set_color cyan
     date "+ %Y-%m-%d %H:%M%z   a %A in %B"
     echo " "(hostname) is (uptime -p)
-    test -e /tmp/updates-available
-    and cat /tmp/updates-available
-    /usr/lib/update-notifier/apt-check --human-readable >/tmp/updates-available &
+    show_available_updates
     set_color normal
 end
 
