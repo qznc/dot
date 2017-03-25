@@ -65,16 +65,21 @@ VARIANT = {
         }
 
 def config_irtss():
+    with fileinput.input('src/lib/debug-cfg.h', inplace=True) as f:
+        for line in f:
+            print(line.replace('SUB_AGENT_TELEMETRY_ON  1',
+                    'SUB_AGENT_TELEMETRY_ON  0'), end='')
     if ARGS.visualize:
-        with fileinput.input('src/lib/debug-cfg.h', inplace=True) as f:
+        assert (ARGS.target == 'i686-invasic-irtss')
+        with fileinput.input('app/release.x86guest.multitile/release.x86guest.multitile.config', inplace=True) as f:
             for line in f:
-                print(line.replace('SUB_AGENT_TELEMETRY_ON  0',
-                        'SUB_AGENT_TELEMETRY_ON  1'), end='')
+                print(line.replace('# CONFIG_cf_gui_enabled is not set',
+                        'CONFIG_cf_gui_enabled=y'), end="")
     else: # undo previous visualize, potentially
-        with fileinput.input('src/lib/debug-cfg.h', inplace=True) as f:
+        with fileinput.input('app/release.x86guest.multitile/release.x86guest.multitile.config', inplace=True) as f:
             for line in f:
-                print(line.replace('SUB_AGENT_TELEMETRY_ON  1',
-                        'SUB_AGENT_TELEMETRY_ON  0'), end='')
+                print(line.replace('CONFIG_cf_gui_enabled=y',
+                    '# CONFIG_cf_gui_enabled is not set'), end="")
 
 def build_irtss():
     arch = TARGET_TO_ARCH[ARGS.target]
