@@ -17,8 +17,6 @@ set -xg GRB_LICENSE_FILE {$GUROBI_HOME}/gurobi.lic
 set -xg LD_LIBRARY_PATH {$GUROBI_HOME}/lib {$LD_LIBRARY_PATH}
 set -xg PATH $GUROBI_HOME/bin $PATH
 
-set -xg ANSIBLE_NOCOWS 1
-
 set -xg LANG "en_US.utf8"
 set -xg LANGUAGE "$LANG"
 set -xg LC_ALL "$LANG"
