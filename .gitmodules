@@ -7,9 +7,6 @@
 [submodule "vim/bundle/OmniCppComplete"]
 	path = vim/bundle/OmniCppComplete
 	url = git://github.com/vim-scripts/OmniCppComplete.git
-[submodule "vim/bundle/css_color"]
-	path = vim/bundle/css_color
-	url = git://github.com/vim-scripts/css_color.vim.git
 [submodule "vim/bundle/Align"]
 	path = vim/bundle/Align
 	url = git://github.com/vim-scripts/Align.git
