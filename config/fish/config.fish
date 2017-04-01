@@ -71,6 +71,15 @@ if begin set -q DISPLAY ;and test -e /usr/bin/xprop; end
   end
 end
 
+switch $HOSTNAME
+case 'qznc*'
+  set PROMPT_COLOR red
+case 'i44pc*'
+  set PROMPT_COLOR blue
+case '*'
+  set PROMPT_COLOR cyan
+end
+
 function fish_prompt -d "Write out the prompt"
     set -l RET $status
     set_color red
@@ -82,7 +91,7 @@ function fish_prompt -d "Write out the prompt"
     end
     #set_color $fish_color_cwd
     #echo -n (git_prompt)
-    set_color cyan
+    set_color $PROMPT_COLOR
     echo -n '➤ '
     set_color normal
 end
@@ -164,7 +173,7 @@ function fish_greeting
     fortune -s "$HOME/.config/fortune/my_cookies" | cowthink -f tux
     set_color cyan
     date "+ %Y-%m-%d %H:%M%z   a %A in %B"
-    echo " "(hostname) is (uptime -p)
+    echo " $HOSTNAME" is (uptime -p)
     show_available_updates
     set_color normal
 end
