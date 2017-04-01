@@ -140,6 +140,18 @@ function c -d "alias for cd"
     cd $argv
 end
 
+function cd.. -d "fix my mistakes"
+    cd ..
+end
+
+function cd... -d "cd shortcut"
+    cd ../..
+end
+
+function cd.... -d "cd shortcut"
+    cd ../../..
+end
+
 function v -d "alias for vim"
     vim -X $argv
 end
