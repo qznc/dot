@@ -45,7 +45,7 @@ end
 function git_prompt -d "short info about git repos if available"
     if git status > /dev/null ^ /dev/null
         set -l branch (git name-rev HEAD --name-only --always ^/dev/null)
-        echo "$branch "
+        printf "[gb "$branch"]"
     end
 end
 
@@ -77,7 +77,15 @@ case 'qznc*'
 case 'i44pc*'
   set PROMPT_COLOR blue
 case '*'
-  set PROMPT_COLOR cyan
+  set PROMPT_COLOR black
+end
+
+function fish_right_prompt -d "shown to the right of my prompt"
+  set_color brown
+  printf "done "
+  printf (date "+%H:%M:%S")
+  printf " "
+  printf (git_prompt)
 end
 
 function fish_prompt -d "Write out the prompt"
@@ -89,10 +97,11 @@ function fish_prompt -d "Write out the prompt"
         echo " "
         nb skip-remind
     end
-    #set_color $fish_color_cwd
-    #echo -n (git_prompt)
+    if [ $USER = "root" ]
+      printf 'ROOT'
+    end
     set_color $PROMPT_COLOR
-    echo -n '➤ '
+    printf '➤ '
     set_color normal
 end
 
