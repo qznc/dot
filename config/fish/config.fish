@@ -72,10 +72,12 @@ if begin set -q DISPLAY ;and test -e /usr/bin/xprop; end
 end
 
 switch $HOSTNAME
-case 'qznc*'
+case 'qznc.*'
   set PROMPT_COLOR red
 case 'i44pc*'
   set PROMPT_COLOR blue
+case '*-T510'
+  set PROMPT_COLOR green
 case '*'
   set PROMPT_COLOR black
 end
