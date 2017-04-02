@@ -15,6 +15,7 @@ def maybe_notify(duration, cmd, success):
 	notify2.init("undistract my fish")
 	n = notify2.Notification(summary, cmd, "face-surprise")
 	n.set_hint_int32("transient", 1)
+	n.set_timeout(60000)
 	n.show()
 
 def parse_iso8601(datestr):
