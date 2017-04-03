@@ -176,6 +176,10 @@ function journal -d "journal inside pvw"
 end
 
 function analyse_history -d "analyze fish shell history for often used commands"
+    cat $HOME/.history_persistent_$HOSTNAME | cut -d ' ' -f 2- | sort | uniq -c | sort -n | tail -n 32
+end
+
+function analyse_history_first -d "analyze fish shell history for often used executables (first token of command)"
     cat $HOME/.history_persistent_$HOSTNAME | cut -d ' ' -f 2 | sort | uniq -c | sort -n | tail -n 32
 end
 
