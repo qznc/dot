@@ -151,6 +151,10 @@ function c -d "alias for cd"
     cd $argv
 end
 
+function .. -d "short cut for cd .."
+    cd ..
+end
+
 function cd.. -d "fix my mistakes"
     cd ..
 end
