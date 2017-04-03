@@ -176,7 +176,7 @@ function journal -d "journal inside pvw"
 end
 
 function analyse_history -d "analyze fish shell history for often used commands"
-    history | sort | uniq -c | sort -n | tail -n 32
+    cat $HOME/.history_persistent_$HOSTNAME | cut -d ' ' -f 2 | sort | uniq -c | sort -n | tail -n 32
 end
 
 function LANGC -d "set LANG=C for a single command"
