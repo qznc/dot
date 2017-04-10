@@ -23,6 +23,7 @@
    cap = commit --patch --amend
    caa = commit --amend -a
    ini = "!git init && git commit --allow-empty -m initial"
+   branches = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short) %09%(authorname)'
 [diff]
    renames = copies
 [user]
