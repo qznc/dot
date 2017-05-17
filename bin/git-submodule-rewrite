@@ -89,14 +89,7 @@ function main() {
   git remote add "${sub}" "${tmpdir}"
   git fetch "${sub}"
 
-  if git_version_lte 2.8.4
-  then
-    # Previous to git 2.9.0 the parameter would yield an error
-    ALLOW_UNRELATED_HISTORIES=""
-  else
-    # From git 2.9.0 this parameter is required
-    ALLOW_UNRELATED_HISTORIES="--allow-unrelated-histories"
-  fi
+  ALLOW_UNRELATED_HISTORIES=""
 
   git merge -s ours --no-commit ${ALLOW_UNRELATED_HISTORIES} "${sub}/master"
   rm -rf tmpdir

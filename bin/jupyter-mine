@@ -2,7 +2,7 @@
 set -e
 
 NOTEBOOKS_PATH="${HOME}/Dropbox/ipython-notebooks"
-IPYTHON_PATH="${HOME}/dev/myipy"
+IPYTHON_PATH="${HOME}/git/myipy"
 
 if [ ! -d "${NOTEBOOKS_PATH}" ]
 then
