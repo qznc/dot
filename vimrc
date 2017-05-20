@@ -8,7 +8,7 @@ syntax on          " syntax highlighting
 
 set encoding=utf-8    " best default encoding
 set ttyfast           " assume a fast terminal
-set lazyredraw        " no redraw within macros etc
+"set lazyredraw        " no redraw within macros etc
 set scrolloff=5       " keep lines around the cursor visible
 set showmode          " show mode on switch
 set showcmd           " show last cmd (fast terminal needed)
