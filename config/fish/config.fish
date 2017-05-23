@@ -75,7 +75,7 @@ end
 switch $HOSTNAME
 case 'qznc.*'
   set PROMPT_COLOR red
-case 'i44pc*'
+case 'i44pc3'
   set PROMPT_COLOR blue
 case '*-T510'
   set PROMPT_COLOR green
