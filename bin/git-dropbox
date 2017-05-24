@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-export GIT_DIR="$1-git"
-export GIT_WORK_TREE="$1"
-shift
-
-git --git-dir="$GIT_DIR" --work-tree="$GIT_WORK_TREE" $*
