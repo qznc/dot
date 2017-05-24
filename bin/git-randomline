@@ -19,17 +19,41 @@ $ vi $(git randomline)
 
 from subprocess import check_output
 from random import choice, randint
+import linecache
 
-_CMD_FILELIST='git ls-files'
 
 def get_file():
+  """Return a random file path tracked in git repo"""
+  _CMD_FILELIST='git ls-files'
   raw = check_output(_CMD_FILELIST, shell=True, universal_newlines=True)
   return choice(raw.split("\n"))
 
 def get_linenum(path):
+  """Return a random existing line number"""
   num_lines = sum(1 for line in open(path))
   return randint(0, num_lines)
 
-path = get_file()
-line = get_linenum(path)
-print("%s +%d" % (path,line))
+def interesting_line(line):
+    """Determine if the line is interesting.
+    Empty lines or stuff like '}' is not interesting."""
+    count = 0
+    for c in line:
+        if 'a' <= c <= 'z':
+            count += 1
+        elif 'A' <= c <= 'Z':
+            count += 1
+    if count > 10:
+        return True
+    return False
+
+while True:
+    try:
+        path = get_file()
+        linenum = get_linenum(path)
+        line = linecache.getline(path, linenum)
+    except UnicodeDecodeError:
+        continue
+    if interesting_line(line):
+        break
+
+print("%s +%d" % (path,linenum))
