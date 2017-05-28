@@ -15,20 +15,15 @@ if [[ `hostname` == i44* ]]
 then
 	EMAIL="zwinkau@kit.edu"
 else
-	EMAIL="qznc@web.de"
+	EMAIL="zwinkau@mailbox.org"
 fi
 
 # install dot-rc files and directories
-for file in bashrc bash_profile vimrc vim gdbinit gitignore tmux.conf muttrc devscripts textadept latexmkrc netsurf xsessionrc ansible.cfg
+for file in bashrc bash_profile vimrc vim gdbinit gitignore tmux.conf muttrc devscripts textadept latexmkrc netsurf xsessionrc ansible.cfg gitconfig
 do
 	info "symlinking ${file}"
 	ln -sf `pwd`/${file} ~/.${file}
 done
-
-# install git config
-cp -f `pwd`/gitconfig ~/.gitconfig
-git config --global user.email ${EMAIL}
-info "installed gitconfig"
 
 # fortune cookies
 pushd config/fortune

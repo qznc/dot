@@ -28,10 +28,7 @@
    renames = copies
 [user]
    name = Andreas Zwinkau
-	email = zwinkau@kit.edu
-# email differs between personal and professional use,
-# so i cannot just symlink this file to ~/.gitconfig
-#  email = ...
+   email = zwinkau@mailbox.org
 [color]
    ui = auto
 [core]
