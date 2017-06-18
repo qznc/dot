@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-NOTEBOOKS_PATH="${HOME}/Dropbox/ipython-notebooks"
+NOTEBOOKS_PATH="${HOME}/Sync/jupyter-notebooks"
 IPYTHON_PATH="${HOME}/git/myipy"
 
 if [ ! -d "${NOTEBOOKS_PATH}" ]
