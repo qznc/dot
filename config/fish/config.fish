@@ -108,10 +108,6 @@ function fish_prompt -d "Write out the prompt"
     set_color normal
 end
 
-function g -d "alias for git"
-    git $argv
-end
-
 function gup -d "alias for g up"
     g up $argv
 end
@@ -144,10 +140,6 @@ function l -d "alias for ls with some tweaks"
     ls --color=auto -B --group-directories-first -h -v $argv
 end
 
-function m -d "alias for make"
-    make LANG=C --warn-undefined-variables $argv
-end
-
 function c -d "alias for cd"
     cd $argv
 end
@@ -166,10 +158,6 @@ end
 
 function cd.... -d "cd shortcut"
     cd ../../..
-end
-
-function v -d "alias for vim"
-    vim -X $argv
 end
 
 function p -d "alias for pwd"

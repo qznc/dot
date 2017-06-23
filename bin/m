@@ -1,0 +1,2 @@
+#!/bin/dash
+exec make LANG=C --warn-undefined-variables $@
