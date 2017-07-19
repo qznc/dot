@@ -78,6 +78,7 @@ case 'qznc.*'
   set PROMPT_COLOR red
 case 'i44pc3'
   set PROMPT_COLOR blue
+  set -xg JAVA_HOME /usr/lib/jvm/zulu-7-amd64/
 case '*-T510'
   set PROMPT_COLOR green
 case '*'
