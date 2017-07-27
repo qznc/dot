@@ -55,12 +55,12 @@ TARGET_TO_ARCH = {
         }
 VARIANT = {
         'x86guest': {
-                4: '4t-w-iotile',
-                6: '6t-w-iotile',
-                8: '8t-w-iotile',
+                4: 'generic',
+                6: 'generic',
+                8: 'generic',
             },
         'leon': {
-                4: '4t5c-chipit-w-iotile',
+                4: 'generic-swcpy-w-iotile',
             }
         }
 
