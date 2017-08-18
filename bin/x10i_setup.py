@@ -22,7 +22,9 @@ P.add_argument('target', nargs='?', default='i686-invasic-irtss',
 P.add_argument('--debug', action='store_true',
     help='Show debug output')
 P.add_argument('--skip-irtss', action='store_true',
-    help='Do not build irtss')
+    help='Do not build iRTSS')
+P.add_argument('--tarball-irtss', action='store_true',
+    help='Use the iRTSS from x10i tarball instead of git repo')
 P.add_argument('--visualize', action='store_true',
     help='Make agent system send out visualization data')
 P.add_argument('--tilecount', type=int, metavar='T', default=4,
@@ -130,6 +132,14 @@ def build_x10i():
     LOG.info("Build x10i %s" % (ARGS.target,))
     exec('ant dist-firm -DTARGET='+ARGS.target, shell=True)
 
-build_irtss()
+def fetch_irtss():
+    os.chdir(X10I_PATH)
+    LOG.info("Install iRTSS tarball")
+    exec('./fetch_octopos.sh', shell=True)
+
+if ARGS.tarball_irtss:
+    fetch_irtss()
+else:
+    build_irtss()
 build_x10i()
 print("Now use `x10-firm -mtarget=%s`" % (ARGS.target,))
