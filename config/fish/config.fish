@@ -1,5 +1,6 @@
 set -xg EDITOR vim
 set -xg PATH $PATH $HOME/bin
+set -xg PATH $PATH $HOME/.local/bin
 set -xg PATH $PATH $HOME/bin/ldc/bin ^/dev/null
 set -xg PATH $PATH $HOME/git/x10i/x10.dist/bin
 set -xg PATH $PATH /afs/info.uni-karlsruhe.de/public/java/ycomp/

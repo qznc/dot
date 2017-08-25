@@ -42,6 +42,7 @@ export EDITOR=vim
 export PATH=${HOME}/bin:${PATH}
 export PATH=${HOME}/dev/dot/bin:${PATH}
 export PATH=${HOME}/git/dot/bin:${PATH}
+export PATH=${PATH}:${HOME}/.local/bin
 export PATH=${PATH}:${HOME}/git/x10i/x10.dist/bin
 export PATH=${HOME}/git/cparser/build:${PATH}
 
