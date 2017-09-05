@@ -5,6 +5,7 @@ logging.basicConfig(level=logging.WARNING)
 
 import os
 import sys
+import re
 import argparse
 import subprocess
 import shutil
@@ -62,7 +63,8 @@ VARIANT = {
                 8: 'generic',
             },
         'leon': {
-                4: 'generic-swcpy-w-iotile',
+                #4: 'generic-swcpy-w-iotile', # newer iRTSS 2017-08
+                4: '4t5c-chipit-w-iotile', # older iRTSS 2017-03
             }
         }
 
@@ -83,7 +85,28 @@ def config_irtss():
                 print(line.replace('CONFIG_cf_gui_enabled=y',
                     '# CONFIG_cf_gui_enabled is not set'), end="")
 
+def symlink_irtss(date):
+    install_dir = os.path.join(X10I_PATH, 'octopos-app/releases/')
+    arch = TARGET_TO_ARCH[ARGS.target]
+    variant = VARIANT[arch][ARGS.tilecount]
+    os.chdir(install_dir)
+    LOG.debug("chdir "+install_dir)
+    if os.path.exists('current'):
+        LOG.debug("remove old 'current' symlink")
+        os.remove('current')
+    LOG.debug("symlink current -> %s" % (date,))
+    os.symlink(date, 'current')
+    d = (os.path.join('current', arch))
+    os.chdir(d)
+    LOG.debug("chdir "+d)
+    if os.path.exists('default'):
+        LOG.debug("remove old 'default' symlink")
+        os.remove('default')
+    LOG.debug("symlink default -> %s" % (variant,))
+    os.symlink(variant, 'default')
+
 def build_irtss():
+    LOG.info("build irtss")
     arch = TARGET_TO_ARCH[ARGS.target]
     variant = VARIANT[arch][ARGS.tilecount]
     LOG.debug("chdir "+IRTSS_PATH)
@@ -113,19 +136,7 @@ def build_irtss():
         shutil.rmtree(tgt)
     shutil.copytree(os.path.join('releases/git/', arch),
             os.path.join(tgt, arch))
-    os.chdir(install_dir)
-    LOG.debug("chdir "+install_dir)
-    if os.path.exists('current'):
-        os.remove('current')
-    LOG.debug("symlink current -> %s" % (date,))
-    os.symlink(date, 'current')
-    d = (os.path.join('current', arch))
-    os.chdir(d)
-    LOG.debug("chdir "+d)
-    if os.path.exists('default'):
-        shutil.rmtree('default')
-    LOG.debug("symlink default -> %s" % (variant,))
-    os.symlink(variant, 'default')
+    symlink_irtss(date)
 
 def build_x10i():
     os.chdir(os.path.join(X10I_PATH, 'x10.dist'))
@@ -136,6 +147,10 @@ def fetch_irtss():
     os.chdir(X10I_PATH)
     LOG.info("Install iRTSS tarball")
     exec('./fetch_octopos.sh', shell=True)
+    date = re.search('RELEASE_DATE="([0-9-]+)"',
+            open('octopos_config.sh').read()).group(1)
+    LOG.info("tarball date: "+str(date))
+    symlink_irtss(date)
 
 if ARGS.tarball_irtss:
     fetch_irtss()
