@@ -91,7 +91,7 @@ def symlink_irtss(date):
     variant = VARIANT[arch][ARGS.tilecount]
     os.chdir(install_dir)
     LOG.debug("chdir "+install_dir)
-    if os.path.exists('current'):
+    if os.path.lexists('current'):
         LOG.debug("remove old 'current' symlink")
         os.remove('current')
     LOG.debug("symlink current -> %s" % (date,))
@@ -99,7 +99,7 @@ def symlink_irtss(date):
     d = (os.path.join('current', arch))
     os.chdir(d)
     LOG.debug("chdir "+d)
-    if os.path.exists('default'):
+    if os.path.lexists('default'):
         LOG.debug("remove old 'default' symlink")
         os.remove('default')
     LOG.debug("symlink default -> %s" % (variant,))
