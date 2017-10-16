@@ -99,3 +99,8 @@ autocmd BufEnter *.h,*.c,*.py :Rooter
 
 " If you forgot to use sudo, use the double exclamation mark
 cmap w!! w !sudo tee % >/dev/null
+
+if has("gui_running")
+  " GUI is running or is about to start.
+  set lines=999 columns=82
+endif
