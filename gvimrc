@@ -1,3 +1,3 @@
 syntax on
-colorscheme shine
+colorscheme zellner
 set guifont=Inconsolata\ 12
