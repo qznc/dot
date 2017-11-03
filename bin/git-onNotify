@@ -23,20 +23,20 @@ class OnWriteHandler(pyinotify.ProcessEvent):
 		self.files = set(getGitFiles())
 	def process_IN_MODIFY(self, event):
 		if not event.pathname in self.files: return
-		subprocess.call(self.cmd.split(' '))
+		subprocess.call(self.cmd)
 
-def auto_compile(path):
+def auto_compile(cmd):
 	wm = pyinotify.WatchManager()
 	handler = OnWriteHandler(cmd=cmd)
 	notifier = pyinotify.Notifier(wm, default_proc_fun=handler)
 	wm.add_watch('.', pyinotify.ALL_EVENTS, rec=True, auto_add=True)
-	sys.stderr.write('==> Start monitoring "%s" (type ctrl-c to exit)\n' % path)
+	sys.stderr.write('==> Start monitoring "%s" (type ctrl-c to exit)\n' % cmd)
 	notifier.loop()
 
 if __name__ == '__main__':
 	# Optional argument
 	cmd = 'make'
-	if len(sys.argv) == 2:
-		cmd = sys.argv[1]
+	if len(sys.argv) >= 2:
+		cmd = sys.argv[1:]
 	# Blocks monitoring
 	auto_compile(cmd)
