@@ -28,6 +28,8 @@ P.add_argument('--tarball-irtss', action='store_true',
     help='Use the iRTSS from x10i tarball instead of git repo')
 P.add_argument('--visualize', action='store_true',
     help='Make agent system send out visualization data')
+P.add_argument('--debug-agent', action='store_true',
+    help='Make agent system log debug info')
 P.add_argument('--tilecount', type=int, metavar='T', default=4,
     help='Number of tiles')
 
@@ -71,8 +73,12 @@ VARIANT = {
 def config_irtss():
     with fileinput.input('src/lib/debug-cfg.h', inplace=True) as f:
         for line in f:
-            print(line.replace('SUB_AGENT_TELEMETRY_ON  1',
-                    'SUB_AGENT_TELEMETRY_ON  0'), end='')
+            line = line.replace('SUB_AGENT_TELEMETRY_ON  1', 'SUB_AGENT_TELEMETRY_ON  0')
+            if ARGS.debug_agent:
+                line = line.replace('SUB_AGENT_ON  1', 'SUB_AGENT_ON  0')
+            else:
+                line = line.replace('SUB_AGENT_ON  0', 'SUB_AGENT_ON  1')
+            print(line, end='')
     if ARGS.visualize:
         assert (ARGS.target == 'i686-invasic-irtss')
         with fileinput.input('app/release.x86guest.multitile/release.x86guest.multitile.config', inplace=True) as f:
