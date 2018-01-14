@@ -49,7 +49,7 @@ case $1 in
 		FILE=$(ls -t -1 $YEAR/$YEAR* | head -1)
 		touch $FILE
 		;;
-	journal) # edit journal entry for today
+	journal) # add journal entry for today
 		FILE=$(date +%Y/%Y-%m-%d)
 		mkdir -p $(dirname "$FILE")
 		PREV=$(date --date="yesterday" +%Y/%Y-%m-%d)
@@ -69,6 +69,15 @@ case $1 in
 		echo >>$FILE
 		echo $(date +%H:%M\ %:z) >>$FILE
 		echo >>$FILE
+		vim $FILE
+		;;
+	yesterday) # edit journal entry for yesterday
+		FILE=$(date -d yesterday +%Y/%Y-%m-%d)
+		if [ ! -f "$FILE" ]
+		then
+			echo "Kein Eintrag gestern"
+			exit 1
+		fi
 		vim $FILE
 		;;
 	*) # start at main page
