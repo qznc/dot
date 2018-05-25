@@ -211,3 +211,7 @@ end
 function mailfile -d "compose mail with thunderbird attaching the given file"
     thunderbird -compose "attachment=(readlink -f $argv)" &
 end
+
+function ifconfig -d "Use ip instead"
+  ip -brief -color address
+end
