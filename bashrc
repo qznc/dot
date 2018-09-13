@@ -92,12 +92,12 @@ function my_prompt {
 	fi
 
 	# color of dollar sign according to username
-	case "$USER" in
+	case "$(whoami)" in
 		beza1e1|qznc) # private use
 			DOLLAR_COLOR="\[\033[1;33m\]"
 			PS1="\[\033[1;33m\]\$ \[\033[m\]"
 			;;
-		zwinkau) # professional use
+		zwinkau|zwa2lr) # professional use
 			DOLLAR_COLOR="\[\033[1;35m\]"
 			;;
 	esac
@@ -110,6 +110,9 @@ PROMPT_COMMAND=my_prompt
 ########## MACHINE SPECIFIC
 
 case `hostname` in
+	LR-Z7016)
+		export PATH=/c/GIT/dot/bin:${PATH}
+		;;
 	i44pc*)
 		source /usr/public/tools/Modules/init/bash
 

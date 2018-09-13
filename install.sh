@@ -22,7 +22,7 @@ fi
 for file in bashrc bash_profile vimrc gvimrc vim gdbinit gitignore tmux.conf muttrc devscripts textadept latexmkrc netsurf xsessionrc ansible.cfg gitconfig
 do
 	info "symlinking ${file}"
-	ln -sf `pwd`/${file} ~/.${file}
+	ln -sf `pwd`/${file} ~/.${file} || true
 done
 
 # fortune cookies
