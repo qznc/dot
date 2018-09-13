@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+TARGET=$1
+shift
+FILES=""
+for x in "$@"
+do
+  FILES="$FILES|$x"
+done
+ffmpeg -i "concat:${FILES:1}" -c copy "$TARGET"
