@@ -1,2 +1,3 @@
-ui.set_theme(not CURSES and 'myellow' or 'light',
-	{font = 'Inconsolata', fontsize = 11})
+buffer:set_theme(not CURSES and 'myellow' or 'light',
+	{font = 'InputSans', fontsize = 11})
+require('elastic_tabstops').enable()
