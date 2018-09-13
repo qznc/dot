@@ -27,7 +27,7 @@ done
 
 # fortune cookies
 pushd config/fortune
-strfile my_cookies my_cookies.dat >/dev/null
+strfile my_cookies my_cookies.dat >/dev/null || true
 popd
 
 # install .config files
