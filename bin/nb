@@ -55,15 +55,6 @@ case $1 in
 		PREV=$(date --date="yesterday" +%Y/%Y-%m-%d)
 		if [ ! -f "$FILE" ]
 		then
-			echo >>$FILE "Wichtigste Aufgabe heute: "
-			#echo >>$FILE "Ich war glücklich als: "
-			#echo >>$FILE "Gestern Zahnseide benutzt? "
-			#echo >>$FILE "Gestern an Diss gearbeitet? "
-			if [ -f "$PREV" ]
-			then
-				JOB=$(cat "$PREV" | head -n 1 | cut -d ':' -f 2- | sed -e 's/^ *//' -e 's/ *$//')
-				echo >>$FILE "Gestern \"$JOB\" erledigt? "
-			fi
 			echo "$TALKABOUT" | shuf -n1 >>$FILE
 		fi
 		echo >>$FILE
