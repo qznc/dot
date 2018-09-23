@@ -2,23 +2,14 @@ set -xg EDITOR vim
 set -xg PATH $PATH $HOME/bin
 set -xg PATH $PATH $HOME/.local/bin
 set -xg PATH $PATH $HOME/bin/ldc/bin ^/dev/null
-set -xg PATH $PATH $HOME/git/x10i/x10.dist/bin
-set -xg PATH $PATH /afs/info.uni-karlsruhe.de/public/java/ycomp/
 set -xg PATH $HOME/dev/dot/bin $PATH ^/dev/null
 set -xg PATH $HOME/git/dot/bin $PATH ^/dev/null
 set -xg PATH $PATH /data1/zwinkau/intellij-idea/bin ^/dev/null
-set -xg PATH $PATH $HOME/git/invadeSIM
 set -xg PATH $PATH $HOME/.cargo/bin
 set -xg PATH $HOME/.cabal/bin /opt/ghc/7.8.4/bin /opt/cabal/1.22/bin /opt/alex/3.1.4/bin /opt/happy/1.19.5/bin $PATH ^/dev/null
 set -xg DEBEMAIL "Andreas Zwinkau <qznc@web.de>"
 
-set -xg IRTSSBASE $HOME/git/irtss
-set -xg PATH $PATH $IRTSSBASE/tools/bin
 set -xg JAVA_HOME /usr/lib/jvm/default-java
-set -xg GUROBI_HOME /data1/zwinkau/gurobi702/linux64
-set -xg GRB_LICENSE_FILE {$GUROBI_HOME}/gurobi.lic
-set -xg LD_LIBRARY_PATH {$GUROBI_HOME}/lib {$LD_LIBRARY_PATH}
-set -xg PATH $GUROBI_HOME/bin $PATH
 
 set -xg LANG "en_US.utf8"
 set -xg LANGUAGE "$LANG"
