@@ -118,3 +118,6 @@ R telepathy-mission-control-5
 R preload
 #ubuntu-mate-desktop
 syncthing
+gnome-tweak-tool
+libreoffice-writer
+calibre
