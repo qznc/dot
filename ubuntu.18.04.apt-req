@@ -1,0 +1,120 @@
+ack-grep
+alsa-utils
+avahi-utils
+bash
+bash-completion
+bsdmainutils
+build-essential
+bzip2
+ca-certificates
+ca-certificates-java
+cdecl
+cmake
+command-not-found
+curl
+R debootstrap
+dos2unix
+easytag
+R eclipse
+evince
+exuberant-ctags
+fish
+fonts-dejavu-core
+fonts-inconsolata
+fonts-opensymbol
+fonts-sil-gentium
+fonts-sil-gentium-basic
+fonts-ubuntu-title
+gargoyle-free
+gconf-editor
+gdb
+gedit
+gimp
+git
+gitg
+gitk
+R gnome-panel
+gnome-terminal
+gnucash
+gnupg
+gnupg-agent
+gparted
+graphviz
+gtk-recordmydesktop
+ikiwiki
+inkscape
+language-pack-de
+language-pack-en
+language-pack-gnome-de
+language-pack-gnome-en
+lsb
+lsb-release
+lshw
+lsof
+R mencoder
+R metacity
+mosh
+mplayer
+mutt
+netcat
+network-manager-openvpn
+ninja-build
+#offlineimap
+openssh-client
+openssh-server
+R pan
+pandoc
+par
+R pinpoint
+pkg-config
+popularity-contest
+pylint
+python3
+python3-feedparser
+R qpdfview
+rar
+simple-scan
+sloccount
+sqlite3
+strace
+subversion
+tmux
+transmission-gtk
+R ttf-mscorefonts-installer
+ttf-ubuntu-font-family
+R unison
+units
+unrar
+unzip
+usbutils
+vim-gtk3
+R virtualbox
+R virtualbox-guest-additions-iso
+R virtualbox-guest-dkms
+R virtualbox-guest-x11
+R vite
+vlc
+weechat-curses
+wget
+wmctrl
+xclip
+xdg-utils
+R emacs23
+R emacs24
+R xemacs21
+R remmina
+R libtomcat7-java
+R groff
+R spring
+R docker.io
+R hugs
+impressive
+R shutter
+R cfengine3
+R aisleriot
+htop
+R telepathy-indicator
+R telepathy-mission-control-5
+R preload
+#ubuntu-mate-desktop
+syncthing
