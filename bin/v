@@ -1,2 +1,7 @@
 #!/bin/dash
-exec gvim $@ || vim $@
+if which gvim
+then
+  exec gvim $@
+else
+  vim $@
+fi
