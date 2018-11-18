@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e -u
 
+# I run updates in the background, so they should slow me down
+BACKGROUND="ionice -c 3 -t nice"
+
 case $1 in
 	gencaches|showpkg|stats|showsrc|dump|dumpavail|unmet|show|search|depends|rdepends|pkgnames|dotty|xvcg|policy|madison)
 		apt-cache $*
@@ -9,7 +12,7 @@ case $1 in
 		apt-get $*
 		;;
 	update|upgrade|dselect-upgrade|dist-upgrade|install|remove|purge|source|build-dep|check|download|clean|autoclean|autoremove|changelog)
-		sudo apt-get $*
+		${BACKGROUND} sudo apt-get $*
 		;;
 	showauto|showmanual|showhold)
 		apt-mark $*
