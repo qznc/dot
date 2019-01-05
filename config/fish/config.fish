@@ -21,6 +21,15 @@ set -xg LC_TIME "de_AT.utf8" # austria has better date formatting
 
 set -xg HOSTNAME (hostname)
 
+if test -f ~/.nix-profile/etc/profile.d/nix.sh
+    # replicate ~/.nix-profile/etc/profile.d/nix.sh for fish
+    # no setup stuff, so you should run it with bash once
+    set -xg NIX_PATH ~/.nix-defexpr/channels/nixpkgs
+    set -xg NIX_SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
+    set -xg PATH $PATH ~/.nix-profile/bin
+    echo "Nix is available"
+end
+
 if test -d /data1/zwinkau/sparc-linux-4.4.2-toolchains/multilib/bin
     set -xg PATH $PATH /data1/zwinkau/sparc-linux-4.4.2-toolchains/multilib/bin
     set -xg PATH $PATH /data1/zwinkau/sparc-elf-6.1.0/bin
