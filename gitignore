@@ -10,3 +10,4 @@
 *.a
 .__afs*
 .~lock*
+.idea

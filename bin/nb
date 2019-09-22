@@ -13,15 +13,9 @@ cd "$DDIR"
 
 TALKABOUT="
 Erzähl mir etwas was dich kürzlich glücklich gemacht hat!
-Erzähl mir etwas worauf du stolz bist!
-Erzähl mir von einem guten Menschen!
-Erzähl mir von einer tollen Stadt!
-Erzähl mir von einem schönen Urlaub!
 Erzähl mir eine Sache die auf deiner Löffelliste steht!
 Was hast du in der letzten Woche gelernt?
-Was motiviert dich?
-Machst du genug Fehler?
-Was würdest du gerne ändern kannst es aber nicht?
+Was hat dich gestern verändert?
 Was erhoffst du dir im nächsten halben Jahr?
 Was wird sich auch in 10 Jahren nicht geändert haben?
 Was erhoffst du dir in 5 Jahren?"
