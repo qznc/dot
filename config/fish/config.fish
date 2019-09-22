@@ -89,19 +89,15 @@ function fish_right_prompt -d "shown to the right of my prompt"
   set_color brown
   echo -n "done "
   echo -n (date "+%H:%M:%S")
-  echo -n " "
-  echo -n (git_prompt)
+  echo -n " in "
+  prompt_pwd
 end
 
 function fish_prompt -d "Write out the prompt"
     set -l RET $status
     set_color red
     [ "$RET" = "0" ]
-    or echo "return code $RET at "(date "+%Y-%m-%d %H:%M:%S")
-    if nb remind
-        echo " "
-        nb skip-remind
-    end
+    or echo "exit code $RET at "(date "+%Y-%m-%d %H:%M:%S")
     if [ $USER = "root" ]
       echo -n 'ROOT'
     end
