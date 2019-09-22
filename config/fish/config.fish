@@ -1,13 +1,10 @@
 set -xg EDITOR vim
 set -xg PATH $PATH $HOME/bin
 set -xg PATH $PATH $HOME/.local/bin
-set -xg PATH $PATH $HOME/bin/ldc/bin ^/dev/null
 set -xg PATH $HOME/dev/dot/bin $PATH ^/dev/null
 set -xg PATH $HOME/git/dot/bin $PATH ^/dev/null
 set -xg PATH $PATH /data1/zwinkau/intellij-idea/bin ^/dev/null
 set -xg PATH $PATH $HOME/.cargo/bin
-set -xg PATH $HOME/.cabal/bin /opt/ghc/7.8.4/bin /opt/cabal/1.22/bin /opt/alex/3.1.4/bin /opt/happy/1.19.5/bin $PATH ^/dev/null
-set -xg DEBEMAIL "Andreas Zwinkau <qznc@web.de>"
 
 set -xg JAVA_HOME /usr/lib/jvm/default-java
 
@@ -28,17 +25,6 @@ if test -f ~/.nix-profile/etc/profile.d/nix.sh
     set -xg NIX_SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
     set -xg PATH $PATH ~/.nix-profile/bin
     echo "Nix is available"
-end
-
-if test -d /data1/zwinkau/sparc-linux-4.4.2-toolchains/multilib/bin
-    set -xg PATH $PATH /data1/zwinkau/sparc-linux-4.4.2-toolchains/multilib/bin
-    set -xg PATH $PATH /data1/zwinkau/sparc-elf-6.1.0/bin
-end
-
-if test -d /data1/zwinkau/Android
-    set -xg PATH $PATH /data1/zwinkau/android-studio/bin
-    set -xg ANDROID_HOME /data1/zwinkau/Android/Sdk
-    set -xg PATH $PATH $ANDROID_HOME/tools $ANDROID_HOME/platform-tools
 end
 
 if status --is-login
@@ -79,8 +65,6 @@ case 'qznc.*'
   set PROMPT_COLOR red
 case 'copacetic-*'
   set PROMPT_COLOR blue
-case '*-T510'
-  set PROMPT_COLOR green
 case '*'
   set PROMPT_COLOR black
 end
@@ -106,65 +90,17 @@ function fish_prompt -d "Write out the prompt"
     set_color normal
 end
 
-function gup -d "alias for g up"
-    g up $argv
-end
-
-function st -d "alias for g st"
-    g st $argv
-end
-
-function gl -d "alias for g l"
-    g l $argv
-end
-
-function gb -d "alias for g bv"
-    g bv $argv
-end
-
-function gd -d "alias for git-diff"
-    git diff --word-diff=color $argv
-end
-
-function gg -d "alias for gitg"
-    gitg $argv
-end
-
-function k -d "alias for kakoune"
-    kak $argv
-end
-
-function l -d "alias for ls with some tweaks"
-    ls --color=auto -B --group-directories-first -h -v $argv
-end
-
-function c -d "alias for cd"
-    cd $argv
-end
-
-function .. -d "short cut for cd .."
-    cd ..
-end
-
-function cd.. -d "fix my mistakes"
-    cd ..
-end
-
-function cd... -d "cd shortcut"
-    cd ../..
-end
-
-function cd.... -d "cd shortcut"
-    cd ../../..
-end
-
-function p -d "alias for pwd"
-    pwd $argv
-end
-
-function journal -d "journal inside pvw"
-    nb journal
-end
+abbr gup  git up
+abbr st   git st
+abbr gl   git l
+abbr gb   git bv
+abbr gd   git diff --word-diff=color 
+abbr l    ls
+abbr c    cd
+abbr ..   cd ..
+abbr cd.. cd ..
+abbr p    pwd
+abbr LANGC env LANG=C
 
 function analyse_history -d "analyze fish shell history for often used commands"
     cat $HOME/.history_persistent_$HOSTNAME | cut -d ' ' -f 2- | sort | uniq -c | sort -n | tail -n 32
@@ -172,10 +108,6 @@ end
 
 function analyse_history_first -d "analyze fish shell history for often used executables (first token of command)"
     cat $HOME/.history_persistent_$HOSTNAME | cut -d ' ' -f 2 | sort | uniq -c | sort -n | tail -n 32
-end
-
-function LANGC -d "set LANG=C for a single command"
-    env LANG=C $argv
 end
 
 function show_available_updates
@@ -194,18 +126,6 @@ function fish_greeting
     echo " $HOSTNAME" is (uptime -p)
     show_available_updates
     set_color normal
-end
-
-function ycomp -d "graph GUI for yFiles"
-    /afs/info.uni-karlsruhe.de/public/java/ycomp/ycomp --dolayout --autoreload $argv
-end
-
-function ibc -d "command line calculator via bc"
-    echo "$argv" | bc -l
-end
-
-function mailfile -d "compose mail with thunderbird attaching the given file"
-    thunderbird -compose "attachment=(readlink -f $argv)" &
 end
 
 function ifconfig -d "Use ip instead"
