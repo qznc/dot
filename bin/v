@@ -3,5 +3,5 @@ if which gvim
 then
   exec gvim $@
 else
-  vim $@
+  vi $@
 fi

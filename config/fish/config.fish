@@ -1,4 +1,4 @@
-set -xg EDITOR vim
+set -xg EDITOR $HOME/git/dot/bin/v
 set -xg PATH $PATH $HOME/bin
 set -xg PATH $PATH $HOME/.local/bin
 set -xg PATH $HOME/dev/dot/bin $PATH ^/dev/null
@@ -86,7 +86,7 @@ function fish_prompt -d "Write out the prompt"
       echo -n 'ROOT'
     end
     set_color $PROMPT_COLOR
-    echo -n '➤ '
+    echo -n ' $ '
     set_color normal
 end
 
@@ -115,12 +115,15 @@ function show_available_updates
     and cat /tmp/updates-available
     set -l UNDO_MASK (umask -p)
     umask 0000
-    /usr/lib/update-notifier/apt-check --human-readable >/tmp/updates-available &
+    test -x /usr/lib/update-notifier/apt-check
+    and /usr/lib/update-notifier/apt-check --human-readable >/tmp/updates-available &
     eval $UNDO_MASK
 end
 
 function fish_greeting
-    fortune -s "$HOME/.config/fortune/my_cookies" | cowthink -f tux
+    command -v fortune ^/dev/null
+    and command -v cowthink ^/dev/null
+    and fortune -s "$HOME/.config/fortune/my_cookies" | cowthink -f tux
     set_color cyan
     date "+ %Y-%m-%d %H:%M%z   a %A in %B"
     echo " $HOSTNAME" is (uptime -p)
