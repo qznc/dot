@@ -86,7 +86,7 @@ function fish_prompt -d "Write out the prompt"
       echo -n 'ROOT'
     end
     set_color $PROMPT_COLOR
-    echo -n ' $ '
+    echo -n '  ;'
     set_color normal
 end
 
