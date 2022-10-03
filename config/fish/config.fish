@@ -47,13 +47,13 @@ end
 if begin set -q DISPLAY ;and test -e /usr/bin/xprop; end
   function preexec_test --on-event fish_preexec
       set -g preexec_time (date --iso-8601=seconds)
-      set -g MY_WINDOW_ID (xprop -root _NET_ACTIVE_WINDOW ^/dev/null)
+      set -g MY_WINDOW_ID (xprop -root _NET_ACTIVE_WINDOW)
   end
 
   function postexec_test --on-event fish_postexec
       set -l RET "$status"
       set -l postexec_time (date --iso-8601=seconds)
-      set -l ACTIVE_WINDOW (xprop -root _NET_ACTIVE_WINDOW ^/dev/null)
+      set -l ACTIVE_WINDOW (xprop -root _NET_ACTIVE_WINDOW)
       if [ "$ACTIVE_WINDOW" != "$MY_WINDOW_ID" ]
           notify_long_running2.py "$preexec_time" "$postexec_time" "$argv" "$RET"
       end
