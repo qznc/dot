@@ -24,8 +24,8 @@ set wildignore+=*.sw? " Vim swap files
 set wildignore+=*.tuc,*.bbl " ConTeXt
 
 " colorscheme requirements:
-set background=light
-colorscheme parsimony
+"set background=light
+"colorscheme parsimony
 
 " automagic indentation
 set autoindent
@@ -60,16 +60,6 @@ if has('persistent_undo')
     set undodir=~/.cache/vim/undos " Save all undo files in a single location
     set undolevels=5000 " Save a lot of back-history...
     set undofile " Actually switch on persistent undo
-endif
-
-if version >= 703
-  " wrapping
-  "set wrap            " wrap lines
-  "set textwidth=79    " insert mode auto line breaks
-
-  " highlight if line too long
-  hi ColorColumn ctermbg=LightYellow
-  call matchadd('ColorColumn', '\%>80v.\+', 100) " asfsdf asdfoiwe  erogn eroig oeri mfg aofi gfdo g dfo g
 endif
 
 " display invisible chars
