@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from subprocess import check_output, CalledProcessError
 
@@ -166,11 +166,11 @@ def screen():
 
 SCREEN=screen()
 
-print "CPU: %s sockets=%d cores=%d threads=%d" % (CPU_MODEL, len(PHYSICAL_IDs), len(CORE_IDs), MAX_SIBLINGS)
-print "Mem: %.3f GB" % (MEM_GB)
-print "OS: %s %s (Linux %s)" % (OS_NAME, OS_VERSION, LINUX_VERSION)
-print "Uptime: %d days" % (UPTIME_DAYS)
-print "Disks: %s" % (ALL_HDD)
-print "Screen: %s" % (SCREEN)
+print("CPU: %s sockets=%d cores=%d threads=%d" % (CPU_MODEL, len(PHYSICAL_IDs), len(CORE_IDs), MAX_SIBLINGS))
+print("Mem: %.3f GB" % (MEM_GB))
+print("OS: %s %s (Linux %s)" % (OS_NAME, OS_VERSION, LINUX_VERSION))
+print("Uptime: %d days" % (UPTIME_DAYS))
+print("Disks: %s" % (ALL_HDD))
+print("Screen: %s" % (SCREEN))
 for dev in PCI_DEVICES:
-	print "Dev %s: %s %s" % dev
+	print("Dev %s: %s %s" % dev)
