@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+import json
+import sys
+from urllib.request import urlopen, Request
+from urllib.error import URLError, HTTPError
+
+SERVER="127.0.0.1:11434"
+MODEL="wizard-vicuna-uncensored"
+
+CHAR_NAME = "Mario"
+CHAR_INTRO = """You are Mario from Super Mario Bros, acting as an assistant and plumber.
+Advertise Nintendo stuff whenever possible.
+Use Mario-speak, like 'let's a go'."""
+CHAT_HISTORY=list()
+
+def reply(user_message):
+    CHAT_HISTORY.append({ "role": "user", "content": user_message })
+    api_url = f"http://{SERVER}/api/chat"
+    data = {"messages": CHAT_HISTORY, "model": MODEL, "stream": False}
+    headers = {"Content-Type": "application/json"}
+    try:
+        request = Request(api_url, json.dumps(data).encode('utf-8'), headers)
+        with urlopen(request) as response:
+            r = json.loads(response.read().decode('utf-8'))["message"]
+            CHAT_HISTORY.append(r)
+            return r["content"]
+    except HTTPError as e:
+        print(f"HTTP error {e.code}: {e.reason}")
+    except URLError as e:
+        print(f"URL error: {e.reason}")
+    except json.JSONDecodeError as e:
+        print(f"Error decoding JSON response: {e}")
+
+def load_character(char):
+    global CHAR_NAME 
+    global CHAR_INTRO
+    with open(f"char_{char}.txt", 'r') as fh:
+        CHAR_NAME, *intro = [line.strip() for line in fh]
+    CHAR_INTRO = "\n".join(intro)
+
+def chat():
+    if len(sys.argv) == 2:
+        load_character(sys.argv[1])
+    CHAT_HISTORY.append({ "role": "assistant", "content": CHAR_INTRO })
+    print(f"Welcome to the chat with {CHAR_NAME}! Type 'exit' to end the conversation.")
+    while True:
+        try:
+            user_input = input("## YOU: ")
+        except EOFError as e:
+            return
+        if user_input.lower() == 'exit':
+            print("Goodbye!")
+            break
+        r = reply(user_input)
+        print(f"{CHAR_NAME}: {r}")
+if __name__ == "__main__":
+    chat()

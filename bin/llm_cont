@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+import json
+import sys
+from urllib.request import urlopen, Request
+from urllib.error import URLError, HTTPError
+
+SERVER="127.0.0.1:11434"
+MODEL="wizard-vicuna-uncensored"
+
+def reply(input):
+    api_url = f"http://{SERVER}/api/generate"
+    data = {"model": MODEL, "stream": False, "prompt": input}
+    headers = {"Content-Type": "application/json"}
+    try:
+        request = Request(api_url, json.dumps(data).encode('utf-8'), headers)
+        with urlopen(request) as response:
+            r = json.loads(response.read().decode('utf-8'))
+            return r["response"]
+    except HTTPError as e:
+        print(f"HTTP error {e.code}: {e.reason}")
+    except URLError as e:
+        print(f"URL error: {e.reason}")
+    except json.JSONDecodeError as e:
+        print(f"Error decoding JSON response: {e}")
+
+if len(sys.argv) == 2:
+    path = sys.argv[1]
+    with open(path) as fh:
+        input = fh.read()
+    out = reply(input)
+    with open(path, 'a') as fh:
+        fh.write(out)
+else:
+    input = sys.stdin.read()
+    print(reply(input))
