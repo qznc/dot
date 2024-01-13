@@ -61,12 +61,14 @@ if begin set -q DISPLAY ;and test -e /usr/bin/xprop; end
 end
 
 switch $HOSTNAME
+case 'carbon'
+  set PROMPT_COLOR green
 case 'qznc.*'
   set PROMPT_COLOR red
 case 'copacetic-*'
   set PROMPT_COLOR blue
 case '*'
-  set PROMPT_COLOR black
+  set PROMPT_COLOR yellow
 end
 
 function fish_right_prompt -d "shown to the right of my prompt"
@@ -94,7 +96,7 @@ abbr gup  git up
 abbr st   git st
 abbr gl   git l
 abbr gb   git bv
-abbr gd   git diff --word-diff=color 
+abbr gd   git diff --word-diff=color
 abbr l    ls
 abbr c    cd
 abbr ..   cd ..

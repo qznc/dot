@@ -142,3 +142,4 @@ case `hostname` in
 		alias eclipse="~/bin/eclipse/eclipse"
 esac
 
+. "$HOME/.cargo/env"
