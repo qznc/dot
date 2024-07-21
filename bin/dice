@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+import sys
+import re
+import random
+
+def roll_dice(dice_notation):
+    match = re.match(r'(\d*)d(\d+)([+-]?\d*)', dice_notation)
+    if not match:
+        raise ValueError(f"Invalid dice notation: {dice_notation}")
+
+    num_rolls = int(match.group(1)) if match.group(1) else 1
+    dice_sides = int(match.group(2))
+    modifier = int(match.group(3)) if match.group(3) else 0
+
+    total = sum(random.randint(1, dice_sides) for _ in range(num_rolls)) + modifier
+    return total
+
+def main(dice_inputs):
+    results = [roll_dice(dice_notation) for dice_notation in dice_inputs]
+    
+    for dice_notation, result in zip(dice_inputs, results):
+        print(f"Result of {dice_notation}: {result}")
+
+    total = sum(results)
+    print(f"Sum: {total}")
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
