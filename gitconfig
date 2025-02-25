@@ -26,7 +26,10 @@
    branches = for-each-ref --sort=-committerdate refs/heads/ --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'
    remotebranches = for-each-ref --sort=-committerdate refs/remotes/ --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'
 [diff]
-   renames = copies
+	renames = true
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
 [user]
    name = Andreas Zwinkau
    email = zwinkau@mailbox.org
@@ -37,6 +40,7 @@
    excludesfile = ~/.gitignore
 [push]
    default = tracking
+	autoSetupRemote = true
 [sendemail]
   smtpencryption = tls
   smtpserverport = 587
@@ -46,3 +50,13 @@
 	rebase = true
 [rebase]
 	autoStash = true
+	updateRefs = true
+[init]
+	defaultBranch = m
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[fetch]
+	prune = true
+	pruneTags = true
