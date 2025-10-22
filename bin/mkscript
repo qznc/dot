@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+"""Create a file, make it executable, then edit it."""
+import sys, os, subprocess
+
+if len(sys.argv) == 0:
+    import tempfile
+    f = tempfile.NamedTemporaryFile(delete=False)
+    path = f.name
+    f.close()
+else:
+    path = sys.argv[1]
+
+with open(path, "w") as fh:
+    if path.endswith(".sh"):
+        fh.write("#!/bin/sh\nset -eux\n\n")
+    elif path.endswith(".bash"):
+        fh.write("#!/usr/bin/bash\nset -eux\n\n")
+    elif path.endswith(".py"):
+        fh.write("#!/usr/bin/env python3\n\n")
+
+os.chmod(path, 0o755)
+subprocess.call([os.environ.get('EDITOR','vi'), path])
