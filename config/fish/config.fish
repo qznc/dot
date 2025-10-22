@@ -136,3 +136,7 @@ end
 function ifconfig -d "Use ip instead"
   ip -brief -color address
 end
+
+function now -d "Current datetime in ISO format"
+    date -Iseconds
+end
