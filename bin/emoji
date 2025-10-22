@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+EMOJI="""
+😀 grinning cheerful cheery face grin grinning face happy laugh nice smile smiling teeth
+🤣 rolling on the floor laughing crying laughing cryinglaughing face floor funny haha hahaha happy hehe hilarious joy laugh laughing laughter lmao lmfao lol lolol lololol rofl roflmao rolling tear tears cry rotfl
+😊 blush eye face glad satisfied smile smiling smiling face with smiling eyes
+🤯 exploding head explode mind blown mindblown no way shocked shocked face with exploding head
+😱 scream epic face face screaming in fear fear fearful munch scared screamer shocked surprised woah
+😡 rage anger angry face feels mad maddening pouting pouting face red shade unhappy upset
+❤️ heart emotion love red heart
+💚 green heart 143 emotion green heart ily love romantic heart green
+👋 wave bye cya felicia g2g greetings gtg hand hello hey hi later outtie ttfn ttyl u there? waving waving hand yo goodbye
+✌️ v hand peace victory victory hand
+🤞 crossed fingers cross finger fingers crossed hand luck hope
+👍 +1 awesome dope fleek for sure fosho good gotcha great hand legit like nice okay rad sure thumb thumbs up tubular up yeah yes thumbsup
+👎 1 bad dislike down hand no no good nope thumb thumbs down thumbsdown
+🙏 pray appreciate ask beg blessed bow cmon five folded folded hands gesture hand high five please thank thank you thanks thx high 5
+🤦 face palm disbelief exasperation face facepalm palm smh
+🙈 see no evil animal cant watch embarrassed evil face forbidden forgot gesture hide monkey no nono not omg prohibited scared secret see see no evil monkey smh blind
+🙉 hear no evil animal ears evil face forbidden gesture hear hear no evil monkey listen monkey no not prohibited secret shh tmi deaf
+🙊 speak no evil animal evil face forbidden gesture monkey no not oops prohibited quiet secret speak speak no evil monkey stealth mute
+🎂 birthday birthday cake cake celebration dessert happy bday happy birthday pastry sweet
+✔️ heavy check mark check checked checkmark done tick mark yes ✓
+✅ white check mark check checked checkmark complete completed done fixed tick button mark yes ✓
+❌ x multiplication multiply cancel cross mark no ×
+🎉 tada awesome birthday celebrate celebration excited hooray party party popper popper woohoo confetti
+🎊 confetti ball ball celebrate celebration confetti party woohoo
+🔥 fire burn flame hot lit lit af litaf tool
+🇩🇪 de flag germany flag de
+🇪🇺 flag eu european union flag
+🇺🇸 us flag united states usa america flag us
+"""
+
+import sys
+for line in EMOJI.split("\n"):
+    for word in sys.argv[1:]:
+        if word in line:
+            print(line[0], end=" ")
+print()
