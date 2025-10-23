@@ -40,12 +40,7 @@
    excludesfile = ~/.gitignore
 [push]
    default = tracking
-	autoSetupRemote = true
-[sendemail]
-  smtpencryption = tls
-  smtpserverport = 587
-  smtpserver = smtp.informatik.kit.edu
-  smtpuser = zwinkau
+   autoSetupRemote = true
 [pull]
 	rebase = true
 [rebase]

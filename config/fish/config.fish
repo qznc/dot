@@ -4,7 +4,8 @@ set -xg PATH $PATH $HOME/.local/bin
 set -xg PATH $HOME/dev/dot/bin $PATH ^/dev/null
 set -xg PATH $HOME/git/dot/bin $PATH ^/dev/null
 set -xg PATH $PATH /data1/zwinkau/intellij-idea/bin ^/dev/null
-set -xg PATH $PATH $HOME/.cargo/bin
+set -xg PATH $PATH $HOME/.cargo/bin ^/dev/null
+set -xg PATH $PATH $HOME/.nvm/versions/node/v20.12.0/bin ^/dev/null
 
 set -xg JAVA_HOME /usr/lib/jvm/default-java
 

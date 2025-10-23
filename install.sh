@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu
+set -eux
 
 function info() {
 	echo "${*}" >&2
@@ -19,11 +19,6 @@ do
 	info "symlinking ${file}"
 	ln -sf `pwd`/${file} ~/.${file} || true
 done
-
-# fortune cookies
-#pushd config/fortune
-#strfile my_cookies my_cookies.dat >/dev/null || true
-#popd
 
 # install .config files
 for dir in config/*

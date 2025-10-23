@@ -1,9 +1,3 @@
 #!/bin/dash
-[ -f /usr/bin/hx ] && /usr/bin/hx $@ && exit 0
-
-if which gvim
-then
-  exec gvim $@
-else
-  vi $@
-fi
+[ -f /usr/bin/zed ] && /usr/bin/zed $@ && exit 0
+vi $@
