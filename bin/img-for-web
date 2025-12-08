@@ -1,0 +1,50 @@
+#!/bin/sh
+set -eu
+
+SRC="$1"
+DST="${2:-}"
+
+# If no DST provided, append _cmprsd before the extension
+if [ -z "${DST}" ]; then
+  DST="${SRC%.*}_cmprsd.${SRC##*.}"
+fi
+
+EXT="${SRC##*.}"
+EXT_LOWER=$(printf "%s" "$EXT" | tr '[:upper:]' '[:lower:]')
+
+case "$EXT_LOWER" in
+  jpg|jpeg)
+    # Optimize JPEG
+    convert "$SRC" \
+      -strip \
+      -sampling-factor 4:2:0 \
+      -define jpeg:optimize-coding=true \
+      -define jpeg:trellis-quantization=true \
+      -define jpeg:fancy-upsampling=off \
+      -interlace Plane \
+      -quality 40 \
+      "$DST"
+    ;;
+
+  png)
+    # First convert (resize + strip)
+    TMP="$(mktemp --suffix=.png)"
+    convert "$SRC" \
+      -strip \
+      "$TMP"
+
+    # Then apply pngquant for huge savings
+    pngquant --quality=50-80 --speed 1 --force \
+      --output "$DST" "$TMP"
+
+    rm "$TMP"
+    ;;
+
+  *)
+    echo "Unsupported image format: $EXT"
+    exit 1
+    ;;
+esac
+
+# print both file sizes
+ls -lh "$SRC" "$DST"
