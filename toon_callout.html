@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Comic Boom Text</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bangers&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #a11;
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+                justify-content: center;
+                align-items: center;
+                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><defs><pattern id="comicPattern" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="20" cy="20" r="15" fill="%23f5f5dc" opacity="0.3"/><circle cx="80" cy="40" r="10" fill="%23f5f5dc" opacity="0.3"/><path d="M10 80 Q50 50 90 80 L70 100" stroke="%23f5f5dc" stroke-width="2" fill="none" opacity="0.3"/></pattern></defs><rect width="100%" height="100%" fill="url(%23comicPattern)"/></svg>');
+            }
+
+            #input-container {
+                position: absolute;
+                top: 20px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                z-index: 10;
+            }
+
+            #text-input {
+                padding: 10px;
+                font-size: 18px;
+                border: 3px solid black;
+                border-radius: 10px;
+                background-color: white;
+                width: 80%;
+                max-width: 500px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                font-family: Arial, sans-serif;
+            }
+
+            #display-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 90vh;
+                width: 95vw;
+                text-align: center;
+                overflow: visible;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+            #display-text {
+                color: #ff5;
+                text-shadow:
+                    -4px -4px 0 #000,
+                    4px -4px 0 #000,
+                    -4px 4px 0 #000,
+                    8px 8px 0 #000;
+                transform: rotate(-3deg);
+                white-space: pre-wrap;
+                word-break: break-word;
+                text-align: center;
+                max-width: 100%;
+                font-family: "Bangers", cursive;
+                font-weight: bold;
+                line-height: 1.1;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="input-container">
+            <input
+                type="text"
+                id="text-input"
+                placeholder="Type something fun..."
+            />
+        </div>
+        <div id="display-container">
+            <div id="display-text"></div>
+        </div>
+
+        <script>
+            const input = document.getElementById("text-input");
+            const displayText = document.getElementById("display-text");
+
+            input.addEventListener("input", function () {
+                displayText.textContent = input.value.toUpperCase();
+                resizeText();
+            });
+
+            function resizeText() {
+                const container = document.getElementById("display-container");
+                const text = document.getElementById("display-text");
+
+                let low = 8;
+                let high = 200;
+                let fontSize = high;
+
+                text.style.fontSize = fontSize + "px";
+
+                while (
+                    (text.scrollWidth > container.clientWidth ||
+                        text.scrollHeight > container.clientHeight) &&
+                    fontSize > low
+                ) {
+                    fontSize--;
+                    text.style.fontSize = fontSize + "px";
+                }
+            }
+
+            window.addEventListener("load", function () {
+                input.focus();
+            });
+
+            window.addEventListener("resize", resizeText);
+        </script>
+    </body>
+</html>

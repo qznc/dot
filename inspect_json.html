@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>JSON/YAML Tree Viewer</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                line-height: 1.6;
+                color: #333;
+                background-color: #f5f5f5;
+            }
+            #inputArea {
+                width: 100%;
+                height: 150px;
+                margin-bottom: 10px;
+                font-family: monospace;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                padding: 8px;
+                background-color: #fff;
+                color: #333;
+            }
+            #tree {
+                font-family: monospace;
+                white-space: pre;
+                border: 1px solid #aaa;
+                padding: 10px;
+                border-radius: 4px;
+                background-color: #fff;
+                margin-top: 10px;
+                color: #333;
+            }
+            details {
+                margin-left: 20px;
+            }
+            summary {
+                font-weight: bold;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                color: #333;
+                outline: none;
+            }
+            summary::before {
+                content: "🔹 ";
+                color: #555;
+                margin-right: 5px;
+            }
+            details[open] > summary::before {
+                content: "🔻 ";
+            }
+            .key {
+                color: #8b008b;
+                margin-right: 5px;
+                font-weight: bold;
+            }
+            .string {
+                color: #008000;
+            }
+            .number {
+                color: #0000ff;
+            }
+            .boolean {
+                color: #ff4500;
+            }
+            .null {
+                color: #808080;
+            }
+            .error {
+                color: #ff0000;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>JSON/YAML Tree Viewer</h1>
+        <textarea
+            id="inputArea"
+            placeholder="Paste your JSON or YAML here..."
+            oninput="debounceRender()"
+        ></textarea>
+        <div id="tree"></div>
+
+        <script>
+            let debounceTimer;
+
+            function debounceRender() {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(renderTree, 300);
+            }
+
+            function renderTree() {
+                const input = document.getElementById("inputArea").value.trim();
+                const treeElement = document.getElementById("tree");
+                treeElement.innerHTML = "";
+
+                if (!input) {
+                    return;
+                }
+
+                try {
+                    let parsed = jsyaml.load(input);
+                    treeElement.appendChild(renderNode(parsed, null, true));
+                } catch (e) {
+                    try {
+                        let parsed = JSON.parse(input);
+                        treeElement.appendChild(renderNode(parsed, null, true));
+                    } catch (e) {
+                        treeElement.innerHTML =
+                            '<span class="error">Invalid JSON or YAML!</span>';
+                    }
+                }
+            }
+
+            function renderNode(data, keyName = null, isTopLevel = false) {
+                if (typeof data === "object" && data !== null) {
+                    const container = document.createElement("div");
+                    const details = document.createElement("details");
+
+                    if (isTopLevel) {
+                        details.open = true;
+                    }
+
+                    const summary = document.createElement("summary");
+                    if (keyName !== null) {
+                        const keySpan = document.createElement("span");
+                        keySpan.className = "key";
+                        keySpan.textContent = `"${keyName}": `;
+                        summary.appendChild(keySpan);
+                    }
+
+                    if (Array.isArray(data)) {
+                        summary.appendChild(
+                            document.createTextNode(`[${data.length} items]`),
+                        );
+                    } else {
+                        summary.appendChild(document.createTextNode("{ }"));
+                    }
+
+                    details.appendChild(summary);
+
+                    const childrenContainer = document.createElement("div");
+                    if (Array.isArray(data)) {
+                        data.forEach((item, index) => {
+                            childrenContainer.appendChild(
+                                renderNode(item, index),
+                            );
+                        });
+                    } else {
+                        for (const [key, value] of Object.entries(data)) {
+                            childrenContainer.appendChild(
+                                renderNode(value, key),
+                            );
+                        }
+                    }
+
+                    details.appendChild(childrenContainer);
+                    container.appendChild(details);
+                    return container;
+                } else {
+                    const span = document.createElement("div");
+                    span.style.marginLeft = "20px";
+
+                    if (keyName !== null) {
+                        const keySpan = document.createElement("span");
+                        keySpan.className = "key";
+                        keySpan.textContent = `"${keyName}": `;
+                        span.appendChild(keySpan);
+                    }
+
+                    const valueSpan = document.createElement("span");
+                    valueSpan.className = getValueClass(data);
+                    valueSpan.textContent = JSON.stringify(data);
+                    span.appendChild(valueSpan);
+
+                    return span;
+                }
+            }
+
+            function getValueClass(value) {
+                if (value === null) return "null";
+                switch (typeof value) {
+                    case "string":
+                        return "string";
+                    case "number":
+                        return "number";
+                    case "boolean":
+                        return "boolean";
+                    default:
+                        return "";
+                }
+            }
+        </script>
+    </body>
+</html>
