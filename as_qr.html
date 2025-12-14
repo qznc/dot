@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>QR Code Generator</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                text-align: center;
+            }
+            input[type="text"] {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                box-sizing: border-box;
+            }
+            button {
+                background-color: #4caf50;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            button:hover {
+                background-color: #45a049;
+            }
+            #qrcode {
+                margin: 20px auto;
+                width: 200px;
+                height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>QR Code Generator</h1>
+        <p>Enter a URL or text to generate a QR code:</p>
+        <input
+            type="text"
+            id="text-input"
+            placeholder="Enter text or URL here..."
+        />
+        <button onclick="generateQRCode()">Generate QR Code</button>
+        <div id="qrcode"></div>
+
+        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+        <script>
+            function generateQRCode() {
+                const text = document.getElementById("text-input").value;
+                if (!text) {
+                    alert("Please enter some text or URL!");
+                    return;
+                }
+                // Clear previous QR code
+                document.getElementById("qrcode").innerHTML = "";
+                // Generate new QR code
+                new QRCode(document.getElementById("qrcode"), {
+                    text: text,
+                    width: 200,
+                    height: 200,
+                });
+            }
+        </script>
+    </body>
+</html>
