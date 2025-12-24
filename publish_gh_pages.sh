@@ -36,3 +36,4 @@ git update-ref refs/heads/gh_pages "$new_commit_hash"
 git push origin gh_pages
 
 echo "Updated gh_pages branch with html_tools content. New commit: $new_commit_hash"
+echo "See https://qznc.github.io/dot/"

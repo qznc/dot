@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Color Picker</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                    Oxygen, Ubuntu, Cantarell, sans-serif;
+                transition: background-color 0.2s ease;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .controls {
+                padding: 2rem;
+                border-radius: 12px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                min-width: 320px;
+            }
+
+            .control-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .control-group:last-child {
+                margin-bottom: 0;
+            }
+
+            label {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+                font-weight: 500;
+                font-size: 0.9rem;
+            }
+
+            .value {
+                font-family: monospace;
+                font-size: 1rem;
+                min-width: 3rem;
+                text-align: right;
+            }
+
+            input[type="range"] {
+                width: 100%;
+                height: 8px;
+                border-radius: 4px;
+                outline: none;
+                -webkit-appearance: none;
+            }
+
+            input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: white;
+                cursor: pointer;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            }
+
+            input[type="range"]::-moz-range-thumb {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: white;
+                cursor: pointer;
+                border: none;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            }
+
+            #red {
+                background: linear-gradient(to right, #000, #f00);
+            }
+
+            #green {
+                background: linear-gradient(to right, #000, #0f0);
+            }
+
+            #blue {
+                background: linear-gradient(to right, #000, #00f);
+            }
+
+            .hex-display {
+                text-align: center;
+                font-size: 1.5rem;
+                font-weight: bold;
+                font-family: monospace;
+                padding: 1rem;
+                background: rgba(0, 0, 0, 0.05);
+                border-radius: 8px;
+                margin-bottom: 1.5rem;
+                user-select: all;
+                cursor: pointer;
+            }
+
+            .hex-display:hover {
+                background: rgba(0, 0, 0, 0.08);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="controls">
+            <div class="hex-display" id="hexDisplay" title="Click to copy">
+                #000000
+            </div>
+
+            <div class="control-group">
+                <label>
+                    <span>Red</span>
+                    <span class="value" id="redValue">0</span>
+                </label>
+                <input type="range" id="red" min="0" max="255" value="0" />
+            </div>
+
+            <div class="control-group">
+                <label>
+                    <span>Green</span>
+                    <span class="value" id="greenValue">0</span>
+                </label>
+                <input type="range" id="green" min="0" max="255" value="0" />
+            </div>
+
+            <div class="control-group">
+                <label>
+                    <span>Blue</span>
+                    <span class="value" id="blueValue">0</span>
+                </label>
+                <input type="range" id="blue" min="0" max="255" value="0" />
+            </div>
+        </div>
+
+        <script>
+            const redSlider = document.getElementById("red");
+            const greenSlider = document.getElementById("green");
+            const blueSlider = document.getElementById("blue");
+            const redValue = document.getElementById("redValue");
+            const greenValue = document.getElementById("greenValue");
+            const blueValue = document.getElementById("blueValue");
+            const hexDisplay = document.getElementById("hexDisplay");
+
+            function updateColor() {
+                const r = parseInt(redSlider.value);
+                const g = parseInt(greenSlider.value);
+                const b = parseInt(blueSlider.value);
+
+                redValue.textContent = r;
+                greenValue.textContent = g;
+                blueValue.textContent = b;
+
+                const hex =
+                    "#" +
+                    [r, g, b]
+                        .map((x) => {
+                            const hex = x.toString(16);
+                            return hex.length === 1 ? "0" + hex : hex;
+                        })
+                        .join("");
+
+                hexDisplay.textContent = hex.toUpperCase();
+                document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            }
+
+            redSlider.addEventListener("input", updateColor);
+            greenSlider.addEventListener("input", updateColor);
+            blueSlider.addEventListener("input", updateColor);
+
+            hexDisplay.addEventListener("click", () => {
+                const text = hexDisplay.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    const original = hexDisplay.textContent;
+                    hexDisplay.textContent = "Copied!";
+                    setTimeout(() => {
+                        hexDisplay.textContent = original;
+                    }, 1000);
+                });
+            });
+
+            updateColor();
+        </script>
+    </body>
+</html>
