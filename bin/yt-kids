@@ -1,4 +1,4 @@
 #!/bin/sh
 FORMAT_STR="bv[height<490]+ba[ext=m4a]" # best video with height<490px merged with best audio in m4a format
 FORMAT_STR="bv[height<490]+ba" # best video with height<490px merged with best audio
-yt-dlp -f $FORMAT_STR $*
+yt-dlp --embed-metadata -f $FORMAT_STR $*

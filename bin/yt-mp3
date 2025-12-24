@@ -1,2 +1,2 @@
 #!/bin/sh
-yt-dlp -x --audio-format mp3 --audio-quality 0 $*
+yt-dlp -x --embed-metadata --embed-thumbnail --audio-format mp3 --audio-quality 0 $*

@@ -1,0 +1,4 @@
+#!/bin/sh
+# Use avc1 video codec, not vp9, because FireTv
+FORMAT_STR="bv[height<1090][vcodec^=avc1]+ba"
+yt-dlp --embed-metadata --embed-thumbnail -f $FORMAT_STR $*
