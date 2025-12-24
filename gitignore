@@ -11,3 +11,5 @@
 .__afs*
 .~lock*
 .idea
+AGENT.md
+bazel-*
