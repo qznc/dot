@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <title>DI.DAY Image Generator</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
         <style>
             body {
                 font-family:
@@ -181,15 +181,7 @@
                 />
             </label>
 
-            <label
-                >Export Format
-                <select id="exportFormat">
-                    <option value="png">PNG</option>
-                    <option value="jpg">JPG</option>
-                </select>
-            </label>
-
-            <button id="downloadBtn">Download Image</button>
+            <button id="downloadBtn">Download PNG</button>
         </aside>
 
         <main>
@@ -269,25 +261,97 @@
                         e.target.value;
                 });
 
+            // Helper: Calculate object-fit: cover dimensions
+            function getCoverSize(img, containerW, containerH) {
+                const ratio = img.naturalWidth / img.naturalHeight;
+                const containerRatio = containerW / containerH;
+                if (ratio > containerRatio) {
+                    return { width: containerH * ratio, height: containerH };
+                }
+                return { width: containerW, height: containerW / ratio };
+            }
+
+            // Helper: Draw overlay image
+            function drawOverlay(ctx, overlay, posterW, posterH) {
+                if (!overlay.complete) return;
+                const aspectRatio =
+                    overlay.naturalWidth / overlay.naturalHeight;
+                const scaledHeight = posterW / aspectRatio;
+                const y = overlay.classList.contains("top")
+                    ? 0
+                    : posterH - scaledHeight;
+                ctx.drawImage(overlay, 0, y, posterW, scaledHeight);
+            }
+
             document
                 .getElementById("downloadBtn")
-                .addEventListener("click", async () => {
-                    const format =
-                        document.getElementById("exportFormat").value;
-                    const canvas = await html2canvas(
-                        document.getElementById("poster"),
-                        {
-                            backgroundColor: null,
-                            useCORS: true,
-                            allowTaint: false,
-                            scale: 2, // high-res export
-                            width: poster.offsetWidth, // 🔒 lock width
-                            height: poster.offsetHeight, // 🔒 lock height
-                        },
+                .addEventListener("click", () => {
+                    const poster = document.getElementById("poster");
+                    const posterImg = document.getElementById("posterImage");
+                    const headlineEl = document.querySelector(".headline");
+                    const scale = 2;
+
+                    // Setup canvas
+                    const canvas = document.createElement("canvas");
+                    canvas.width = poster.offsetWidth * scale;
+                    canvas.height = poster.offsetHeight * scale;
+                    const ctx = canvas.getContext("2d");
+                    ctx.scale(scale, scale);
+
+                    const w = poster.offsetWidth;
+                    const h = poster.offsetHeight;
+
+                    // Background
+                    ctx.fillStyle = "#000";
+                    ctx.fillRect(0, 0, w, h);
+
+                    // Main image with aspect ratio preserved
+                    if (posterImg.src && posterImg.complete) {
+                        const cover = getCoverSize(posterImg, w, h);
+                        const imgW = cover.width * (zoom / 100);
+                        const imgH = cover.height * (zoom / 100);
+                        const imgX = (w - imgW) / 2 + (posX / 100) * imgW;
+                        const imgY = (h - imgH) / 2 + (posY / 100) * imgH;
+                        ctx.drawImage(posterImg, imgX, imgY, imgW, imgH);
+                    }
+
+                    // Get headline position from DOM
+                    const rect = headlineEl.getBoundingClientRect();
+                    const posterRect = poster.getBoundingClientRect();
+                    const hX = rect.left - posterRect.left;
+                    const hY = rect.top - posterRect.top;
+                    const hW = rect.width;
+                    const hH = rect.height;
+
+                    // Headline box
+                    ctx.fillStyle = "rgba(255, 180, 0, 0.92)";
+                    ctx.beginPath();
+                    ctx.roundRect(hX, hY, hW, hH, 14);
+                    ctx.fill();
+
+                    // Text
+                    ctx.fillStyle = "#6a007d";
+                    ctx.textAlign = "center";
+                    ctx.font = "900 1.25rem system-ui, sans-serif";
+                    ctx.fillText(
+                        document.getElementById("headlineText").value,
+                        w / 2,
+                        hY + 22,
                     );
+                    ctx.font = "700 0.75rem system-ui, sans-serif";
+                    ctx.fillText(
+                        document.getElementById("subtitleText").value,
+                        w / 2,
+                        hY + 40,
+                    );
+
+                    document.querySelectorAll(".overlay").forEach((overlay) => {
+                        drawOverlay(ctx, overlay, w, h);
+                    });
+
                     const link = document.createElement("a");
-                    link.download = `diday.${format}`;
-                    link.href = canvas.toDataURL(`image/${format}`, 0.95);
+                    link.download = "diday.png";
+                    link.href = canvas.toDataURL("image/png");
                     link.click();
                 });
         </script>
