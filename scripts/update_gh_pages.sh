@@ -1,23 +1,5 @@
 #!/bin/sh
 
-# Generate index.html listing all HTML files in html_tools
-echo "<!DOCTYPE html>" > html_tools/index.html
-echo "<html><head><title>Index of HTML Tools</title></head><body>" >> html_tools/index.html
-echo "<h1>Index of HTML Tools</h1><ul>" >> html_tools/index.html
-
-# Add all .html files to the index
-for file in html_tools/*.html; do
-    if [ "$file" != "html_tools/index.html" ]; then
-        filename=$(basename "$file")
-        echo "<li><a href=\"$filename\">$filename</a></li>" >> html_tools/index.html
-    fi
-done
-
-echo "</ul><p><p>Inspired by Simon Willison's <a href="https://simonwillison.net/2025/Dec/10/html-tools/">HTML Tools</a> article.</p></p></body></html>" >> html_tools/index.html
-
-# Stage the index.html file
-git add html_tools/index.html
-
 # Get the tree hash of the html_tools subfolder
 tree_hash=$(git ls-tree HEAD html_tools | head -n 1 | awk '{print $3}')
 
