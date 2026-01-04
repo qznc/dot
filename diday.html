@@ -341,6 +341,26 @@
                 ctx.drawImage(overlay, 0, y, posterW, scaledHeight);
             }
 
+            // Helper: Wrap text to fit within maxWidth
+            function wrapText(ctx, text, maxWidth) {
+                const words = text.split(" ");
+                const lines = [];
+                let currentLine = words[0];
+
+                for (let i = 1; i < words.length; i++) {
+                    const testLine = currentLine + " " + words[i];
+                    const metrics = ctx.measureText(testLine);
+                    if (metrics.width > maxWidth) {
+                        lines.push(currentLine);
+                        currentLine = words[i];
+                    } else {
+                        currentLine = testLine;
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            }
+
             document
                 .getElementById("generateBtn")
                 .addEventListener("click", () => {
@@ -381,30 +401,75 @@
                     const hW = rect.width;
                     const hH = rect.height;
 
-                    // Headline box
-                    ctx.fillStyle = "rgba(255, 180, 0, 0.92)";
-                    ctx.beginPath();
-                    ctx.roundRect(hX, hY, hW, hH, 14);
-                    ctx.fill();
-
-                    // Text
+                    // Text styling
                     ctx.fillStyle = "#6a007d";
                     ctx.textAlign = "center";
                     ctx.textBaseline = "top";
 
-                    // Main headline
+                    // Calculate available width for text (box width minus padding)
+                    const textMaxWidth = hW - 28; // 14px padding on each side
+
+                    // Main headline - wrap text
                     ctx.font = "900 1.25rem system-ui, sans-serif";
                     const headlineText =
                         document.getElementById("headlineText").value;
-                    const mainTextY = hY + 14; // matches padding: 14px
-                    ctx.fillText(headlineText, w / 2, mainTextY);
+                    const headlineLines = wrapText(
+                        ctx,
+                        headlineText,
+                        textMaxWidth,
+                    );
+                    const lineHeight = 20; // 1.25rem ≈ 20px
+                    let currentY = hY + 14; // matches padding: 14px
 
-                    // Subtitle - position below main headline
+                    // Draw each line of headline
+                    headlineLines.forEach((line) => {
+                        ctx.fillText(line, w / 2, currentY);
+                        currentY += lineHeight;
+                    });
+
+                    // Subtitle - wrap text and position below main headline
                     ctx.font = "700 0.75rem system-ui, sans-serif";
                     const subtitleText =
                         document.getElementById("subtitleText").value;
-                    const subtitleY = mainTextY + 20 + 6; // 1.25rem * 16 = 20px height, + 6px margin-top
-                    ctx.fillText(subtitleText, w / 2, subtitleY);
+                    const subtitleLines = wrapText(
+                        ctx,
+                        subtitleText,
+                        textMaxWidth,
+                    );
+                    const subtitleLineHeight = 14; // 0.75rem ≈ 12px + spacing
+                    currentY += 6; // margin-top between headline and subtitle
+
+                    // Draw each line of subtitle
+                    subtitleLines.forEach((line) => {
+                        ctx.fillText(line, w / 2, currentY);
+                        currentY += subtitleLineHeight;
+                    });
+
+                    // Now draw the headline box with proper height
+                    const boxHeight = currentY - hY + 14; // add bottom padding
+                    ctx.fillStyle = "rgba(255, 180, 0, 0.92)";
+                    ctx.beginPath();
+                    ctx.roundRect(hX, hY, hW, boxHeight, 14);
+                    ctx.fill();
+
+                    // Redraw text on top of the box
+                    ctx.fillStyle = "#6a007d";
+                    currentY = hY + 14;
+
+                    // Redraw headline
+                    ctx.font = "900 1.25rem system-ui, sans-serif";
+                    headlineLines.forEach((line) => {
+                        ctx.fillText(line, w / 2, currentY);
+                        currentY += lineHeight;
+                    });
+
+                    // Redraw subtitle
+                    ctx.font = "700 0.75rem system-ui, sans-serif";
+                    currentY += 6;
+                    subtitleLines.forEach((line) => {
+                        ctx.fillText(line, w / 2, currentY);
+                        currentY += subtitleLineHeight;
+                    });
 
                     document.querySelectorAll(".overlay").forEach((overlay) => {
                         drawOverlay(ctx, overlay, w, h);
