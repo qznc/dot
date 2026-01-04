@@ -18,13 +18,24 @@
                 margin: 0;
                 padding: 0;
                 display: grid;
-                grid-template-columns: 320px 1fr;
+                grid-template-columns: 320px 1fr 1fr;
                 min-height: 100vh;
+            }
+            @media (max-width: 1024px) {
+                body {
+                    grid-template-columns: 1fr;
+                    grid-template-rows: auto auto auto;
+                }
             }
             aside {
                 background: #3a0047;
                 padding: 16px;
                 box-shadow: inset -2px 0 0 rgba(0, 0, 0, 0.3);
+            }
+            @media (max-width: 1024px) {
+                aside {
+                    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+                }
             }
             aside h2 {
                 margin-top: 0;
@@ -57,11 +68,47 @@
                 font-weight: 700;
                 cursor: pointer;
             }
+            #downloadBtn {
+                display: none;
+                width: auto;
+                padding: 12px 24px;
+                margin-top: 16px;
+            }
             main {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 padding: 24px;
+            }
+            @media (max-width: 1024px) {
+                main {
+                    padding: 16px;
+                }
+            }
+            #generatedColumn {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 24px;
+                background: #220029;
+            }
+            @media (max-width: 1024px) {
+                #generatedColumn {
+                    padding: 16px;
+                }
+            }
+            #generatedImage {
+                display: none;
+                width: 360px;
+                aspect-ratio: 9 / 16;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            }
+            @media (max-width: 480px) {
+                #generatedImage {
+                    width: 100%;
+                    max-width: 360px;
+                }
             }
 
             /* Poster */
@@ -72,6 +119,12 @@
                 overflow: hidden;
                 box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
                 background: #000;
+            }
+            @media (max-width: 480px) {
+                #poster {
+                    width: 100%;
+                    max-width: 360px;
+                }
             }
 
             .overlay {
@@ -181,7 +234,7 @@
                 />
             </label>
 
-            <button id="downloadBtn">Download PNG</button>
+            <button id="generateBtn">Generate Image</button>
         </aside>
 
         <main>
@@ -204,6 +257,11 @@
                 <img src="diday.png" class="overlay bottom" />
             </div>
         </main>
+
+        <div id="generatedColumn">
+            <img id="generatedImage" alt="Generated poster" />
+            <button id="downloadBtn">Download PNG</button>
+        </div>
 
         <script>
             const imgEl = document.getElementById("posterImage");
@@ -284,7 +342,7 @@
             }
 
             document
-                .getElementById("downloadBtn")
+                .getElementById("generateBtn")
                 .addEventListener("click", () => {
                     const poster = document.getElementById("poster");
                     const posterImg = document.getElementById("posterImage");
@@ -332,26 +390,43 @@
                     // Text
                     ctx.fillStyle = "#6a007d";
                     ctx.textAlign = "center";
+                    ctx.textBaseline = "top";
+
+                    // Main headline
                     ctx.font = "900 1.25rem system-ui, sans-serif";
-                    ctx.fillText(
-                        document.getElementById("headlineText").value,
-                        w / 2,
-                        hY + 22,
-                    );
+                    const headlineText =
+                        document.getElementById("headlineText").value;
+                    const mainTextY = hY + 14; // matches padding: 14px
+                    ctx.fillText(headlineText, w / 2, mainTextY);
+
+                    // Subtitle - position below main headline
                     ctx.font = "700 0.75rem system-ui, sans-serif";
-                    ctx.fillText(
-                        document.getElementById("subtitleText").value,
-                        w / 2,
-                        hY + 40,
-                    );
+                    const subtitleText =
+                        document.getElementById("subtitleText").value;
+                    const subtitleY = mainTextY + 20 + 6; // 1.25rem * 16 = 20px height, + 6px margin-top
+                    ctx.fillText(subtitleText, w / 2, subtitleY);
 
                     document.querySelectorAll(".overlay").forEach((overlay) => {
                         drawOverlay(ctx, overlay, w, h);
                     });
 
+                    const generatedImg =
+                        document.getElementById("generatedImage");
+                    generatedImg.src = canvas.toDataURL("image/png");
+                    generatedImg.style.display = "block";
+                    document.getElementById("downloadBtn").style.display =
+                        "block";
+                });
+
+            // Download button handler
+            document
+                .getElementById("downloadBtn")
+                .addEventListener("click", () => {
+                    const generatedImg =
+                        document.getElementById("generatedImage");
                     const link = document.createElement("a");
                     link.download = "diday.png";
-                    link.href = canvas.toDataURL("image/png");
+                    link.href = generatedImg.src;
                     link.click();
                 });
         </script>
