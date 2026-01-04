@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>DI.DAY Image Generator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+        <style>
+            body {
+                font-family:
+                    system-ui,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    sans-serif;
+                background: #2b0033;
+                color: #fff;
+                margin: 0;
+                padding: 0;
+                display: grid;
+                grid-template-columns: 320px 1fr;
+                min-height: 100vh;
+            }
+            aside {
+                background: #3a0047;
+                padding: 16px;
+                box-shadow: inset -2px 0 0 rgba(0, 0, 0, 0.3);
+            }
+            aside h2 {
+                margin-top: 0;
+                font-size: 1.1rem;
+            }
+            label {
+                display: block;
+                margin-top: 12px;
+                font-size: 0.85rem;
+                opacity: 0.9;
+            }
+            input,
+            textarea,
+            select,
+            button {
+                width: 100%;
+                margin-top: 6px;
+                padding: 8px;
+                border-radius: 8px;
+                border: none;
+                font-size: 0.9rem;
+            }
+            textarea {
+                resize: vertical;
+            }
+            button {
+                margin-top: 16px;
+                background: #ffb400;
+                color: #4b005c;
+                font-weight: 700;
+                cursor: pointer;
+            }
+            main {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 24px;
+            }
+
+            /* Poster */
+            #poster {
+                width: 360px;
+                aspect-ratio: 9 / 16;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+                background: #000;
+            }
+
+            .overlay {
+                position: absolute;
+                left: 0;
+                width: 100%;
+                pointer-events: none;
+                z-index: 5;
+            }
+            .overlay.top {
+                top: 0;
+            }
+            .overlay.bottom {
+                bottom: 0;
+            }
+
+            .image-area {
+                position: absolute;
+                inset: 0;
+                z-index: 1;
+            }
+            .image-area img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transform-origin: center;
+                transition: transform 0.1s ease-out;
+            }
+
+            .headline {
+                position: absolute;
+                left: 16px;
+                right: 16px;
+                bottom: 110px;
+                z-index: 3;
+                background: rgba(255, 180, 0, 0.92);
+                color: #6a007d;
+                padding: 14px;
+                border-radius: 14px;
+                text-align: center;
+            }
+            .headline-main {
+                font-size: 1.25rem;
+                font-weight: 900;
+                line-height: 1.15;
+            }
+            .headline-sub {
+                font-size: 0.75rem;
+                font-weight: 700;
+                margin-top: 6px;
+            }
+        </style>
+    </head>
+    <body>
+        <aside>
+            <h2>Poster Settings</h2>
+
+            <label
+                >Upload Image
+                <input type="file" accept="image/*" id="imageUpload" />
+            </label>
+
+            <label
+                >Zoom
+                <input
+                    type="range"
+                    min="100"
+                    max="300"
+                    value="100"
+                    id="zoomSlider"
+                />
+            </label>
+
+            <label
+                >Position X
+                <input
+                    type="range"
+                    min="-100"
+                    max="100"
+                    value="0"
+                    id="posXSlider"
+                />
+            </label>
+
+            <label
+                >Position Y
+                <input
+                    type="range"
+                    min="-100"
+                    max="100"
+                    value="0"
+                    id="posYSlider"
+                />
+            </label>
+
+            <label
+                >Main Headline
+                <textarea id="headlineText">Digital Independence Day</textarea>
+            </label>
+
+            <label
+                >Subtitle
+                <input
+                    type="text"
+                    id="subtitleText"
+                    value="Jeden ersten Sonntag digital freier werden!"
+                />
+            </label>
+
+            <label
+                >Export Format
+                <select id="exportFormat">
+                    <option value="png">PNG</option>
+                    <option value="jpg">JPG</option>
+                </select>
+            </label>
+
+            <button id="downloadBtn">Download Image</button>
+        </aside>
+
+        <main>
+            <div id="poster">
+                <div class="image-area">
+                    <img id="posterImage" />
+                </div>
+
+                <div class="headline">
+                    <div class="headline-main" id="headlinePreview">
+                        Digital Independence Day
+                    </div>
+                    <div class="headline-sub" id="subtitlePreview">
+                        Jeden ersten Sonntag digital freier werden!
+                    </div>
+                </div>
+
+                <!-- Overlays -->
+                <img src="diday.png" class="overlay top" />
+                <img src="diday.png" class="overlay bottom" />
+            </div>
+        </main>
+
+        <script>
+            const imgEl = document.getElementById("posterImage");
+            let zoom = 100;
+            let posX = 0;
+            let posY = 0;
+
+            function updateImageTransform() {
+                const scale = zoom / 100;
+                imgEl.style.transform = `scale(${scale}) translate(${posX}%, ${posY}%)`;
+            }
+
+            document
+                .getElementById("imageUpload")
+                .addEventListener("change", (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = () => (imgEl.src = reader.result);
+                    reader.readAsDataURL(file);
+                });
+
+            document
+                .getElementById("zoomSlider")
+                .addEventListener("input", (e) => {
+                    zoom = e.target.value;
+                    updateImageTransform();
+                });
+
+            document
+                .getElementById("posXSlider")
+                .addEventListener("input", (e) => {
+                    posX = e.target.value;
+                    updateImageTransform();
+                });
+
+            document
+                .getElementById("posYSlider")
+                .addEventListener("input", (e) => {
+                    posY = e.target.value;
+                    updateImageTransform();
+                });
+
+            document
+                .getElementById("headlineText")
+                .addEventListener("input", (e) => {
+                    document.getElementById("headlinePreview").textContent =
+                        e.target.value;
+                });
+
+            document
+                .getElementById("subtitleText")
+                .addEventListener("input", (e) => {
+                    document.getElementById("subtitlePreview").textContent =
+                        e.target.value;
+                });
+
+            document
+                .getElementById("downloadBtn")
+                .addEventListener("click", async () => {
+                    const format =
+                        document.getElementById("exportFormat").value;
+                    const canvas = await html2canvas(
+                        document.getElementById("poster"),
+                        {
+                            backgroundColor: null,
+                            useCORS: true,
+                            allowTaint: false,
+                            scale: 2, // high-res export
+                            width: poster.offsetWidth, // 🔒 lock width
+                            height: poster.offsetHeight, // 🔒 lock height
+                        },
+                    );
+                    const link = document.createElement("a");
+                    link.download = `diday.${format}`;
+                    link.href = canvas.toDataURL(`image/${format}`, 0.95);
+                    link.click();
+                });
+        </script>
+    </body>
+</html>
