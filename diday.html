@@ -1,4 +1,11 @@
 <!doctype html>
+<!--
+Copyright 2026 Andreas Zwinkau
+
+Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -92,6 +99,25 @@
                 justify-content: center;
                 padding: 24px;
                 background: #220029;
+            }
+            footer {
+                grid-column: 1 / -1;
+                background: #1a001f;
+                padding: 16px;
+                text-align: center;
+                font-size: 0.8rem;
+                opacity: 0.8;
+                border-top: 1px solid rgba(255, 180, 0, 0.2);
+            }
+            footer p {
+                margin: 4px 0;
+            }
+            footer a {
+                color: #ffb400;
+                text-decoration: none;
+            }
+            footer a:hover {
+                text-decoration: underline;
             }
             @media (max-width: 1024px) {
                 #generatedColumn {
@@ -189,35 +215,17 @@
 
             <label
                 >Zoom
-                <input
-                    type="range"
-                    min="100"
-                    max="300"
-                    value="100"
-                    id="zoomSlider"
-                />
+                <input type="range" min="100" max="300" value="100" id="zoomSlider" />
             </label>
 
             <label
                 >Position X
-                <input
-                    type="range"
-                    min="-100"
-                    max="100"
-                    value="0"
-                    id="posXSlider"
-                />
+                <input type="range" min="-100" max="100" value="0" id="posXSlider" />
             </label>
 
             <label
                 >Position Y
-                <input
-                    type="range"
-                    min="-100"
-                    max="100"
-                    value="0"
-                    id="posYSlider"
-                />
+                <input type="range" min="-100" max="100" value="0" id="posYSlider" />
             </label>
 
             <label
@@ -227,11 +235,7 @@
 
             <label
                 >Subtitle
-                <input
-                    type="text"
-                    id="subtitleText"
-                    value="Jeden ersten Sonntag digital freier werden!"
-                />
+                <input type="text" id="subtitleText" value="Jeden ersten Sonntag digital freier werden!" />
             </label>
 
             <button id="generateBtn">Generate Image</button>
@@ -244,12 +248,8 @@
                 </div>
 
                 <div class="headline">
-                    <div class="headline-main" id="headlinePreview">
-                        Digital Independence Day
-                    </div>
-                    <div class="headline-sub" id="subtitlePreview">
-                        Jeden ersten Sonntag digital freier werden!
-                    </div>
+                    <div class="headline-main" id="headlinePreview">Digital Independence Day</div>
+                    <div class="headline-sub" id="subtitlePreview">Jeden ersten Sonntag digital freier werden!</div>
                 </div>
 
                 <!-- Overlays -->
@@ -263,6 +263,21 @@
             <button id="downloadBtn">Download PNG</button>
         </div>
 
+        <footer>
+            <p>
+                Für die nicht-kommerzielle Verwendung im Sinne und im Geiste des
+                <a href="https://di.day">di.day</a>.
+            </p>
+            <p>
+                For non-commercial use in the sense and spirit of
+                <a href="https://di.day">di.day</a>.
+            </p>
+            <p>
+                The sources of this page can be freely reused under
+                <a href="https://opensource.org/license/isc-license-txt">ISC license</a>.
+            </p>
+        </footer>
+
         <script>
             const imgEl = document.getElementById("posterImage");
             let zoom = 100;
@@ -274,50 +289,36 @@
                 imgEl.style.transform = `scale(${scale}) translate(${posX}%, ${posY}%)`;
             }
 
-            document
-                .getElementById("imageUpload")
-                .addEventListener("change", (e) => {
-                    const file = e.target.files[0];
-                    if (!file) return;
-                    const reader = new FileReader();
-                    reader.onload = () => (imgEl.src = reader.result);
-                    reader.readAsDataURL(file);
-                });
+            document.getElementById("imageUpload").addEventListener("change", (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = () => (imgEl.src = reader.result);
+                reader.readAsDataURL(file);
+            });
 
-            document
-                .getElementById("zoomSlider")
-                .addEventListener("input", (e) => {
-                    zoom = e.target.value;
-                    updateImageTransform();
-                });
+            document.getElementById("zoomSlider").addEventListener("input", (e) => {
+                zoom = e.target.value;
+                updateImageTransform();
+            });
 
-            document
-                .getElementById("posXSlider")
-                .addEventListener("input", (e) => {
-                    posX = e.target.value;
-                    updateImageTransform();
-                });
+            document.getElementById("posXSlider").addEventListener("input", (e) => {
+                posX = e.target.value;
+                updateImageTransform();
+            });
 
-            document
-                .getElementById("posYSlider")
-                .addEventListener("input", (e) => {
-                    posY = e.target.value;
-                    updateImageTransform();
-                });
+            document.getElementById("posYSlider").addEventListener("input", (e) => {
+                posY = e.target.value;
+                updateImageTransform();
+            });
 
-            document
-                .getElementById("headlineText")
-                .addEventListener("input", (e) => {
-                    document.getElementById("headlinePreview").textContent =
-                        e.target.value;
-                });
+            document.getElementById("headlineText").addEventListener("input", (e) => {
+                document.getElementById("headlinePreview").textContent = e.target.value;
+            });
 
-            document
-                .getElementById("subtitleText")
-                .addEventListener("input", (e) => {
-                    document.getElementById("subtitlePreview").textContent =
-                        e.target.value;
-                });
+            document.getElementById("subtitleText").addEventListener("input", (e) => {
+                document.getElementById("subtitlePreview").textContent = e.target.value;
+            });
 
             // Helper: Calculate object-fit: cover dimensions
             function getCoverSize(img, containerW, containerH) {
@@ -332,12 +333,9 @@
             // Helper: Draw overlay image
             function drawOverlay(ctx, overlay, posterW, posterH) {
                 if (!overlay.complete) return;
-                const aspectRatio =
-                    overlay.naturalWidth / overlay.naturalHeight;
+                const aspectRatio = overlay.naturalWidth / overlay.naturalHeight;
                 const scaledHeight = posterW / aspectRatio;
-                const y = overlay.classList.contains("top")
-                    ? 0
-                    : posterH - scaledHeight;
+                const y = overlay.classList.contains("top") ? 0 : posterH - scaledHeight;
                 ctx.drawImage(overlay, 0, y, posterW, scaledHeight);
             }
 
@@ -361,139 +359,122 @@
                 return lines;
             }
 
-            document
-                .getElementById("generateBtn")
-                .addEventListener("click", () => {
-                    const poster = document.getElementById("poster");
-                    const posterImg = document.getElementById("posterImage");
-                    const headlineEl = document.querySelector(".headline");
-                    const scale = 2;
+            document.getElementById("generateBtn").addEventListener("click", () => {
+                const poster = document.getElementById("poster");
+                const posterImg = document.getElementById("posterImage");
+                const headlineEl = document.querySelector(".headline");
+                const scale = 2;
 
-                    // Setup canvas
-                    const canvas = document.createElement("canvas");
-                    canvas.width = poster.offsetWidth * scale;
-                    canvas.height = poster.offsetHeight * scale;
-                    const ctx = canvas.getContext("2d");
-                    ctx.scale(scale, scale);
+                // Setup canvas
+                const canvas = document.createElement("canvas");
+                canvas.width = poster.offsetWidth * scale;
+                canvas.height = poster.offsetHeight * scale;
+                const ctx = canvas.getContext("2d");
+                ctx.scale(scale, scale);
 
-                    const w = poster.offsetWidth;
-                    const h = poster.offsetHeight;
+                const w = poster.offsetWidth;
+                const h = poster.offsetHeight;
 
-                    // Background
-                    ctx.fillStyle = "#000";
-                    ctx.fillRect(0, 0, w, h);
+                // Background
+                ctx.fillStyle = "#000";
+                ctx.fillRect(0, 0, w, h);
 
-                    // Main image with aspect ratio preserved
-                    if (posterImg.src && posterImg.complete) {
-                        const cover = getCoverSize(posterImg, w, h);
-                        const imgW = cover.width * (zoom / 100);
-                        const imgH = cover.height * (zoom / 100);
-                        const imgX = (w - imgW) / 2 + (posX / 100) * imgW;
-                        const imgY = (h - imgH) / 2 + (posY / 100) * imgH;
-                        ctx.drawImage(posterImg, imgX, imgY, imgW, imgH);
-                    }
+                // Main image with aspect ratio preserved
+                if (posterImg.src && posterImg.complete) {
+                    const cover = getCoverSize(posterImg, w, h);
+                    const imgW = cover.width * (zoom / 100);
+                    const imgH = cover.height * (zoom / 100);
+                    const imgX = (w - imgW) / 2 + (posX / 100) * imgW;
+                    const imgY = (h - imgH) / 2 + (posY / 100) * imgH;
+                    ctx.drawImage(posterImg, imgX, imgY, imgW, imgH);
+                }
 
-                    // Get headline position from DOM
-                    const rect = headlineEl.getBoundingClientRect();
-                    const posterRect = poster.getBoundingClientRect();
-                    const hX = rect.left - posterRect.left;
-                    const hY = rect.top - posterRect.top;
-                    const hW = rect.width;
-                    const hH = rect.height;
+                // Get headline position from DOM
+                const rect = headlineEl.getBoundingClientRect();
+                const posterRect = poster.getBoundingClientRect();
+                const hX = rect.left - posterRect.left;
+                const hY = rect.top - posterRect.top;
+                const hW = rect.width;
+                const hH = rect.height;
 
-                    // Text styling
-                    ctx.fillStyle = "#6a007d";
-                    ctx.textAlign = "center";
-                    ctx.textBaseline = "top";
+                // Text styling
+                ctx.fillStyle = "#6a007d";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "top";
 
-                    // Calculate available width for text (box width minus padding)
-                    const textMaxWidth = hW - 28; // 14px padding on each side
+                // Calculate available width for text (box width minus padding)
+                const textMaxWidth = hW - 28; // 14px padding on each side
 
-                    // Main headline - wrap text
-                    ctx.font = "900 1.25rem system-ui, sans-serif";
-                    const headlineText =
-                        document.getElementById("headlineText").value;
-                    const headlineLines = wrapText(
-                        ctx,
-                        headlineText,
-                        textMaxWidth,
-                    );
-                    const lineHeight = 20; // 1.25rem ≈ 20px
-                    let currentY = hY + 14; // matches padding: 14px
+                // Main headline - wrap text
+                ctx.font = "900 1.25rem system-ui, sans-serif";
+                const headlineText = document.getElementById("headlineText").value;
+                const headlineLines = wrapText(ctx, headlineText, textMaxWidth);
+                const lineHeight = 20; // 1.25rem ≈ 20px
+                let currentY = hY + 14; // matches padding: 14px
 
-                    // Draw each line of headline
-                    headlineLines.forEach((line) => {
-                        ctx.fillText(line, w / 2, currentY);
-                        currentY += lineHeight;
-                    });
-
-                    // Subtitle - wrap text and position below main headline
-                    ctx.font = "700 0.75rem system-ui, sans-serif";
-                    const subtitleText =
-                        document.getElementById("subtitleText").value;
-                    const subtitleLines = wrapText(
-                        ctx,
-                        subtitleText,
-                        textMaxWidth,
-                    );
-                    const subtitleLineHeight = 14; // 0.75rem ≈ 12px + spacing
-                    currentY += 6; // margin-top between headline and subtitle
-
-                    // Draw each line of subtitle
-                    subtitleLines.forEach((line) => {
-                        ctx.fillText(line, w / 2, currentY);
-                        currentY += subtitleLineHeight;
-                    });
-
-                    // Now draw the headline box with proper height
-                    const boxHeight = currentY - hY + 14; // add bottom padding
-                    ctx.fillStyle = "rgba(255, 180, 0, 0.92)";
-                    ctx.beginPath();
-                    ctx.roundRect(hX, hY, hW, boxHeight, 14);
-                    ctx.fill();
-
-                    // Redraw text on top of the box
-                    ctx.fillStyle = "#6a007d";
-                    currentY = hY + 14;
-
-                    // Redraw headline
-                    ctx.font = "900 1.25rem system-ui, sans-serif";
-                    headlineLines.forEach((line) => {
-                        ctx.fillText(line, w / 2, currentY);
-                        currentY += lineHeight;
-                    });
-
-                    // Redraw subtitle
-                    ctx.font = "700 0.75rem system-ui, sans-serif";
-                    currentY += 6;
-                    subtitleLines.forEach((line) => {
-                        ctx.fillText(line, w / 2, currentY);
-                        currentY += subtitleLineHeight;
-                    });
-
-                    document.querySelectorAll(".overlay").forEach((overlay) => {
-                        drawOverlay(ctx, overlay, w, h);
-                    });
-
-                    const generatedImg =
-                        document.getElementById("generatedImage");
-                    generatedImg.src = canvas.toDataURL("image/png");
-                    generatedImg.style.display = "block";
-                    document.getElementById("downloadBtn").style.display =
-                        "block";
+                // Draw each line of headline
+                headlineLines.forEach((line) => {
+                    ctx.fillText(line, w / 2, currentY);
+                    currentY += lineHeight;
                 });
+
+                // Subtitle - wrap text and position below main headline
+                ctx.font = "700 0.75rem system-ui, sans-serif";
+                const subtitleText = document.getElementById("subtitleText").value;
+                const subtitleLines = wrapText(ctx, subtitleText, textMaxWidth);
+                const subtitleLineHeight = 14; // 0.75rem ≈ 12px + spacing
+                currentY += 6; // margin-top between headline and subtitle
+
+                // Draw each line of subtitle
+                subtitleLines.forEach((line) => {
+                    ctx.fillText(line, w / 2, currentY);
+                    currentY += subtitleLineHeight;
+                });
+
+                // Now draw the headline box with proper height
+                const boxHeight = currentY - hY + 14; // add bottom padding
+                ctx.fillStyle = "rgba(255, 180, 0, 0.92)";
+                ctx.beginPath();
+                ctx.roundRect(hX, hY, hW, boxHeight, 14);
+                ctx.fill();
+
+                // Redraw text on top of the box
+                ctx.fillStyle = "#6a007d";
+                currentY = hY + 14;
+
+                // Redraw headline
+                ctx.font = "900 1.25rem system-ui, sans-serif";
+                headlineLines.forEach((line) => {
+                    ctx.fillText(line, w / 2, currentY);
+                    currentY += lineHeight;
+                });
+
+                // Redraw subtitle
+                ctx.font = "700 0.75rem system-ui, sans-serif";
+                currentY += 6;
+                subtitleLines.forEach((line) => {
+                    ctx.fillText(line, w / 2, currentY);
+                    currentY += subtitleLineHeight;
+                });
+
+                document.querySelectorAll(".overlay").forEach((overlay) => {
+                    drawOverlay(ctx, overlay, w, h);
+                });
+
+                const generatedImg = document.getElementById("generatedImage");
+                generatedImg.src = canvas.toDataURL("image/png");
+                generatedImg.style.display = "block";
+                document.getElementById("downloadBtn").style.display = "block";
+            });
 
             // Download button handler
-            document
-                .getElementById("downloadBtn")
-                .addEventListener("click", () => {
-                    const generatedImg =
-                        document.getElementById("generatedImage");
-                    const link = document.createElement("a");
-                    link.download = "diday.png";
-                    link.href = generatedImg.src;
-                    link.click();
-                });
+            document.getElementById("downloadBtn").addEventListener("click", () => {
+                const generatedImg = document.getElementById("generatedImage");
+                const link = document.createElement("a");
+                link.download = "diday.png";
+                link.href = generatedImg.src;
+                link.click();
+            });
         </script>
     </body>
 </html>
