@@ -93,6 +93,7 @@ function fish_prompt -d "Write out the prompt"
     set_color normal
 end
 
+abbr g    git
 abbr gup  git up
 abbr st   git st
 abbr gl   git l

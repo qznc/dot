@@ -5,10 +5,10 @@ import re
 import subprocess
 import random
 
-_LINECOLNR = re.compile("(.+):(\d+):(\d+):?")
-_LINENR = re.compile("(.+):([\d]+):?")
-_PROTOCOL = re.compile("(https?|ftp|file|gopher|mailto|news|nntp|telnet|wais):.+")
-_ARITHMETIC = re.compile("[ \d+*-/%()~<>&|^=!]+")
+_LINECOLNR = re.compile(r"(.+):(\d+):(\d+):?")
+_LINENR = re.compile(r"(.+):([\d]+):?")
+_PROTOCOL = re.compile(r"(https?|ftp|file|gopher|mailto|news|nntp|telnet|wais):.+")
+_ARITHMETIC = re.compile(r"[ \d+*-/%()~<>&|^=!]+")
 
 def exec_and_exit(cmd):
 	os.system(cmd)

@@ -38,6 +38,7 @@
 [core]
    whitespace=fix,trailing-space,cr-at-eol
    excludesfile = ~/.gitignore
+	editor = vim
 [push]
    default = tracking
    autoSetupRemote = true
