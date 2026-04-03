@@ -158,7 +158,7 @@ THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL WARRANTIES WIT
                 left: 0;
                 width: 100%;
                 pointer-events: none;
-                z-index: 5;
+                z-index: 1;
             }
             .overlay.top {
                 top: 0;
@@ -182,25 +182,27 @@ THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL WARRANTIES WIT
 
             .headline {
                 position: absolute;
-                left: 16px;
-                right: 16px;
-                bottom: 110px;
+                left: 0;
+                right: 0;
+                bottom: 95px;
                 z-index: 3;
-                background: rgba(255, 180, 0, 0.92);
-                color: #6a007d;
-                padding: 14px;
-                border-radius: 14px;
-                text-align: center;
+                color: #fff;
+                padding: 0;
             }
             .headline-main {
-                font-size: 1.25rem;
+                font-size: 1.75rem;
                 font-weight: 900;
                 line-height: 1.15;
+                padding: 14px;
+                text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             }
             .headline-sub {
-                font-size: 0.75rem;
+                font-size: 1rem;
                 font-weight: 700;
                 margin-top: 6px;
+                background: #800080;
+                padding: 14px;
+                width: 100%;
             }
         </style>
     </head>
@@ -390,75 +392,62 @@ THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL WARRANTIES WIT
                 }
 
                 // Get headline position from DOM
-                const rect = headlineEl.getBoundingClientRect();
+                const mainEl = document.getElementById("headlinePreview");
+                const subEl = document.getElementById("subtitlePreview");
                 const posterRect = poster.getBoundingClientRect();
-                const hX = rect.left - posterRect.left;
-                const hY = rect.top - posterRect.top;
-                const hW = rect.width;
-                const hH = rect.height;
+                const mY = mainEl.getBoundingClientRect().top - posterRect.top;
+                const sY = subEl.getBoundingClientRect().top - posterRect.top;
+                const subHeight = subEl.getBoundingClientRect().height;
 
-                // Text styling
-                ctx.fillStyle = "#6a007d";
-                ctx.textAlign = "center";
+                ctx.textAlign = "left";
                 ctx.textBaseline = "top";
 
-                // Calculate available width for text (box width minus padding)
-                const textMaxWidth = hW - 28; // 14px padding on each side
-
-                // Main headline - wrap text
-                ctx.font = "900 1.25rem system-ui, sans-serif";
-                const headlineText = document.getElementById("headlineText").value;
-                const headlineLines = wrapText(ctx, headlineText, textMaxWidth);
-                const lineHeight = 20; // 1.25rem ≈ 20px
-                let currentY = hY + 14; // matches padding: 14px
-
-                // Draw each line of headline
-                headlineLines.forEach((line) => {
-                    ctx.fillText(line, w / 2, currentY);
-                    currentY += lineHeight;
-                });
-
-                // Subtitle - wrap text and position below main headline
-                ctx.font = "700 0.75rem system-ui, sans-serif";
-                const subtitleText = document.getElementById("subtitleText").value;
-                const subtitleLines = wrapText(ctx, subtitleText, textMaxWidth);
-                const subtitleLineHeight = 14; // 0.75rem ≈ 12px + spacing
-                currentY += 6; // margin-top between headline and subtitle
-
-                // Draw each line of subtitle
-                subtitleLines.forEach((line) => {
-                    ctx.fillText(line, w / 2, currentY);
-                    currentY += subtitleLineHeight;
-                });
-
-                // Now draw the headline box with proper height
-                const boxHeight = currentY - hY + 14; // add bottom padding
-                ctx.fillStyle = "rgba(255, 180, 0, 0.92)";
-                ctx.beginPath();
-                ctx.roundRect(hX, hY, hW, boxHeight, 14);
-                ctx.fill();
-
-                // Redraw text on top of the box
-                ctx.fillStyle = "#6a007d";
-                currentY = hY + 14;
-
-                // Redraw headline
-                ctx.font = "900 1.25rem system-ui, sans-serif";
-                headlineLines.forEach((line) => {
-                    ctx.fillText(line, w / 2, currentY);
-                    currentY += lineHeight;
-                });
-
-                // Redraw subtitle
-                ctx.font = "700 0.75rem system-ui, sans-serif";
-                currentY += 6;
-                subtitleLines.forEach((line) => {
-                    ctx.fillText(line, w / 2, currentY);
-                    currentY += subtitleLineHeight;
-                });
+                const padding = 14;
+                const textMaxWidth = w - padding * 2;
 
                 document.querySelectorAll(".overlay").forEach((overlay) => {
                     drawOverlay(ctx, overlay, w, h);
+                });
+
+                // Main headline
+                ctx.fillStyle = "#fff";
+                ctx.font = "900 1.75rem system-ui, sans-serif";
+                ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 4;
+                ctx.shadowBlur = 8;
+
+                const headlineText = document.getElementById("headlineText").value;
+                const headlineLines = wrapText(ctx, headlineText, textMaxWidth);
+                const lineHeightMain = 32.2;
+                let currentY = mY + padding;
+
+                headlineLines.forEach((line) => {
+                    ctx.fillText(line, padding, currentY);
+                    currentY += lineHeightMain;
+                });
+
+                ctx.shadowColor = "transparent";
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+                ctx.shadowBlur = 0;
+
+                // Subtitle background
+                ctx.fillStyle = "#800080";
+                ctx.fillRect(0, sY, w, subHeight);
+
+                // Subtitle text
+                ctx.fillStyle = "#fff";
+                ctx.font = "700 1rem system-ui, sans-serif";
+
+                const subtitleText = document.getElementById("subtitleText").value;
+                const subtitleLines = wrapText(ctx, subtitleText, textMaxWidth);
+                const subtitleLineHeight = 20;
+                currentY = sY + padding;
+
+                subtitleLines.forEach((line) => {
+                    ctx.fillText(line, padding, currentY);
+                    currentY += subtitleLineHeight;
                 });
 
                 const generatedImg = document.getElementById("generatedImage");
