@@ -59,6 +59,7 @@
                 border-radius: 4px;
                 outline: none;
                 -webkit-appearance: none;
+                appearance: none;
             }
 
             input[type="range"]::-webkit-slider-thumb {
@@ -115,7 +116,7 @@
     <body>
         <div class="controls">
             <div class="hex-display" id="hexDisplay" title="Click to copy">
-                #000000
+                #000
             </div>
 
             <div class="control-group">
@@ -123,7 +124,7 @@
                     <span>Red</span>
                     <span class="value" id="redValue">0</span>
                 </label>
-                <input type="range" id="red" min="0" max="255" value="0" />
+                <input type="range" id="red" min="0" max="15" value="0" />
             </div>
 
             <div class="control-group">
@@ -131,7 +132,7 @@
                     <span>Green</span>
                     <span class="value" id="greenValue">0</span>
                 </label>
-                <input type="range" id="green" min="0" max="255" value="0" />
+                <input type="range" id="green" min="0" max="15" value="0" />
             </div>
 
             <div class="control-group">
@@ -139,7 +140,7 @@
                     <span>Blue</span>
                     <span class="value" id="blueValue">0</span>
                 </label>
-                <input type="range" id="blue" min="0" max="255" value="0" />
+                <input type="range" id="blue" min="0" max="15" value="0" />
             </div>
         </div>
 
@@ -164,16 +165,16 @@
                 const hex =
                     "#" +
                     [r, g, b]
-                        .map((x) => {
-                            const hex = x.toString(16);
-                            return hex.length === 1 ? "0" + hex : hex;
-                        })
+                        .map((x) => x.toString(16))
                         .join("");
 
-                hexDisplay.textContent = hex.toUpperCase();
-                document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                hexDisplay.textContent = hex;
+                document.body.style.backgroundColor = `rgb(${r * 17}, ${g * 17}, ${b * 17})`;
 
-                const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+                const fullR = r * 17;
+                const fullG = g * 17;
+                const fullB = b * 17;
+                const luminance = 0.299 * fullR + 0.587 * fullG + 0.114 * fullB;
                 document.body.style.color = luminance > 128 ? "black" : "white";
             }
 
