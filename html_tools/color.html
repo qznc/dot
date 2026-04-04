@@ -15,7 +15,7 @@
                 font-family:
                     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                     Oxygen, Ubuntu, Cantarell, sans-serif;
-                transition: background-color 0.2s ease;
+                transition: background-color 0.2s ease, color 0.2s ease;
                 min-height: 100vh;
                 display: flex;
                 align-items: center;
@@ -172,6 +172,9 @@
 
                 hexDisplay.textContent = hex.toUpperCase();
                 document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+
+                const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+                document.body.style.color = luminance > 128 ? "black" : "white";
             }
 
             redSlider.addEventListener("input", updateColor);
