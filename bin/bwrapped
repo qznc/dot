@@ -1,0 +1,40 @@
+#!/bin/bash
+# Safely sandbox AI coding commands using bubblewrap
+set -euo pipefail
+
+ulimit -t 600          # CPU time (seconds)
+ulimit -v $((2<<20))   # 2 GiB virtual memory
+ulimit -u 4000        # Max processes
+ulimit -f 1048576      # Max file size (512 MiB blocks on Linux)
+
+# Run command in sandbox using current directory
+# networking is still fully available
+exec bwrap \
+  --new-session \
+  --tmpfs /tmp \
+  --dev /dev \
+  --proc /proc \
+  --unshare-all \
+  --ro-bind /usr /usr \
+  --ro-bind /bin /bin \
+  --ro-bind /lib /lib \
+  --ro-bind /lib64 /lib64 \
+  --ro-bind /etc /etc \
+  --tmpfs "$HOME/.cache" \
+  --ro-bind "$HOME/bin" "$HOME/bin" \
+  --ro-bind "$HOME/.local" "$HOME/.local" \
+  --ro-bind-try "$HOME/.cargo" "$HOME/.cargo" \
+  --ro-bind-try "$HOME/.rustup" "$HOME/.rustup" \
+  --tmpfs "$HOME/.config" \
+  --cap-drop all \
+  --die-with-parent \
+  --bind "$PWD" "$PWD" \
+  --chdir "$PWD" \
+  --hostname sandbox \
+  --clearenv \
+  --setenv HOME "$HOME" \
+  --setenv XDG_CACHE_HOME "$HOME/.cache" \
+  --setenv PATH "$HOME/bin:$HOME/.cargo/bin:/usr/bin:/usr/sbin:/bin:$HOME/.local/bin" \
+  --setenv LANG "${LANG:-C.UTF-8}" \
+  --setenv LC_ALL "${LC_ALL:-C.UTF-8}" \
+  -- "$@"
