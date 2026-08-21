@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+
+import re
+import sys
+from pathlib import Path
+
+
+def vtt_to_text(path):
+    lines = []
+    previous = None
+
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+
+        # Skip VTT metadata, timestamps, cue numbers, and empty lines
+        if (
+            not line
+            or line == "WEBVTT"
+            or line.startswith(("Kind:", "Language:", "NOTE"))
+            or "-->" in line
+            or re.fullmatch(r"\d+", line)
+        ):
+            continue
+
+        # Remove VTT/HTML tags
+        line = re.sub(r"<[^>]+>", "", line)
+
+        # Decode common HTML entities
+        line = (
+            line.replace("&amp;", "&")
+                .replace("&lt;", "<")
+                .replace("&gt;", ">")
+                .replace("&quot;", '"')
+                .replace("&#39;", "'")
+        )
+
+        line = re.sub(r"\s+", " ", line).strip()
+
+        # Remove consecutive duplicate captions
+        if line and line != previous:
+            lines.append(line)
+            previous = line
+
+    return "\n".join(lines)
+
+
+for filename in sys.argv[1:]:
+    path = Path(filename)
+    output = path.with_suffix(".txt")
+    output.write_text(vtt_to_text(path) + "\n", encoding="utf-8")
+    print(output)
+

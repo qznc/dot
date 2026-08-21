@@ -1,0 +1,4 @@
+#!/bin/sh
+yt-dlp --skip-download --write-auto-subs $*
+vtt2txt *.vtt
+
